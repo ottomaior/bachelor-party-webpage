@@ -1,4 +1,10 @@
 {
+  "name": "otto-bachelor-party",
+  "version": "1.0.0",
+  "description": "Bachelor party website - Prague 2026",
+  "scripts": {
+    "start": "npx serve -s . -p $PORT"
+  },
   "dependencies": {
     "firebase": "^12.8.0"
   }
