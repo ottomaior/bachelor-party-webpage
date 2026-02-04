@@ -52,11 +52,19 @@ hamburger.addEventListener('click', () => {
 // Handle navigation clicks - support both sections and tabs
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        
+        // If it's an external link (like expenses.html), let it navigate normally
+        if (href && (href.includes('.html') || href.startsWith('http'))) {
+            return; // Don't prevent default, let the link work!
+        }
+        
+        // Only prevent default for internal anchors (like #program, #banda)
         e.preventDefault();
         hamburger.classList.remove('active');
         navLinksContainer.classList.remove('active');
         
-        const targetId = link.getAttribute('href').slice(1);
+        const targetId = href.slice(1);
         const tabName = link.getAttribute('data-tab');
         
         // Check if this nav link should activate a tab
