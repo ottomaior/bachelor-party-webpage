@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otto Legénybúcsúja 🍻 | Last Ride in Prague</title>
+    <meta name="description" content="Otto búcsúztatása - Prága, 2026 május">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">🍻 Ottó Legénybúcsúja</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Kezdőlap</a></li>
+                <li><a href="#overview" class="nav-link">Infók</a></li>
+                <li><a href="#schedule" class="nav-link" data-tab="schedule">Program</a></li>
+                <li><a href="#crew" class="nav-link" data-tab="crew">Banda</a></li>
+                <li><a href="#vote" class="nav-link" data-tab="vote">Szavazás</a></li>
+                <li><a href="#logistics" class="nav-link">Logisztika</a></li>
+                <li><a href="#stats-dashboard" class="nav-link">Statisztika</a></li>
+                <li><a href="#rsvp" class="nav-link">Jövök!</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Ottó Legénybúcsúja 🍻</h1>
+            <p class="hero-subtitle">Final Boss Fight – Prague Edition</p>
+            <p style="font-size: 1.3rem; color: var(--accent-gold); margin-top: 20px;">
+                📍 Prága, Csehország • 🗓️ 2026. május 6–9.
+            </p>
+
+            <!-- Countdown Timer -->
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Nap</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Óra</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Perc</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Mp</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="scrollToSection('rsvp'); triggerConfetti();">
+                Jelentkezem! 🎉
+            </button>
+
+            <!-- Share Buttons -->
+            <div class="share-buttons">
+                <div class="share-btn" onclick="shareOnWhatsApp()" title="Megosztás WhatsAppon">💬</div>
+                <div class="share-btn" onclick="copyLink()" title="Link másolása">🔗</div>
+                <div class="share-btn" onclick="shareOnFacebook()" title="Megosztás Facebookon">📘</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TABS NAVIGATION -->
+    <div class="tabs-container" id="overview">
+        <div class="tabs" id="tabs">
+            <button class="tab-button active" data-tab="overview">📋 Áttekintés</button>
+            <button class="tab-button" data-tab="schedule">🗓️ Program</button>
+            <button class="tab-button" data-tab="crew">👥 A Banda</button>
+            <button class="tab-button" data-tab="vote">🗳️ Szavazás</button>
+            <button class="tab-button" data-tab="games">🎲 Játékok</button>
+            <button class="tab-button" data-tab="rules">📜 Szabályok</button>
+            <div class="tab-indicator" id="tabIndicator"></div>
+        </div>
+    </div>
+
+    <!-- TAB CONTENT: OVERVIEW -->
+    <div class="tab-content active" id="tab-overview" data-tab="overview">
+        <div class="container">
+            <h2>Mi vár ránk?</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🎉 A Misszió</h3>
+                    <p>Egy hétvége Prágában együtt. Iszunk, megyünk, meglátjuk mi történik – a részletek majd utólag derülnek ki..</p>
+                </div>
+                <div class="card">
+                    <h3>📅 Mikor & Hol</h3>
+                    <p><strong>Dátum:</strong> 2026. május 6–9.<br>
+                        <strong>Időtartam:</strong> 2-3 éjszaka<br>
+                        <strong>Helyszín:</strong> 🇨🇿 Prága, Csehország<br>
+                        <span style="color: var(--accent-gold); font-size: 0.9rem;">*tervezett, még finomítjuk</span>
+                    </p>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 60px;">🍺 Miért Prága?</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 15px;">💰</h3>
+                    <h4 style="text-align: center;">Mert szerintem pont erre való hely</h4>
+                    <p style="text-align: center; color: var(--text-muted);">Jó ár-érték arány, sör olcsóbb mint a víz
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 15px;">🎉</h3>
+                    <h4 style="text-align: center;">Bulis</h4>
+                    <p style="text-align: center; color: var(--text-muted);">Éjszakai élet, bulizóhelyek, romkocsmák</p>
+                </div>
+                <div class="card">
+                    <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 15px;">🗺️</h3>
+                    <h4 style="text-align: center;">Jól bejárható</h4>
+                    <p style="text-align: center; color: var(--text-muted);">Kompakt város, gyalog lehet menni mindenhova</p>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="daysUntil">91</div>
+                    <div class="stat-label">Nap a bulira</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="crewCount">~12</div>
+                    <div class="stat-label">Várható résztvevő</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">400-600€</div>
+                    <div class="stat-label">Költség/fő (kb.)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Buli</div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 60px;">💸 Költségvetés (becslés)</h2>
+            <div class="card" style="padding: 40px;">
+                <div class="grid-2">
+                    <div>
+                        <h4>Mibe kerül?</h4>
+                        <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                            <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <span style="float: right; color: var(--accent-blue);">~80-200€</span>
+                                🚆 Utazás
+                            </li>
+                            <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <span style="float: right; color: var(--accent-blue);">~TBA€</span>
+                                🏠 Szállás (3 éj / 12 fő)
+                            </li>
+                            <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <span style="float: right; color: var(--accent-blue);">~100-150€</span>
+                                🍻 Kaja + Pia
+                            </li>
+                            <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <span style="float: right; color: var(--accent-blue);">~50-150€</span>
+                                🎉 Programok + Extra
+                            </li>
+                            <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <span style="float: right; color: var(--accent-blue);">~300-500€</span>
+                                🎉 Összesen / Fő (kb)
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Fontos infók</h4>
+                        <p style="color: var(--text-muted); margin-top: 20px;">
+                            💡 A végső költség függ a választásoktól<br><br>
+                            👑 Otto részét részben a csapat állja<br><br>
+                            📊 Pontos számok akkor, ha fix a létszám
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 60px;">🎯 Elképzelés</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>✓ Ez lesz</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 10px 0;">✅ Csinálunk amit akarunk típusú trip</li>
+                        <li style="padding: 10px 0;">✅ Városnézés + kocsmázás + buli</li>
+                        <li style="padding: 10px 0;">✅ Nappali chill + random őrület</li>
+                        <li style="padding: 10px 0;">✅ Meglepetés programok 😏</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>✗ Ez NEM lesz</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 10px 0;">❌ Nonstop fesztivál program</li>
+                        <li style="padding: 10px 0;">❌ Kötött időbeosztás</li>
+                        <li style="padding: 10px 0;">❌ Túl sokat költünk</li>
+                        <li style="padding: 10px 0;">❌ Egésznap rohadunk a házban</li>
+                        <li style="padding: 10px 0;">❌ Rinyálás 😴</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB CONTENT: SCHEDULE -->
+<div class="tab-content" id="tab-schedule" data-tab="schedule">
+    <div class="container">
+        <h2>🗓️ Program Vázlat</h2>
+        <p style="color: var(--accent-gold); text-align: center; margin-bottom: 40px;">
+            <em>Rugalmas terv – részleteket a helyszínen döntjük el!</em>
+        </p>
+
+        <!-- Timeline overview -->
+        <div class="card" style="padding: 40px; margin-bottom: 50px; background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(255,0,110,0.1));">
+            <h3 style="text-align: center; margin-bottom: 30px;">📅 Menetrend</h3>
+            <div class="grid-2">
+                <div style="text-align: center; padding: 30px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🚆</div>
+                    <h4 style="color: var(--accent-blue); margin-bottom: 10px;">Indulás</h4>
+                    <p style="font-size: 1.2rem; font-weight: 600;">Május 6-7.</p>
+                    <p style="color: var(--text-muted); margin-top: 10px;">Érkezés Prágába 7. délután/este</p>
+                </div>
+                <div style="text-align: center; padding: 30px;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🏠</div>
+                    <h4 style="color: var(--accent-pink); margin-bottom: 10px;">Hazautazás</h4>
+                    <p style="font-size: 1.2rem; font-weight: 600;">Május 10. (Vasárnap)</p>
+                    <p style="color: var(--text-muted); margin-top: 10px;">Vagy előbb, ha valakinek kell</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="font-size: 1.1rem;">
+                    <strong style="color: var(--accent-gold);">2-3 éjszaka Prágában</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Activity categories -->
+        <h3 style="text-align: center; margin-bottom: 30px;">🎯 Mit csinálunk?</h3>
+        
+        <div class="grid-3" style="margin-bottom: 50px;">
+            <div class="card" style="text-align: center; padding: 30px;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🍻</div>
+                <h4>Bulizás</h4>
+                <p style="color: var(--text-muted); margin-top: 15px;">
+                    Romkocsmák, klubok – ahogy épp van kedvünk
+                </p>
+            </div>
+
+            <div class="card" style="text-align: center; padding: 30px;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🏰</div>
+                <h4>Városnézés</h4>
+                <p style="color: var(--text-muted); margin-top: 15px;">
+                    Opcionális tripek
+                </p>
+            </div>
+        </div>
+
+        <!-- Daily rhythm -->
+        <h3 style="text-align: center; margin-bottom: 30px;">⏰ Napi Vibe</h3>
+        
+        <div class="grid-2">
+            <div class="card" style="padding: 30px;">
+                <h4 style="margin-bottom: 20px;">🌅 Nappal</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        ☕ Reggeli
+                    </li>
+                    <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        🚶 Városnézés vagy chill
+                    </li>
+                    <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        🍺 Ebéd + sörözés
+                    </li>
+                    <li style="padding: 12px 0;">
+                        😴 Opcionális power nap
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card" style="padding: 30px;">
+                <h4 style="margin-bottom: 20px;">🌃 Éjszaka</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        🍕 Evés
+                    </li>
+                    <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        🍻 Ivás
+                    </li>
+                    <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        🎉 Bulizás ahogy esik
+                    </li>
+                    <li style="padding: 12px 0;">
+                        🌅 Hajnalig (opcionális 😏)
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Important notes -->
+        <div class="card" style="margin-top: 50px; padding: 40px; background: rgba(255,215,0,0.1); border: 2px solid var(--accent-gold);">
+            <h3 style="text-align: center; color: var(--accent-gold); margin-bottom: 20px;">💡 Fontos</h3>
+            <div style="text-align: center; color: var(--text-muted); line-height: 1.8;">
+                <p>✅ <strong>Nincs kötött program</strong> – csinálunk amit akarunk</p>
+                <p>✅ <strong>Mindenki dönti</strong> hogy miben vesz részt</p>
+                <p>✅ <strong>Rugalmas időbeosztás</strong> – nincs stressz</p>
+                <p style="margin-top: 20px; font-size: 1.1rem;">
+                    📲 <strong>Részletek a WhatsApp csoportban!</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Secret surprises teaser -->
+        <div style="text-align: center; margin-top: 50px;">
+            <div class="card" style="padding: 40px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(255, 0, 110, 0.2));">
+                <h3 style="margin-bottom: 15px;">🎁 Meglepetés programok</h3>
+                <p style="color: var(--text-muted);">
+                    Van még néhány terv...<br>
+                    De azt csak a helyszínen tudjátok meg! 😏
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+    <!-- TAB CONTENT: CREW -->
+    <div class="tab-content" id="tab-crew" data-tab="crew">
+        <div class="container">
+            <h2>👔 A Banda</h2>
+            <p>Azok, akik ezt az éjszakát felejthetetlenné teszik</p>
+
+            <div class="grid-3">
+                <div class="crew-card card">
+                    <div class="crew-avatar">🤵</div>
+                    <h3 class="crew-name">Otto</h3>
+                    <span class="status-badge confirmed">✅ Fix</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">👑</div>
+                    <h3 class="crew-name">Emil</h3>
+                    <span class="status-badge confirmed">✅ Ott leszek</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">🎯</div>
+                    <h3 class="crew-name">Szucsu</h3>
+                    <p class="crew-description">Bármi megtörténhet</p>
+                    <span class="status-badge confirmed">✅ Ott leszek</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">🎪</div>
+                    <h3 class="crew-name">Nimród</h3>
+                    <span class="status-badge confirmed">✅ Ott leszek</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">🎪</div>
+                    <h3 class="crew-name">Sanyi</h3>
+                    <span class="status-badge confirmed">✅ Ott leszek</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">🎲</div>
+                    <h3 class="crew-name">Attika</h3>
+                    <span class="status-badge maybe">❓ Talán</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">🔥</div>
+                    <h3 class="crew-name">Csabi</h3>
+                    <span class="status-badge maybe">❓ Talán</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">📸</div>
+                    <h3 class="crew-name">Öcsi</h3>
+                    <span class="status-badge confirmed">✅ Ott leszek</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">🎸</div>
+                    <h3 class="crew-name">Zsombi</h3>
+                    <span class="status-badge confirmed">✅ Ott leszek</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">🎸</div>
+                    <h3 class="crew-name">Barni</h3>
+                    <span class="status-badge confirmed">✅ Ott leszek</span>
+                </div>
+
+                <div class="crew-card card">
+                    <div class="crew-avatar">👥</div>
+                    <h3 class="crew-name">+ Még páran akik nem jeleztek vissza vagy még nincsenek a csoportban</h3>
+                    <p class="crew-role">Debrecen / Gyergyó</p>
+                    <p class="crew-description">Még szervezés alatt</p>
+                    <span class="status-badge pending">⏳ Pending</span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="color: var(--text-muted);">Végleges létszám: <strong id="finalCount">~12 fő</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB CONTENT: VOTE -->
+    <div class="tab-content" id="tab-vote" data-tab="vote">
+        <div class="container">
+            <h2>🗳️ Szavazások & Döntések</h2>
+            <p>Így jutottunk el Prágáig</p>
+
+            <h3 style="margin-top: 40px;">📅 Dátum Szavazás</h3>
+            <div class="card" style="padding: 40px;">
+                <h4>Opciók:</h4>
+                <div class="vote-option">
+                    <div class="vote-bar">
+                        <div class="vote-fill" style="width: 25%; background: var(--accent-blue);"></div>
+                    </div>
+                    <span>Április vége (25%)</span>
+                </div>
+                <div class="vote-option">
+                    <div class="vote-bar">
+                        <div class="vote-fill" style="width: 65%; background: var(--accent-gold);"></div>
+                    </div>
+                    <span>✅ Május eleje (65%) – NYERT</span>
+                </div>
+                <div class="vote-option">
+                    <div class="vote-bar">
+                        <div class="vote-fill" style="width: 10%; background: var(--accent-pink);"></div>
+                    </div>
+                    <span>Május közepe (10%)</span>
+                </div>
+                <p style="margin-top: 30px; color: var(--accent-gold);">
+                    🎯 Végső döntés: <strong>Május 6-9, 2026</strong>
+                </p>
+            </div>
+
+            <h3 style="margin-top: 60px;">📍 Helyszín Szavazás</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>❌ Elutasítva</h4>
+                    <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            🎪 Fesztivál – Túl kötött program
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            🌷 Amsterdam – Tavaly már volt és akkor sem jött össze
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>✅ Döntés</h4>
+                    <div
+                        style="margin-top: 20px; padding: 30px; background: rgba(0, 212, 255, 0.1); border-radius: 15px; border: 2px solid var(--accent-blue);">
+                        <h3 style="text-align: center; color: var(--accent-blue);">🇨🇿 PRÁGA</h3>
+                        <p style="text-align: center; margin-top: 15px; color: var(--text-muted);">
+                            A legtöbb szavazat<br>
+                        </p>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
+                        ❓ Backup: Gyergyó / hétvégi ház (ha nagyon szétesik a dolog)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB CONTENT: GAMES -->
+    <div class="tab-content" id="tab-games" data-tab="games">
+        <div class="container">
+            <h2>🎲 Játékok & Kihívások</h2>
+
+            <div class="card" style="text-align: center; padding: 50px;">
+                <h3 style="margin-bottom: 30px;">Merészség Generátor</h3>
+                <p class="dare-text" id="dareText">
+                    Kattints ide a kihívásért...
+                </p>
+                <button class="btn btn-secondary" onclick="generateDare()" style="margin-top: 30px;">
+                    🎲 Pörgessük!
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TAB CONTENT: RULES -->
+    <div class="tab-content" id="tab-rules" data-tab="rules">
+        <div class="container">
+            <div class="card" style="padding: 40px; margin-bottom: 30px;">
+                <h3 style="text-align: center; margin-bottom: 30px;">⚔️ Rules of the Trip ⚔️</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li
+                        style="padding: 15px; margin-bottom: 10px; background: rgba(255,255,255,0.05); border-left: 4px solid var(--accent-blue); border-radius: 10px;">
+                        <strong>1.</strong> Nincs, csak tudd hol vannak a határaid és ne kelljen azzal töltsük az időt, hogy vigyázunk rád mert te kiütötted magad.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Secret Section Teaser -->
+            <div style="margin-top: 60px; text-align: center;">
+                <div class="card"
+                    style="padding: 50px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(255, 0, 110, 0.2));">
+                    <h3>🔐 Secret Section</h3>
+                    <p style="color: var(--text-muted); margin: 20px 0;">
+                        Van még néhány meglepetés...<br>
+                        De ezt csak a helyszínen tudjátok meg 😏
+                    </p>
+                    <button class="btn btn-secondary" onclick="alert('🤫 Ha most megtudnád nézni, már nem is lenne secret!')">
+                        🔓 Unlock Secrets
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGISTICS SECTION -->
+    <section id="logistics" style="padding: 80px 0;">
+        <div class="container">
+            <h2>🚆 Logisztika & Utazás</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">
+                Hogyan jutunk el Prágába?
+            </p>
+
+            <h3 style="margin-top: 40px;">✈️ Utazási Opciók</h3>
+            <div class="grid-3" style="margin-top: 30px;">
+                <div class="card">
+                    <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 15px;">🚆</h3>
+                    <h4 style="text-align: center;">Vonat</h4>
+                    <p style="text-align: center; color: var(--text-muted);">
+                        Budapest → Prága<br>
+                        ~6 óra<br>
+                        <strong style="color: var(--accent-blue);">Ajánlott!</strong>
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 15px;">🚗</h3>
+                    <h4 style="text-align: center;">Autó</h4>
+                    <p style="text-align: center; color: var(--text-muted);">
+                        Rugalmas<br>
+                        Megosztható költség<br>
+                        Debrecen/Gyergyó csapnak
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 15px;">✈️</h3>
+                    <h4 style="text-align: center;">Repülő</h4>
+                    <p style="text-align: center; color: var(--text-muted);">
+                        Opcionális<br>
+                        Gyors, de drágább<br>
+                        Nem kötelező
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 60px;">🏠 Szállás</h3>
+            <div class="grid-2" style="margin-top: 30px;">
+                <div class="card">
+                    <h4>Követelmények</h4>
+                    <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            👥 ~12 fő befogadása
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            🛏️ 3-4 hálószoba minimum
+                        </li>
+                        <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            🏠 VAGY 2 közeli Airbnb
+                        </li>
+                        <li style="padding: 10px 0;">
+                            📍 Központi elhelyezkedés
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h4>Költség (becslés)</h4>
+                    <p style="color: var(--text-muted); margin-top: 20px;">
+                        💶 ~3500-4500 RON<br>
+                        <span style="font-size: 0.9rem;">(3 éjszaka / 12 fő)</span>
+                    </p>
+                    <p style="margin-top: 30px; color: var(--accent-gold);">
+                        <strong>Státusz:</strong><br>
+                        📝 Árajánlat kérése folyamatban
+                    </p>
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
+                        Foglalás akkor, ha a létszám fix
+                    </p>
+                </div>
+            </div>
+
+            <div class="card"
+                style="margin-top: 40px; padding: 40px; background: rgba(0, 212, 255, 0.1); border: 2px solid var(--accent-blue);">
+                <h3 style="text-align: center;">📲 Koordináció</h3>
+                <p style="text-align: center; color: var(--text-muted); margin-top: 20px;">
+                    Pontos útvonalak, időpontok és szállás részletek<br>
+                    a WhatsApp csoportban lesznek megosztva
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATISTICS SECTION - Real-time Dashboard -->
+    <section id="stats-dashboard" style="padding: 80px 0; background: rgba(0, 0, 0, 0.2);">
+        <div class="container">
+            <h2 style="text-align: center;">📊 Élő Statisztikák</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">
+                Ki jön? Hogyan utaznak? Frissül élőben!
+            </p>
+
+            <!-- Summary Stats -->
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="totalAttending">0</div>
+                    <div class="stat-label">Hell yes! 🎉</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="totalMaybe">0</div>
+                    <div class="stat-label">Valószínűleg 🤔</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="totalTrain">0</div>
+                    <div class="stat-label">Vonattal 🚆</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="totalCar">0</div>
+                    <div class="stat-label">Autóval 🚗</div>
+                </div>
+            </div>
+
+            <!-- Attendees List -->
+            <div style="margin-top: 60px;">
+                <h3 style="text-align: center; margin-bottom: 30px;">👥 Ki jön?</h3>
+                <div id="attendeesList" class="attendees-grid">
+                    <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+                        <p>Még senki nem jelentkezett... legyél te az első! 🎉</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transport Breakdown -->
+            <div style="margin-top: 60px;">
+                <h3 style="text-align: center; margin-bottom: 30px;">🚆 Utazási preferenciák</h3>
+                <div id="transportBreakdown" class="grid-2">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- RSVP SECTION -->
+    <section id="rsvp" style="padding: 80px 0; background: rgba(0, 0, 0, 0.3);">
+        <div class="container">
+            <h2 style="text-align: center;">🎯 Megerősítés & Utazás</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">
+                Tudnunk kell, hogy számíthatunk rád és hogyan utazol!
+            </p>
+
+            <form class="rsvp-form" id="rsvpForm" onsubmit="handleRSVP(event)">
+
+                <!-- Basic Info -->
+                <div
+                    style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+                    <h3 style="margin-top: 0;">📋 Alap Információk</h3>
+
+                    <div class="form-group">
+                        <label for="name">Teljes Név *</label>
+                        <input type="text" id="name" name="name" required placeholder="A neved">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="email@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Telefonszám *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+36 ... ... ....">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attending">Jössz? *</label>
+                        <select id="attending" name="attending" required
+                            onchange="console.log('Select changed!'); toggleTravelSection();">
+                            <option value="">Válassz egyet</option>
+                            <option value="yes">Hell yes! 🎉</option>
+                            <option value="maybe">Valószínűleg 🤔</option>
+                            <option value="no">Sajnos nem tudok 😢</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Travel Details (only shown if attending YES) -->
+                <div id="travelSection" style="display: block;">
+
+                    <!-- Starting Location -->
+                    <div
+                        style="background: rgba(0,212,255,0.05); padding: 30px; border-radius: 15px; margin-bottom: 30px; border: 1px solid rgba(0,212,255,0.2);">
+                        <h3 style="margin-top: 0;">🗺️ Honnan indulsz?</h3>
+
+                        <div class="form-group">
+                            <label for="startLocation">Kiindulási pont *</label>
+                            <select id="startLocation" name="startLocation" onchange="updateTravelOptions()">
+                                <option value="">Válassz...</option>
+                                <option value="gyergyo">Gyergyószentmiklós</option>
+                                <option value="brasso">Brassó</option>
+                                <option value="bukarest">Bukarest</option>
+                                <option value="debrecen">Debrecen</option>
+                                <option value="other">Egyéb (írd be alább)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="otherLocationGroup" style="display: none;">
+                            <label for="startLocationOther">Egyéb kiindulási pont</label>
+                            <input type="text" id="startLocationOther" name="startLocationOther"
+                                placeholder="Pl. Szeged, Pécs...">
+                        </div>
+                    </div>
+
+                    <!-- Transport Method -->
+                    <div
+                        style="background: rgba(255,215,0,0.05); padding: 30px; border-radius: 15px; margin-bottom: 30px; border: 1px solid rgba(255,215,0,0.2);">
+                        <h3 style="margin-top: 0;">🚗 Mivel utazol?</h3>
+
+                        <div class="form-group">
+                            <label for="transportMethod">Fő közlekedési eszköz *</label>
+                            <select id="transportMethod" name="transportMethod" onchange="toggleTransportDetails()">
+                                <option value="">Válassz...</option>
+                                <option value="car-driver">🚗 Saját autóval megyek (SOFŐR)</option>
+                                <option value="car-passenger">🚗 Autóval megyek (UTAS - csatlakoznék valakihez)</option>
+                                <option value="train">🚆 Vonat</option>
+                                <option value="plane">✈️ Repülő</option>
+                                <option value="mixed">🔀 Kombináció (több eszköz)</option>
+                                <option value="undecided">❓ Még nem tudom</option>
+                            </select>
+                        </div>
+
+                        <!-- Car Driver Details -->
+                        <div id="carDriverDetails"
+                            style="display: none; margin-top: 20px; padding: 20px; background: rgba(0,212,255,0.1); border-radius: 10px;">
+                            <h4>🚗 Autós információk</h4>
+
+                            <div class="form-group">
+                                <label for="carSeats">Hány szabad hely van az autódban? *</label>
+                                <select id="carSeats" name="carSeats">
+                                    <option value="">Válassz...</option>
+                                    <option value="1">1 hely</option>
+                                    <option value="2">2 hely</option>
+                                    <option value="3">3 hely</option>
+                                    <option value="4">4 hely</option>
+                                    <option value="5">5+ hely</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="carRoute">Útvonal részletei</label>
+                                <textarea id="carRoute" name="carRoute" rows="3"
+                                    placeholder="Pl.: Gyergyó → Debrecen → Budapest → Prága. Csatlakozási pontok: Debrecen (8:00), Budapest (14:00)"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="carCostShare" name="carCostShare" value="yes">
+                                    Megosztom a benzin költséget az utasokkal
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Car Passenger Details -->
+                        <div id="carPassengerDetails"
+                            style="display: none; margin-top: 20px; padding: 20px; background: rgba(255,215,0,0.1); border-radius: 10px;">
+                            <h4>🚗 Utas információk</h4>
+
+                            <div class="form-group">
+                                <label for="preferredPickup">Honnan tudnál csatlakozni?</label>
+                                <input type="text" id="preferredPickup" name="preferredPickup"
+                                    placeholder="Pl.: Debrecen, Budapest, Kolozsvár">
+                            </div>
+
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="flexiblePickup" name="flexiblePickup" value="yes">
+                                    Rugalmas vagyok a csatlakozási ponttal
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Mixed Transport Details -->
+                        <div id="mixedTransportDetails"
+                            style="display: none; margin-top: 20px; padding: 20px; background: rgba(255,0,110,0.1); border-radius: 10px;">
+                            <h4>🔀 Kombinált utazás részletei</h4>
+
+                            <div class="form-group">
+                                <label for="mixedRoute">Írd le az útvonaladat részletesen *</label>
+                                <textarea id="mixedRoute" name="mixedRoute" rows="4"
+                                    placeholder="Példa:&#10;Brassó → Debrecen (AUTÓ, saját, 2 szabad hely)&#10;Debrecen → Budapest (VONAT)&#10;Budapest → Prága (VONAT)"></textarea>
+                                <small style="color: var(--text-muted); display: block; margin-top: 5px;">
+                                    💡 Tipp: Add meg minden szakaszt külön sorban, jelöld hogy
+                                    autóval/vonattal/repülővel mész
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timing -->
+                    <div
+                        style="background: rgba(255,0,110,0.05); padding: 30px; border-radius: 15px; margin-bottom: 30px; border: 1px solid rgba(255,0,110,0.2);">
+                        <h3 style="margin-top: 0;">🕐 Időzítés</h3>
+
+                        <div class="form-group">
+                            <label for="arrivalDay">Mikor érkezel Prágába?</label>
+                            <select id="arrivalDay" name="arrivalDay">
+                                <option value="">Válassz...</option>
+                                <option value="may5">Május 6.</option>
+                                <option value="may6-morning">Május 7. délelőtt</option>
+                                <option value="may6-afternoon">Május 7. délután</option>
+                                <option value="may6-evening">Május 7. este</option>
+                                <option value="may7">Május 8. (később érkezem)</option>
+                                <option value="undecided">Még nem tudom</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="departureDay">Mikor utazol haza?</label>
+                            <select id="departureDay" name="departureDay">
+                                <option value="">Válassz...</option>
+                                <option value="may8">Május 8. (korán)</option>
+                                <option value="may9-morning">Május 9. délelőtt</option>
+                                <option value="may9-afternoon">Május 9. délután</option>
+                                <option value="may9-evening">Május 9. este</option>
+                                <option value="may10">Május 10. délelőtt</option>
+                                <option value="may10">Május 10. délután</option>
+                                <option value="may10">Május 10. este</option>
+                                <option value="undecided">Még nem tudom</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Other Info -->
+                <div
+                    style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+                    <h3 style="margin-top: 0;">ℹ️ Egyéb információk</h3>
+
+                    <div class="form-group">
+                        <label for="dietary">Étel allergia / preferencia</label>
+                        <input type="text" id="dietary" name="dietary" placeholder="Vegetáriánus, allergiák, stb.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Üzenet Ottonak / Extra infók</label>
+                        <textarea id="message" name="message" rows="4"
+                            placeholder="Bármi amit üzenni szeretnél vagy fontos infó az utazásról..."></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                    🎊 Jelentkezem!
+                </button>
+            </form>
+
+            <div id="rsvpConfirmation"
+                style="display: none; text-align: center; padding: 40px; background: var(--bg-card); border-radius: 20px; margin-top: 30px;">
+                <h3 style="color: var(--accent-gold);">🎉 Jössz! Király!</h3>
+                <p style="color: var(--text-muted); margin-top: 15px;">Köszi a megerősítést! Az utazási infóid láthatóak
+                    a Statisztika szekcióban.</p>
+                <button class="btn btn-secondary" onclick="window.location.href='#stats-dashboard'"
+                    style="margin-top: 20px;">
+                    📊 Nézd meg a résztvevőket
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <h2>Ott találkozunk! 🔥</h2>
+        <p style="color: var(--text-muted); margin: 20px 0;">
+            Jó lesz ez, készülj fel!
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Kérdések? WhatsApp csoportban
+        </p>
+        <div class="share-buttons">
+            <div class="share-btn" onclick="shareOnWhatsApp()">💬</div>
+            <div class="share-btn" onclick="copyLink()">🔗</div>
+            <div class="share-btn" onclick="shareOnFacebook()">📘</div>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 30px;">
+            🍺 Prága vár • Last Ride • 2026 🍺
+        </p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase Config -->
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7STy9Pyx6jBOtagEtQBQ3xM77cdlRIU8",
+            authDomain: "otto-bachelor-party.firebaseapp.com",
+            projectId: "otto-bachelor-party",
+            storageBucket: "otto-bachelor-party.firebasestorage.app",
+            messagingSenderId: "918048100825",
+            appId: "1:918048100825:web:13069d341370085ba689c8"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        console.log('Firebase initialized successfully!');
+    </script>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/interactive.js"></script>
+    <script src="js/firebase-stats.js"></script>
+
+    <!-- Force Travel Section Toggle -->
+    <script>
+        console.log('🚀 Setting up travel section listener...');
+
+        window.addEventListener('load', function () {
+            const attendingSelect = document.getElementById('attending');
+            const travelSection = document.getElementById('travelSection');
+
+            if (attendingSelect && travelSection) {
+                attendingSelect.addEventListener('change', function () {
+                    console.log('🔥 Attending changed to:', this.value);
+
+                    // Only hide if user selects "no" - otherwise keep it visible
+                    if (this.value === 'no') {
+                        travelSection.style.display = 'none';
+                        console.log('❌ Travel section HIDDEN (not attending)');
+                    } else {
+                        travelSection.style.display = 'block';
+                        console.log('✅ Travel section SHOWN');
+                    }
+                });
+                console.log('✅ Travel listener attached!');
+            }
+
+            // Also add listeners for other dropdowns
+            const startLocationSelect = document.getElementById('startLocation');
+            const otherLocationGroup = document.getElementById('otherLocationGroup');
+
+            if (startLocationSelect && otherLocationGroup) {
+                startLocationSelect.addEventListener('change', function () {
+                    if (this.value === 'other') {
+                        otherLocationGroup.style.display = 'block';
+                    } else {
+                        otherLocationGroup.style.display = 'none';
+                    }
+                });
+            }
+
+            const transportMethodSelect = document.getElementById('transportMethod');
+            if (transportMethodSelect) {
+                transportMethodSelect.addEventListener('change', function () {
+                    const carDriver = document.getElementById('carDriverDetails');
+                    const carPassenger = document.getElementById('carPassengerDetails');
+                    const mixed = document.getElementById('mixedTransportDetails');
+
+                    if (carDriver) carDriver.style.display = 'none';
+                    if (carPassenger) carPassenger.style.display = 'none';
+                    if (mixed) mixed.style.display = 'none';
+
+                    if (this.value === 'car-driver' && carDriver) {
+                        carDriver.style.display = 'block';
+                    } else if (this.value === 'car-passenger' && carPassenger) {
+                        carPassenger.style.display = 'block';
+                    } else if (this.value === 'mixed' && mixed) {
+                        mixed.style.display = 'block';
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+
+</body>
+
+</html>
