@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "description": "Bachelor party website - Prague 2026",
   "scripts": {
-    "start": "npx serve . -p $PORT"
+    "start": "npx serve . -p $PORT --no-redirect"
   },
   "dependencies": {
     "firebase": "^12.8.0"
