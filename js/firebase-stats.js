@@ -435,9 +435,10 @@ function getTimingName(timing) {
 }
 
 // Cleanup on page unload
-window.addEventListener('beforeunload', function() {
+/* window.addEventListener('beforeunload', function() {
     if (statsListener) {
         statsListener();
         console.log('Listener cleaned up');
     }
 });
+*/
