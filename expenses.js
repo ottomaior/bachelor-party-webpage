@@ -114,7 +114,7 @@ function populatePeopleDropdowns() {
     }
 }
 
-// ==================== REVOLUT PEOPLE ====================
+// ==================== REVOLUT PEOPLE WITH QR CODES ====================
 function renderRevolutPeople() {
     const container = document.getElementById('revolut-people-list');
     if (!container) return;
@@ -130,16 +130,22 @@ function renderRevolutPeople() {
 
         if (hasRevolut) {
             return `
-                <a href="${revolutLink}" target="_blank" rel="noopener noreferrer"
-                   class="flex flex-col items-center gap-2 p-3 glass-card rounded-xl hover:bg-blue-500/10 hover:border-blue-500/50 transition-all group cursor-pointer text-center">
+                <div class="flex flex-col items-center gap-2 p-3 glass-card rounded-xl hover:bg-blue-500/10 hover:border-blue-500/50 transition-all group text-center">
                     <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform">
                         ${person.name.charAt(0).toUpperCase()}
                     </div>
                     <div class="text-xs font-semibold text-white">${person.name.split(' ')[0]}</div>
-                    <div class="px-3 py-1.5 bg-blue-500 hover:bg-blue-600 rounded-lg text-xs font-semibold text-white transition-colors w-full flex items-center justify-center gap-1">
-                        <span>💳</span><span>Pay</span>
+                    <div class="flex gap-2 w-full">
+                        <a href="${revolutLink}" target="_blank" rel="noopener noreferrer"
+                           class="flex-1 px-2 py-1.5 bg-blue-500 hover:bg-blue-600 rounded-lg text-xs font-semibold text-white transition-colors flex items-center justify-center gap-1">
+                            <span>💳</span><span>Pay</span>
+                        </a>
+                        <button onclick="showQRCode('${person.name}', '${revolutLink}')" 
+                                class="px-2 py-1.5 bg-purple-500 hover:bg-purple-600 rounded-lg text-xs font-semibold text-white transition-colors">
+                            📱
+                        </button>
                     </div>
-                </a>
+                </div>
             `;
         }
         return `
@@ -153,6 +159,47 @@ function renderRevolutPeople() {
         `;
     }).join('');
 }
+
+// ==================== QR CODE FUNCTIONS ====================
+window.showQRCode = function(name, revolutLink) {
+    const modal = document.getElementById('qr-modal');
+    const title = document.getElementById('qr-modal-title');
+    const subtitle = document.getElementById('qr-modal-subtitle');
+    const directLink = document.getElementById('qr-direct-link');
+    const canvas = document.getElementById('qr-canvas');
+    
+    if (!modal || !canvas) return;
+    
+    title.textContent = `Fizetés: ${name}`;
+    subtitle.textContent = 'Scanneld be a QR kódot a Revoluttal';
+    directLink.href = revolutLink;
+    
+    // Generate QR code
+    if (typeof QRCode !== 'undefined') {
+        QRCode.toCanvas(canvas, revolutLink, {
+            width: 200,
+            margin: 2,
+            color: {
+                dark: '#000000',
+                light: '#ffffff'
+            }
+        }, function(error) {
+            if (error) console.error('QR Code error:', error);
+        });
+    }
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+};
+
+window.closeQRModal = function(event) {
+    if (event && event.target !== event.currentTarget) return;
+    const modal = document.getElementById('qr-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+};
 
 // ==================== MODAL CONTROLS ====================
 const modal = document.getElementById('expense-modal');
@@ -645,6 +692,70 @@ function updateQuickStats(expenses) {
     el('stat-count', expenses.length);
     el('stat-avg', `€${avg.toFixed(2)}`);
     el('stat-per-person', `€${perPerson.toFixed(2)}`);
+    
+    // Update budget tracker
+    updateBudgetTracker(total, participants.size, perPerson);
+}
+
+// ==================== BUDGET TRACKER ====================
+function updateBudgetTracker(total, participantCount, perPerson) {
+    const BUDGET_MIN = 400;
+    const BUDGET_MAX = 600;
+    
+    // Update elements
+    const currentEl = document.getElementById('budget-current');
+    const fillEl = document.getElementById('budget-fill');
+    const statusEl = document.getElementById('budget-status');
+    const totalEl = document.getElementById('budget-total');
+    const participantsEl = document.getElementById('budget-participants');
+    const remainingLowEl = document.getElementById('budget-remaining-low');
+    const remainingHighEl = document.getElementById('budget-remaining-high');
+    
+    if (currentEl) currentEl.textContent = `€${perPerson.toFixed(2)}`;
+    if (totalEl) totalEl.textContent = `€${total.toFixed(2)}`;
+    if (participantsEl) participantsEl.textContent = participantCount || peopleList.length;
+    
+    // Calculate remaining budget
+    const remainingLow = Math.max(0, BUDGET_MIN - perPerson);
+    const remainingHigh = Math.max(0, BUDGET_MAX - perPerson);
+    if (remainingLowEl) remainingLowEl.textContent = `€${remainingLow.toFixed(0)}`;
+    if (remainingHighEl) remainingHighEl.textContent = `€${remainingHigh.toFixed(0)}`;
+    
+    // Calculate progress percentage (based on max budget)
+    const percentage = Math.min((perPerson / BUDGET_MAX) * 100, 100);
+    
+    if (fillEl) {
+        fillEl.style.width = `${percentage}%`;
+        // Change background position based on percentage to show gradient
+        const gradientPos = (percentage / 100) * 100;
+        fillEl.style.backgroundPosition = `${gradientPos}% 50%`;
+    }
+    
+    // Update status message
+    if (statusEl) {
+        let statusHTML = '';
+        let statusClass = '';
+        
+        if (perPerson === 0) {
+            statusHTML = '<span class="text-gray-400">Még nincsenek költségek</span>';
+        } else if (perPerson < BUDGET_MIN * 0.5) {
+            statusClass = 'bg-green-900/30 border border-green-500/30';
+            statusHTML = `<span class="text-green-400">🟢 Jó ütemben haladtok!</span><br><span class="text-sm text-gray-400">Még bőven van keret</span>`;
+        } else if (perPerson < BUDGET_MIN) {
+            statusClass = 'bg-green-900/30 border border-green-500/30';
+            statusHTML = `<span class="text-green-400">✅ A minimum alatt vagytok</span><br><span class="text-sm text-gray-400">Költhettek még €${remainingLow.toFixed(0)}-t a minimumig</span>`;
+        } else if (perPerson <= BUDGET_MAX) {
+            statusClass = 'bg-yellow-900/30 border border-yellow-500/30';
+            statusHTML = `<span class="text-yellow-400">⚠️ Költségvetésen belül</span><br><span class="text-sm text-gray-400">Még €${remainingHigh.toFixed(0)} a maximum előtt</span>`;
+        } else {
+            statusClass = 'bg-red-900/30 border border-red-500/30';
+            const over = perPerson - BUDGET_MAX;
+            statusHTML = `<span class="text-red-400">🔴 Túlléptétek a keretet!</span><br><span class="text-sm text-gray-400">€${over.toFixed(0)}-val többet költöttetek a tervezettnél</span>`;
+        }
+        
+        statusEl.className = `p-4 rounded-xl text-center ${statusClass}`;
+        statusEl.innerHTML = statusHTML;
+    }
 }
 
 // ==================== EXPORT ====================
