@@ -434,11 +434,11 @@ function getTimingName(timing) {
     return names[timing] || timing;
 }
 
-// Cleanup on page unload
-/* window.addEventListener('beforeunload', function() {
+// Cleanup on page unload to prevent memory leaks
+window.addEventListener('beforeunload', function() {
     if (statsListener) {
         statsListener();
-        console.log('Listener cleaned up');
+        statsListener = null;
+        console.log('Firebase listener cleaned up');
     }
 });
-*/

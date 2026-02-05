@@ -1,0 +1,28 @@
+/* ===== BACHELOR PARTY WEBSITE - MAIN CSS ===== */
+/* Import orchestrator - loads all modular CSS files */
+
+/* ===== BASE ===== */
+@import url('./base/variables.css');
+@import url('./base/reset.css');
+@import url('./base/typography.css');
+@import url('./base/accessibility.css');
+
+/* ===== LAYOUTS ===== */
+@import url('./layouts/grid.css');
+@import url('./layouts/navigation.css');
+
+/* ===== COMPONENTS ===== */
+@import url('./components/buttons.css');
+@import url('./components/cards.css');
+@import url('./components/forms.css');
+@import url('./components/modals.css');
+@import url('./components/toast.css');
+
+/* ===== EFFECTS ===== */
+@import url('./effects/animations.css');
+@import url('./effects/particles.css');
+@import url('./effects/glassmorphism.css');
+
+/* ===== PAGES ===== */
+@import url('./pages/home.css');
+@import url('./pages/expenses.css');

@@ -3,6 +3,9 @@
 // Prága trip - Május 6, 2026, 12:00
 const partyDate = new Date(2026, 4, 6, 12, 0, 0).getTime(); // Month is 0-indexed (4 = May)
 
+// Store interval reference for cleanup
+let countdownInterval = null;
+
 function updateCountdown() {
     const now = new Date().getTime();
     const distance = partyDate - now;
@@ -35,9 +38,22 @@ function updateCountdown() {
         if (countdownEl) {
             countdownEl.innerHTML = '<h2 style="color: var(--accent-gold);">🎉 PRÁGA IDŐ! 🎉</h2>';
         }
+        // Clear interval when countdown expires
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
     }
 }
 
 // Update every second
-setInterval(updateCountdown, 1000);
+countdownInterval = setInterval(updateCountdown, 1000);
 updateCountdown();
+
+// Cleanup on page unload to prevent memory leaks
+window.addEventListener('beforeunload', function() {
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+});

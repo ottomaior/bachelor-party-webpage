@@ -1,0 +1,392 @@
+/* ===== FORM SYSTEM ===== */
+
+/* Form Container */
+.form-container,
+.rsvp-form {
+    background: var(--color-bg-card);
+    backdrop-filter: blur(var(--glass-blur));
+    border-radius: var(--radius-2xl);
+    padding: var(--space-2xl);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+}
+
+/* Base Input Styles */
+.form-group input,
+.form-group select,
+.form-group textarea,
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-base);
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder,
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--color-text-disabled);
+}
+
+/* Focus States */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus,
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Glow Focus Effect */
+.form-input-glow:focus,
+.form-select-glow:focus,
+.form-textarea-glow:focus {
+    border-color: var(--color-accent-blue);
+    box-shadow: 
+        0 0 0 3px rgba(0, 212, 255, 0.1),
+        0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+/* Select Dropdown */
+select,
+.form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a0a0b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-md) center;
+    background-size: 16px;
+    padding-right: var(--space-2xl);
+}
+
+select option,
+.form-select option {
+    background: var(--color-bg-card-solid);
+    color: var(--color-text-primary);
+    padding: var(--space-sm);
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+    background: var(--color-accent-blue);
+    color: white;
+}
+
+/* Textarea */
+textarea,
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Checkbox and Radio */
+.form-checkbox,
+.form-radio {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    cursor: pointer;
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    transition: background var(--duration-fast) var(--ease-out);
+}
+
+.form-checkbox:hover,
+.form-radio:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.form-checkbox input,
+.form-radio input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color-accent-blue);
+}
+
+/* Input with Icon */
+.input-icon-wrapper {
+    position: relative;
+}
+
+.input-icon-wrapper .icon {
+    position: absolute;
+    left: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    pointer-events: none;
+}
+
+.input-icon-wrapper input {
+    padding-left: var(--space-2xl);
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    gap: 0;
+}
+
+.input-group input {
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.input-group button,
+.input-group .input-addon {
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    border-left: none;
+}
+
+.input-addon {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-md);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--color-border-subtle);
+    color: var(--color-text-muted);
+}
+
+/* Floating Label */
+.form-floating {
+    position: relative;
+}
+
+.form-floating input,
+.form-floating textarea {
+    padding: var(--space-lg) var(--space-md) var(--space-sm);
+}
+
+.form-floating label {
+    position: absolute;
+    top: 50%;
+    left: var(--space-md);
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    transition: all var(--duration-fast) var(--ease-out);
+    pointer-events: none;
+    font-weight: var(--font-weight-normal);
+}
+
+.form-floating input:focus ~ label,
+.form-floating input:not(:placeholder-shown) ~ label,
+.form-floating textarea:focus ~ label,
+.form-floating textarea:not(:placeholder-shown) ~ label {
+    top: var(--space-sm);
+    font-size: var(--font-size-xs);
+    color: var(--color-accent-blue);
+}
+
+/* Validation States */
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea,
+.is-invalid {
+    border-color: var(--color-error);
+}
+
+.form-group.error input:focus,
+.is-invalid:focus {
+    box-shadow: 0 0 0 3px var(--color-error-light);
+}
+
+.form-group.success input,
+.is-valid {
+    border-color: var(--color-success);
+}
+
+.form-group.success input:focus,
+.is-valid:focus {
+    box-shadow: 0 0 0 3px var(--color-success-light);
+}
+
+.error-message {
+    color: var(--color-error);
+    font-size: var(--font-size-sm);
+    margin-top: var(--space-xs);
+}
+
+.help-text {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    margin-top: var(--space-xs);
+}
+
+/* File Input */
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.file-input-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed var(--color-border-default);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-out);
+}
+
+.file-input-label:hover {
+    border-color: var(--color-accent-blue);
+    background: rgba(0, 212, 255, 0.05);
+    color: var(--color-accent-blue);
+}
+
+/* Search Input */
+.search-input {
+    position: relative;
+}
+
+.search-input input {
+    padding-left: var(--space-2xl);
+    padding-right: var(--space-2xl);
+}
+
+.search-input .search-icon {
+    position: absolute;
+    left: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+}
+
+.search-input .clear-btn {
+    position: absolute;
+    right: var(--space-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: var(--space-xs);
+    opacity: 0;
+    transition: opacity var(--duration-fast);
+}
+
+.search-input input:not(:placeholder-shown) ~ .clear-btn {
+    opacity: 1;
+}
+
+/* Range Input */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--color-accent-blue);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: transform var(--duration-fast);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    transition: var(--duration-normal);
+}
+
+.toggle-slider::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: var(--radius-full);
+    transition: var(--duration-normal);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background: var(--color-accent-blue);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+    transform: translateX(24px);
+}
+
+/* Dark mode select fix */
+@-moz-document url-prefix() {
+    select option {
+        background-color: var(--color-bg-card-solid);
+        color: var(--color-text-primary);
+    }
+    
+    select option:hover,
+    select option:checked {
+        background-color: var(--color-accent-blue);
+        color: white;
+    }
+}
