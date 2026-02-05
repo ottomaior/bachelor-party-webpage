@@ -246,6 +246,437 @@
             width: 2px;
             background: white;
         }
+        
+        /* ==================== CURRENCY CONVERTER ==================== */
+        .currency-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        .currency-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s;
+        }
+        .currency-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(16, 185, 129, 0.5);
+        }
+        .currency-panel {
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            width: 320px;
+            background: rgba(20, 20, 35, 0.98);
+            border-radius: 16px;
+            padding: 20px;
+            display: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .currency-panel.active { display: block; }
+        .currency-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .currency-input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 1.1rem;
+        }
+        .currency-select {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+        }
+        .currency-results {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .currency-result {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .currency-result .flag { font-size: 1.2rem; }
+        .currency-result .amount { font-size: 1.1rem; font-weight: bold; color: var(--accent-blue); }
+        .currency-result .code { font-size: 0.8rem; color: var(--text-muted); }
+        .currency-presets {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .currency-preset {
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .currency-preset:hover { background: rgba(255, 255, 255, 0.2); }
+        
+        /* ==================== DARK/LIGHT MODE ==================== */
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { background: rgba(255, 255, 255, 0.1); }
+        body.light-mode {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a1a2e;
+            --text-muted: #666666;
+        }
+        body.light-mode .card {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a2e;
+        }
+        body.light-mode .navbar {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        body.light-mode .nav-link { color: #1a1a2e; }
+        body.light-mode .currency-panel,
+        body.light-mode .leaflet-control-layers,
+        body.light-mode .leaflet-popup-content-wrapper {
+            background: rgba(255, 255, 255, 0.98) !important;
+            color: #1a1a2e !important;
+        }
+        
+        /* ==================== PHRASE BOOK ==================== */
+        .phrase-card {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .phrase-card:hover { background: rgba(255, 255, 255, 0.1); }
+        .phrase-card .czech { font-size: 1.1rem; font-weight: 600; color: var(--accent-blue); }
+        .phrase-card .hungarian { color: var(--text-muted); margin-top: 5px; }
+        .phrase-card .phonetic { font-style: italic; color: var(--accent-gold); font-size: 0.9rem; margin-top: 3px; }
+        .phrase-category-title {
+            padding: 10px 15px;
+            background: linear-gradient(90deg, var(--accent-blue), transparent);
+            border-radius: 10px;
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+        
+        /* ==================== METRO GUIDE ==================== */
+        .metro-line {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        .metro-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .metro-badge.line-a { background: #00a651; }
+        .metro-badge.line-b { background: #ffd700; color: #000; }
+        .metro-badge.line-c { background: #e31e24; }
+        
+        /* ==================== DRINKING GAMES ==================== */
+        .game-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .game-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        .game-card .game-icon { font-size: 3rem; margin-bottom: 15px; }
+        .game-card h4 { color: var(--accent-gold); margin-bottom: 10px; }
+        .game-rules {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .game-card.expanded .game-rules { display: block; }
+        .game-rules ol { padding-left: 20px; }
+        .game-rules li { margin-bottom: 8px; color: var(--text-muted); }
+        
+        /* ==================== PHOTO CHALLENGES ==================== */
+        .challenge-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(255, 0, 110, 0.1));
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .challenge-card:hover { transform: scale(1.02); }
+        .challenge-card.completed {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(16, 185, 129, 0.1));
+            border: 2px solid #10b981;
+        }
+        .challenge-points {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent-gold);
+            color: #000;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .challenge-leaderboard {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--accent-gold);
+            border-radius: 16px;
+            padding: 25px;
+        }
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+        .leaderboard-rank {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* ==================== BADGES/ACHIEVEMENTS ==================== */
+        .badge-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .achievement-badge {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            border: 2px solid var(--accent-gold);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .achievement-badge:hover { transform: scale(1.2); }
+        .achievement-badge.locked {
+            filter: grayscale(1);
+            opacity: 0.5;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .badge-modal {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 15px;
+        }
+        .badge-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+        .badge-item .badge-icon { font-size: 2rem; margin-bottom: 8px; }
+        
+        /* ==================== LIVE POLLS ==================== */
+        .poll-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(102, 126, 234, 0.1));
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .poll-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .poll-option:hover { background: rgba(255, 255, 255, 0.1); }
+        .poll-option.selected { 
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid var(--accent-blue);
+        }
+        .poll-bar {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .poll-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
+            transition: width 0.5s ease;
+        }
+        
+        /* ==================== ITINERARY BUILDER ==================== */
+        .itinerary-day {
+            margin-bottom: 30px;
+        }
+        .itinerary-day-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: linear-gradient(90deg, var(--accent-blue), transparent);
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        .itinerary-day-date {
+            width: 50px;
+            height: 50px;
+            background: white;
+            color: #1a1a2e;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .itinerary-day-date .day { font-size: 1.5rem; }
+        .itinerary-day-date .month { font-size: 0.7rem; text-transform: uppercase; }
+        .itinerary-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            margin-left: 30px;
+            border-left: 3px solid var(--accent-blue);
+        }
+        .itinerary-time {
+            min-width: 60px;
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+        
+        /* ==================== MUSIC PLAYLIST ==================== */
+        .playlist-embed {
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .song-suggestion {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .song-suggestion input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+        
+        /* ==================== TRIP TIMELINE ==================== */
+        .timeline-container {
+            position: relative;
+            padding-left: 40px;
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent-blue), var(--accent-pink));
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 25px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            border: 3px solid var(--bg-primary);
+        }
+        .timeline-date {
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .timeline-photos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .timeline-photo {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .timeline-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 
@@ -275,6 +706,39 @@
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container top-right" aria-live="polite" aria-atomic="true"></div>
 
+    <!-- Currency Converter Widget -->
+    <div class="currency-widget">
+        <button class="currency-btn" onclick="toggleCurrencyPanel()" title="Valutaváltó">💱</button>
+        <div class="currency-panel" id="currencyPanel">
+            <h4 style="margin-bottom: 15px; text-align: center;">💱 Valutaváltó</h4>
+            <div class="currency-presets">
+                <button class="currency-preset" onclick="setCurrencyAmount(10)">10</button>
+                <button class="currency-preset" onclick="setCurrencyAmount(50)">50</button>
+                <button class="currency-preset" onclick="setCurrencyAmount(100)">100</button>
+                <button class="currency-preset" onclick="setCurrencyAmount(500)">500</button>
+                <button class="currency-preset" onclick="setCurrencyAmount(1000)">1000</button>
+            </div>
+            <div class="currency-input-group">
+                <input type="number" class="currency-input" id="currencyAmount" value="100" oninput="convertCurrency()">
+                <select class="currency-select" id="currencyFrom" onchange="convertCurrency()">
+                    <option value="EUR">EUR</option>
+                    <option value="CZK">CZK</option>
+                    <option value="HUF">HUF</option>
+                    <option value="RON">RON</option>
+                </select>
+            </div>
+            <div class="currency-results" id="currencyResults">
+                <div class="currency-result"><span class="flag">🇪🇺</span><div class="amount" id="resultEUR">100.00</div><div class="code">EUR</div></div>
+                <div class="currency-result"><span class="flag">🇨🇿</span><div class="amount" id="resultCZK">2,500.00</div><div class="code">CZK</div></div>
+                <div class="currency-result"><span class="flag">🇭🇺</span><div class="amount" id="resultHUF">39,500.00</div><div class="code">HUF</div></div>
+                <div class="currency-result"><span class="flag">🇷🇴</span><div class="amount" id="resultRON">497.00</div><div class="code">RON</div></div>
+            </div>
+            <p style="text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 15px;">
+                Árfolyamok tájékoztató jellegűek
+            </p>
+        </div>
+    </div>
+
     <!-- NAVIGATION BAR -->
     <nav class="navbar" id="navbar" role="navigation" aria-label="Fő navigáció">
         <div class="nav-container">
@@ -290,6 +754,7 @@
                 <a href="/expenses.html" onclick="event.stopPropagation(); window.location.href='/expenses.html';" style="cursor: pointer;">💰 Költségek</a>
                 <li><a href="#gallery" class="nav-link">📸 Galéria</a></li>
                 <li><a href="#rsvp" class="nav-link">Jövök!</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" title="Téma váltás">🌙</button></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -612,54 +1077,91 @@
             <h2>👔 A Banda</h2>
             <p>Azok, akik ezt az éjszakát felejthetetlenné teszik</p>
 
+            <!-- Badge Gallery Modal Button -->
+            <div style="text-align: center; margin-bottom: 30px;">
+                <button class="btn btn-secondary" onclick="showBadgeGallery()">
+                    🏆 Összes Achievement Megtekintése
+                </button>
+            </div>
+
             <div class="grid-3">
-                <div class="crew-card card">
+                <div class="crew-card card" data-crew="otto">
                     <div class="crew-avatar">🤵</div>
                     <h3 class="crew-name">Otto</h3>
                     <span class="status-badge confirmed">✅ Fix</span>
+                    <div class="badge-container">
+                        <div class="achievement-badge" title="Vőlegény">👑</div>
+                        <div class="achievement-badge" title="VIP">⭐</div>
+                    </div>
                 </div>
 
-                <div class="crew-card card">
+                <div class="crew-card card" data-crew="emil">
                     <div class="crew-avatar">👑</div>
                     <h3 class="crew-name">Emil</h3>
                     <span class="status-badge confirmed">✅ Ott leszek</span>
+                    <div class="badge-container">
+                        <div class="achievement-badge locked" title="Első Sör">🍺</div>
+                        <div class="achievement-badge locked" title="Éjjeli Bagoly">🦉</div>
+                    </div>
                 </div>
 
-                <div class="crew-card card">
+                <div class="crew-card card" data-crew="szucsu">
                     <div class="crew-avatar">🎯</div>
                     <h3 class="crew-name">Szucsu</h3>
                     <p class="crew-description">Bármi megtörténhet</p>
                     <span class="status-badge confirmed">✅ Ott leszek</span>
+                    <div class="badge-container">
+                        <div class="achievement-badge" title="Szervező">📋</div>
+                        <div class="achievement-badge locked" title="Első Sör">🍺</div>
+                    </div>
                 </div>
 
-                <div class="crew-card card">
+                <div class="crew-card card" data-crew="nimrod">
                     <div class="crew-avatar">🎪</div>
                     <h3 class="crew-name">Nimród</h3>
                     <span class="status-badge confirmed">✅ Ott leszek</span>
+                    <div class="badge-container">
+                        <div class="achievement-badge locked" title="Első Sör">🍺</div>
+                        <div class="achievement-badge locked" title="Éjjeli Bagoly">🦉</div>
+                    </div>
                 </div>
 
-                <div class="crew-card card">
+                <div class="crew-card card" data-crew="sanyi">
                     <div class="crew-avatar">🎪</div>
                     <h3 class="crew-name">Sanyi</h3>
                     <span class="status-badge confirmed">✅ Ott leszek</span>
+                    <div class="badge-container">
+                        <div class="achievement-badge locked" title="Első Sör">🍺</div>
+                        <div class="achievement-badge locked" title="Éjjeli Bagoly">🦉</div>
+                    </div>
                 </div>
 
-                <div class="crew-card card">
+                <div class="crew-card card" data-crew="attika">
                     <div class="crew-avatar">🎲</div>
                     <h3 class="crew-name">Attika</h3>
                     <span class="status-badge maybe">❓ Talán</span>
+                    <div class="badge-container">
+                        <div class="achievement-badge locked" title="Első Sör">🍺</div>
+                    </div>
                 </div>
 
-                <div class="crew-card card">
+                <div class="crew-card card" data-crew="csabi">
                     <div class="crew-avatar">🔥</div>
                     <h3 class="crew-name">Csabi</h3>
                     <span class="status-badge maybe">❓ Talán</span>
+                    <div class="badge-container">
+                        <div class="achievement-badge locked" title="Első Sör">🍺</div>
+                    </div>
                 </div>
 
-                <div class="crew-card card">
+                <div class="crew-card card" data-crew="ocsi">
                     <div class="crew-avatar">📸</div>
                     <h3 class="crew-name">Öcsi</h3>
                     <span class="status-badge confirmed">✅ Ott leszek</span>
+                    <div class="badge-container">
+                        <div class="achievement-badge locked" title="Fotós">📸</div>
+                        <div class="achievement-badge locked" title="Első Sör">🍺</div>
+                    </div>
                 </div>
 
                 <div class="crew-card card">
@@ -756,7 +1258,8 @@
         <div class="container">
             <h2>🎲 Játékok & Kihívások</h2>
 
-            <div class="card" style="text-align: center; padding: 50px;">
+            <!-- Dare Generator -->
+            <div class="card" style="text-align: center; padding: 50px; margin-bottom: 40px;">
                 <h3 style="margin-bottom: 30px;">Merészség Generátor</h3>
                 <p class="dare-text" id="dareText">
                     Kattints ide a kihívásért...
@@ -764,6 +1267,183 @@
                 <button class="btn btn-secondary" onclick="generateDare()" style="margin-top: 30px;">
                     🎲 Pörgessük!
                 </button>
+            </div>
+
+            <!-- Random Game Picker -->
+            <div class="card" style="text-align: center; padding: 30px; margin-bottom: 40px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 0, 110, 0.1));">
+                <h3 style="margin-bottom: 15px;">🎰 Nem tudtok választani?</h3>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Válasszunk mi helyettetek!</p>
+                <button class="btn btn-primary" onclick="pickRandomGame()">
+                    🎲 Random Játék
+                </button>
+                <div id="randomGameResult" style="margin-top: 20px; font-size: 1.5rem; font-weight: bold; color: var(--accent-gold); display: none;"></div>
+            </div>
+
+            <!-- Drinking Games Collection -->
+            <h3 style="margin-bottom: 30px; text-align: center;">🍻 Ivós Játékok Gyűjtemény</h3>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Kattints a játékra a szabályokért!</p>
+            
+            <div class="grid-3" style="gap: 20px;">
+                <!-- Kings -->
+                <div class="game-card" onclick="toggleGameRules(this)">
+                    <div class="game-icon">🃏</div>
+                    <h4>Kings (Király)</h4>
+                    <p style="color: var(--text-muted);">A klasszikus kártyás ivójáték</p>
+                    <div class="game-rules">
+                        <ol>
+                            <li><strong>2:</strong> Te választasz - valaki iszik</li>
+                            <li><strong>3:</strong> Te iszol</li>
+                            <li><strong>4:</strong> Lányok isznak (Floor = mindenki)</li>
+                            <li><strong>5:</strong> Fiúk isznak</li>
+                            <li><strong>6:</strong> Mindenki a padlóra mutat - utolsó iszik</li>
+                            <li><strong>7:</strong> Égre mutatsz - utolsó iszik</li>
+                            <li><strong>8:</strong> Választasz ivótársat</li>
+                            <li><strong>9:</strong> Rímelés - aki nem tud, iszik</li>
+                            <li><strong>10:</strong> Kategória - aki nem tud, iszik</li>
+                            <li><strong>J:</strong> Új szabály</li>
+                            <li><strong>Q:</strong> Kérdésmester - aki válaszol, iszik</li>
+                            <li><strong>K:</strong> Tölts a közös pohárba</li>
+                            <li><strong>A:</strong> Vízesés - mindenki iszik</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Never Have I Ever -->
+                <div class="game-card" onclick="toggleGameRules(this)">
+                    <div class="game-icon">🙈</div>
+                    <h4>Én Még Soha</h4>
+                    <p style="color: var(--text-muted);">Titkok és ivás</p>
+                    <div class="game-rules">
+                        <ol>
+                            <li>Mindenki körben ül</li>
+                            <li>Valaki mond: "Én még soha nem..."</li>
+                            <li>Aki már csinálta, iszik</li>
+                            <li>Következő játékos</li>
+                            <li>Tilos hazudni!</li>
+                        </ol>
+                        <p style="margin-top: 15px; font-style: italic; color: var(--accent-gold);">💡 Tipp: A legszaftosabb titkok a legjobbak!</p>
+                    </div>
+                </div>
+
+                <!-- Beer Pong -->
+                <div class="game-card" onclick="toggleGameRules(this)">
+                    <div class="game-icon">🏓</div>
+                    <h4>Beer Pong</h4>
+                    <p style="color: var(--text-muted);">Csapatverseny</p>
+                    <div class="game-rules">
+                        <ol>
+                            <li>2v2 vagy 1v1</li>
+                            <li>10-10 pohár háromszög alakban</li>
+                            <li>Felváltva dobnak a csapatok</li>
+                            <li>Ha betalál: ellenfél issza ki a poharat</li>
+                            <li>Két találat egymás után = extra dobás</li>
+                            <li>Aki előbb üríti az ellenfél poharait, nyer</li>
+                        </ol>
+                        <p style="margin-top: 15px; font-style: italic; color: var(--accent-gold);">💡 Házi szabály: vesztes csapat issza meg a maradékot!</p>
+                    </div>
+                </div>
+
+                <!-- Flip Cup -->
+                <div class="game-card" onclick="toggleGameRules(this)">
+                    <div class="game-icon">🥤</div>
+                    <h4>Flip Cup</h4>
+                    <p style="color: var(--text-muted);">Sebesség + ügyesség</p>
+                    <div class="game-rules">
+                        <ol>
+                            <li>Két csapat szemben áll</li>
+                            <li>Mindenki előtt egy pohár sör</li>
+                            <li>"Rajt!" - első iszik, majd felborítja a poharat</li>
+                            <li>Az asztal szélén pöccintéssel fel kell fordítani</li>
+                            <li>Ha sikerült, következő játékos</li>
+                            <li>Amelyik csapat előbb végez, nyer!</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Bus Driver -->
+                <div class="game-card" onclick="toggleGameRules(this)">
+                    <div class="game-icon">🚌</div>
+                    <h4>Busz Sofőr</h4>
+                    <p style="color: var(--text-muted);">A vesztes sokat iszik</p>
+                    <div class="game-rules">
+                        <ol>
+                            <li><strong>1. kör:</strong> Piros vagy fekete?</li>
+                            <li><strong>2. kör:</strong> Magasabb vagy alacsonyabb?</li>
+                            <li><strong>3. kör:</strong> Belül vagy kívül?</li>
+                            <li><strong>4. kör:</strong> Melyik szín?</li>
+                            <li>Minden rossz tipp = iszol egyet</li>
+                            <li>A legtöbb rossz tippel = "buszsofőr"</li>
+                            <li>Buszsofőr: 5 kártya piramis, rossz tipp = újrakezd</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Paranoia -->
+                <div class="game-card" onclick="toggleGameRules(this)">
+                    <div class="game-icon">😰</div>
+                    <h4>Paranoia</h4>
+                    <p style="color: var(--text-muted);">Ki mit gondol rólad?</p>
+                    <div class="game-rules">
+                        <ol>
+                            <li>Körben ültök</li>
+                            <li>Súgj egy kérdést a mellette ülőnek</li>
+                            <li>Pl: "Ki részegszik le először?"</li>
+                            <li>Hangosan mondja a választ (egy nevet)</li>
+                            <li>A választott személy dob kockával</li>
+                            <li>Páros: megtudja a kérdést</li>
+                            <li>Páratlan: sose tudja meg, de iszik!</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Roxanne -->
+                <div class="game-card" onclick="toggleGameRules(this)">
+                    <div class="game-icon">🎵</div>
+                    <h4>Roxanne</h4>
+                    <p style="color: var(--text-muted);">Zenés ivójáték</p>
+                    <div class="game-rules">
+                        <ol>
+                            <li>Tegyétek fel a "Roxanne" dalt (The Police)</li>
+                            <li>Két csapat</li>
+                            <li><strong>1. csapat:</strong> iszik ha "Roxanne"</li>
+                            <li><strong>2. csapat:</strong> iszik ha "Red light"</li>
+                            <li>A dal végére mindenki vidám!</li>
+                        </ol>
+                        <p style="margin-top: 15px; font-style: italic; color: var(--accent-gold);">🎵 Más dalok: "Thunderstruck" (AC/DC)</p>
+                    </div>
+                </div>
+
+                <!-- Truth or Drink -->
+                <div class="game-card" onclick="toggleGameRules(this)">
+                    <div class="game-icon">🤔</div>
+                    <h4>Igazság vagy Ital</h4>
+                    <p style="color: var(--text-muted);">Nincs mese!</p>
+                    <div class="game-rules">
+                        <ol>
+                            <li>Valaki kérdez tőled</li>
+                            <li>Válaszolsz őszintén VAGY iszol</li>
+                            <li>Minél kellemetlenebb a kérdés, annál jobb</li>
+                            <li>Ha iszol, sose tudják meg az igazat...</li>
+                            <li>...vagy mégis? 😏</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Most Likely To -->
+                <div class="game-card" onclick="toggleGameRules(this)">
+                    <div class="game-icon">👆</div>
+                    <h4>Ki a Legvalószínűbb</h4>
+                    <p style="color: var(--text-muted);">Mutass és igyál</p>
+                    <div class="game-rules">
+                        <ol>
+                            <li>Valaki mond: "Ki a legvalószínűbb, hogy..."</li>
+                            <li>Pl: "...elalszik először"</li>
+                            <li>3...2...1... mindenki mutat valakire</li>
+                            <li>Ahányan rád mutatnak, annyit iszol</li>
+                            <li>Következő játékos kérdez</li>
+                        </ol>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -953,6 +1633,192 @@
                     <p style="color: var(--text-muted); font-size: 0.9rem;">
                         💡 Tipp: Mentsd el ezeket a számokat a telefonodba utazás előtt!
                     </p>
+                </div>
+            </div>
+
+            <!-- Prague Metro Guide -->
+            <h3 style="margin-top: 40px;">🚇 Prága Tömegközlekedés</h3>
+            <div class="card" style="padding: 30px; margin-top: 20px; margin-bottom: 40px;">
+                <div class="grid-2" style="gap: 30px;">
+                    <div>
+                        <h4 style="margin-bottom: 20px;">Metro Vonalak</h4>
+                        <div class="metro-line">
+                            <div class="metro-badge line-a">A</div>
+                            <div>
+                                <div style="font-weight: 600;">Zöld vonal</div>
+                                <div style="color: var(--text-muted); font-size: 0.9rem;">Dejvická ↔ Depo Hostivař</div>
+                                <div style="color: var(--accent-blue); font-size: 0.85rem;">Staroměstská (Óváros)</div>
+                            </div>
+                        </div>
+                        <div class="metro-line">
+                            <div class="metro-badge line-b">B</div>
+                            <div>
+                                <div style="font-weight: 600;">Sárga vonal</div>
+                                <div style="color: var(--text-muted); font-size: 0.9rem;">Zličín ↔ Černý Most</div>
+                                <div style="color: var(--accent-blue); font-size: 0.85rem;">Můstek, Florenc (busz)</div>
+                            </div>
+                        </div>
+                        <div class="metro-line">
+                            <div class="metro-badge line-c">C</div>
+                            <div>
+                                <div style="font-weight: 600;">Piros vonal</div>
+                                <div style="color: var(--text-muted); font-size: 0.9rem;">Letňany ↔ Háje</div>
+                                <div style="color: var(--accent-blue); font-size: 0.85rem;">Hlavní nádraží (vonat)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 20px;">💳 Jegyárak (2026)</h4>
+                        <div style="padding: 15px; background: rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>30 perces jegy</span>
+                                <strong style="color: var(--accent-gold);">30 CZK (~1.2€)</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>90 perces jegy</span>
+                                <strong style="color: var(--accent-gold);">40 CZK (~1.6€)</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>24 órás bérlet</span>
+                                <strong style="color: var(--accent-gold);">120 CZK (~4.8€)</strong>
+                            </div>
+                        </div>
+                        <div style="padding: 15px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                            <div style="font-weight: 600; color: #10b981;">💡 Tipp</div>
+                            <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">
+                                Használd a <strong>PID Lítačka</strong> appot jegyvásárláshoz!
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; text-align: center;">
+                            <a href="https://app.pidlitacka.cz" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                                📱 PID Lítačka App
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        🌙 <strong>Éjszakai járatok:</strong> 51-59 villamosok & éjszakai buszok 00:00 - 05:00 között
+                    </p>
+                </div>
+            </div>
+
+            <!-- Czech Phrase Book -->
+            <h3 style="margin-top: 40px;">🗣️ Cseh Kisokos</h3>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">
+                Kattints a kifejezésre a másoláshoz!
+            </p>
+            <div class="card" style="padding: 30px; margin-top: 20px; margin-bottom: 40px;">
+                <div class="grid-2" style="gap: 30px;">
+                    <div>
+                        <div class="phrase-category-title">👋 Köszönések</div>
+                        <div class="phrase-card" onclick="copyPhrase('Dobrý den')">
+                            <div class="czech">Dobrý den</div>
+                            <div class="phonetic">[dobré den]</div>
+                            <div class="hungarian">Jó napot</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Ahoj')">
+                            <div class="czech">Ahoj</div>
+                            <div class="phonetic">[ahoj]</div>
+                            <div class="hungarian">Szia / Hello</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Na shledanou')">
+                            <div class="czech">Na shledanou</div>
+                            <div class="phonetic">[na szledanou]</div>
+                            <div class="hungarian">Viszontlátásra</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Děkuji')">
+                            <div class="czech">Děkuji</div>
+                            <div class="phonetic">[gyekuji]</div>
+                            <div class="hungarian">Köszönöm</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Prosím')">
+                            <div class="czech">Prosím</div>
+                            <div class="phonetic">[proszím]</div>
+                            <div class="hungarian">Kérem / Tessék</div>
+                        </div>
+                        
+                        <div class="phrase-category-title">🍺 Kocsmában</div>
+                        <div class="phrase-card" onclick="copyPhrase('Jedno pivo, prosím')">
+                            <div class="czech">Jedno pivo, prosím</div>
+                            <div class="phonetic">[jedno pivo proszím]</div>
+                            <div class="hungarian">Egy sört kérek</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Ještě jedno')">
+                            <div class="czech">Ještě jedno</div>
+                            <div class="phonetic">[jestye jedno]</div>
+                            <div class="hungarian">Még egyet</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Na zdraví!')">
+                            <div class="czech">Na zdraví!</div>
+                            <div class="phonetic">[na zdraví]</div>
+                            <div class="hungarian">Egészségedre!</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Účet, prosím')">
+                            <div class="czech">Účet, prosím</div>
+                            <div class="phonetic">[úcset proszím]</div>
+                            <div class="hungarian">Számlát kérek</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="phrase-category-title">🍽️ Étteremben</div>
+                        <div class="phrase-card" onclick="copyPhrase('Jídelní lístek, prosím')">
+                            <div class="czech">Jídelní lístek, prosím</div>
+                            <div class="phonetic">[jídelní lisztek proszím]</div>
+                            <div class="hungarian">Étlapot kérek</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Bylo to výborné')">
+                            <div class="czech">Bylo to výborné</div>
+                            <div class="phonetic">[bilo to víborné]</div>
+                            <div class="hungarian">Nagyon finom volt</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Kde je záchod?')">
+                            <div class="czech">Kde je záchod?</div>
+                            <div class="phonetic">[kde je záhod]</div>
+                            <div class="hungarian">Hol a mosdó?</div>
+                        </div>
+                        
+                        <div class="phrase-category-title">🆘 Vészhelyzet</div>
+                        <div class="phrase-card" onclick="copyPhrase('Pomoc!')">
+                            <div class="czech">Pomoc!</div>
+                            <div class="phonetic">[pomoc]</div>
+                            <div class="hungarian">Segítség!</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Zavolejte policii')">
+                            <div class="czech">Zavolejte policii</div>
+                            <div class="phonetic">[zavolejte policii]</div>
+                            <div class="hungarian">Hívja a rendőrséget</div>
+                        </div>
+                        <div class="phrase-card" onclick="copyPhrase('Potřebuji lékaře')">
+                            <div class="czech">Potřebuji lékaře</div>
+                            <div class="phonetic">[potrebuji lékarzse]</div>
+                            <div class="hungarian">Orvosra van szükségem</div>
+                        </div>
+                        
+                        <div class="phrase-category-title">🔢 Számok</div>
+                        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px;">
+                            <div style="text-align: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                                <div style="font-weight: bold; color: var(--accent-blue);">1</div>
+                                <div style="font-size: 0.8rem;">jeden</div>
+                            </div>
+                            <div style="text-align: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                                <div style="font-weight: bold; color: var(--accent-blue);">2</div>
+                                <div style="font-size: 0.8rem;">dva</div>
+                            </div>
+                            <div style="text-align: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                                <div style="font-weight: bold; color: var(--accent-blue);">3</div>
+                                <div style="font-size: 0.8rem;">tři</div>
+                            </div>
+                            <div style="text-align: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                                <div style="font-weight: bold; color: var(--accent-blue);">5</div>
+                                <div style="font-size: 0.8rem;">pět</div>
+                            </div>
+                            <div style="text-align: center; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                                <div style="font-weight: bold; color: var(--accent-blue);">10</div>
+                                <div style="font-size: 0.8rem;">deset</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1165,6 +2031,438 @@
                         💡 A feltöltött fotók a csapat minden tagja számára láthatóak lesznek
                     </p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHOTO CHALLENGES SECTION -->
+    <section id="challenges" style="padding: 80px 0; background: rgba(0, 0, 0, 0.2);">
+        <div class="container">
+            <h2 style="text-align: center;">📸 Fotó Kihívások</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">
+                Teljesítsd a kihívásokat és gyűjts pontokat! A győztes kap egy körítést 🍺
+            </p>
+
+            <!-- Leaderboard -->
+            <div class="challenge-leaderboard" style="margin-bottom: 40px;">
+                <h3 style="text-align: center; margin-bottom: 20px;">🏆 Ranglista</h3>
+                <div id="challengeLeaderboard">
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-rank">1</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Még nincs győztes</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">Legyél te az első!</div>
+                        </div>
+                        <div style="font-weight: bold; color: var(--accent-gold);">0 pont</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Challenges Grid -->
+            <div class="grid-3" style="gap: 20px;">
+                <div class="challenge-card" data-challenge="charles-bridge" onclick="markChallenge(this)">
+                    <span class="challenge-points">+10 pont</span>
+                    <h4 style="margin: 15px 0 10px;">🌉 Károly híd</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Csoportkép a Károly hídon napkeltekor vagy napnyugtakor</p>
+                </div>
+                <div class="challenge-card" data-challenge="beer-spa" onclick="markChallenge(this)">
+                    <span class="challenge-points">+15 pont</span>
+                    <h4 style="margin: 15px 0 10px;">🛁 Sörspa</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Fotó a sörfürdőből (ha elmegyünk)</p>
+                </div>
+                <div class="challenge-card" data-challenge="castle" onclick="markChallenge(this)">
+                    <span class="challenge-points">+10 pont</span>
+                    <h4 style="margin: 15px 0 10px;">🏰 Prágai Vár</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Panorámakép a várnál</p>
+                </div>
+                <div class="challenge-card" data-challenge="cheers" onclick="markChallenge(this)">
+                    <span class="challenge-points">+5 pont</span>
+                    <h4 style="margin: 15px 0 10px;">🍻 Na Zdraví!</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Koccintós fotó a csapattal</p>
+                </div>
+                <div class="challenge-card" data-challenge="landmark" onclick="markChallenge(this)">
+                    <span class="challenge-points">+5 pont</span>
+                    <h4 style="margin: 15px 0 10px;">📍 Turistáskodás</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Fotó bármelyik nevezetességnél</p>
+                </div>
+                <div class="challenge-card" data-challenge="local-food" onclick="markChallenge(this)">
+                    <span class="challenge-points">+5 pont</span>
+                    <h4 style="margin: 15px 0 10px;">🍖 Trdelník</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Fotó helyi kajával (trdelník, svíčková, stb.)</p>
+                </div>
+                <div class="challenge-card" data-challenge="metro" onclick="markChallenge(this)">
+                    <span class="challenge-points">+5 pont</span>
+                    <h4 style="margin: 15px 0 10px;">🚇 Metró Túrista</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Szelfi a metrón</p>
+                </div>
+                <div class="challenge-card" data-challenge="night-out" onclick="markChallenge(this)">
+                    <span class="challenge-points">+10 pont</span>
+                    <h4 style="margin: 15px 0 10px;">🎉 Éjszakai Kaland</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Csoportkép egy klubban</p>
+                </div>
+                <div class="challenge-card" data-challenge="lennon-wall" onclick="markChallenge(this)">
+                    <span class="challenge-points">+10 pont</span>
+                    <h4 style="margin: 15px 0 10px;">🎨 Lennon Fal</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Kreatív fotó a Lennon Falnál</p>
+                </div>
+                <div class="challenge-card" data-challenge="sunrise" onclick="markChallenge(this)">
+                    <span class="challenge-points">+20 pont</span>
+                    <h4 style="margin: 15px 0 10px;">🌅 Napkelte</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Fotó napkeltekor - ha még fenn vagytok!</p>
+                </div>
+                <div class="challenge-card" data-challenge="otto-special" onclick="markChallenge(this)">
+                    <span class="challenge-points">+25 pont</span>
+                    <h4 style="margin: 15px 0 10px;">👑 Otto Király</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Ottóval közös kép valami vicces helyzetben</p>
+                </div>
+                <div class="challenge-card" data-challenge="mystery" onclick="markChallenge(this)">
+                    <span class="challenge-points">+??? pont</span>
+                    <h4 style="margin: 15px 0 10px;">🎁 Titkos Kihívás</h4>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Ezt csak a helyszínen tudjátok meg...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE POLLS SECTION -->
+    <section id="polls" style="padding: 80px 0;">
+        <div class="container">
+            <h2 style="text-align: center;">🗳️ Élő Szavazások</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">
+                Szavazz és döntsd el mi legyen a következő program!
+            </p>
+
+            <!-- Active Poll -->
+            <div class="poll-card" id="activePoll">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>🍽️ Hol vacsorázzunk pénteken?</h3>
+                    <span style="background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;">Aktív</span>
+                </div>
+                <div class="poll-option" data-option="lokal" onclick="votePoll(this)">
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">🍺 Lokál</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Cseh konyha, tank sör</div>
+                    </div>
+                    <div style="text-align: right; min-width: 60px;">
+                        <div class="poll-bar"><div class="poll-bar-fill" style="width: 40%;"></div></div>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">4 szavazat</span>
+                    </div>
+                </div>
+                <div class="poll-option" data-option="kantyna" onclick="votePoll(this)">
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">🥩 Kantýna</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Modern cseh, steak</div>
+                    </div>
+                    <div style="text-align: right; min-width: 60px;">
+                        <div class="poll-bar"><div class="poll-bar-fill" style="width: 30%;"></div></div>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">3 szavazat</span>
+                    </div>
+                </div>
+                <div class="poll-option" data-option="ufleku" onclick="votePoll(this)">
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">🏛️ U Fleků</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Történelmi sörfőzde (1499!)</div>
+                    </div>
+                    <div style="text-align: right; min-width: 60px;">
+                        <div class="poll-bar"><div class="poll-bar-fill" style="width: 30%;"></div></div>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">3 szavazat</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Poll Creator -->
+            <div class="card" style="padding: 30px; margin-top: 30px;">
+                <h4 style="margin-bottom: 20px;">➕ Új Gyors Szavazás</h4>
+                <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.9rem;">
+                    Később aktiválható a helyszínen a WhatsApp csoportból!
+                </p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn btn-secondary" onclick="createQuickPoll('Hova menjünk?')">📍 Hova menjünk?</button>
+                    <button class="btn btn-secondary" onclick="createQuickPoll('Mit igyunk?')">🍺 Mit igyunk?</button>
+                    <button class="btn btn-secondary" onclick="createQuickPoll('Mikor induljunk?')">⏰ Mikor induljunk?</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DAY-BY-DAY ITINERARY -->
+    <section id="itinerary" style="padding: 80px 0; background: rgba(0, 0, 0, 0.2);">
+        <div class="container">
+            <h2 style="text-align: center;">📅 Napi Program</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">
+                Tervezett program napokra bontva - rugalmasan módosítható!
+            </p>
+
+            <!-- Day 1: May 7 -->
+            <div class="itinerary-day">
+                <div class="itinerary-day-header">
+                    <div class="itinerary-day-date">
+                        <div class="day">7</div>
+                        <div class="month">Máj</div>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0;">Csütörtök - Érkezés</h3>
+                        <p style="color: var(--text-muted); margin: 5px 0 0;">Megérkezünk és beköszönünk! 🍻</p>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">14:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🚆 Érkezés Prágába</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Hlavní nádraží (Fő pályaudvar)</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">15:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🏠 Szállás becsekkolás</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Csomagok lerakása, frissítés</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">17:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🍺 Első sör!</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Lokál vagy közeli kocsma</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">20:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🍽️ Vacsora</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Helyszín szavazás alapján</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">22:00+</div>
+                    <div>
+                        <div style="font-weight: 600;">🎉 Bulinegyed felfedezése</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Dlouhá utca környéke</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2: May 8 -->
+            <div class="itinerary-day">
+                <div class="itinerary-day-header">
+                    <div class="itinerary-day-date">
+                        <div class="day">8</div>
+                        <div class="month">Máj</div>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0;">Péntek - Fő nap</h3>
+                        <p style="color: var(--text-muted); margin: 5px 0 0;">Városnézés + Este a nagy buli! 🔥</p>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">10:00</div>
+                    <div>
+                        <div style="font-weight: 600;">☕ Laza reggeli</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Regenerálódás + kávé</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">12:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🏰 Városnézés (opcionális)</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Óváros, Károly híd, Vár</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">14:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🍺 Ebéd + Sörözés</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">U Zlatého Tygra vagy hasonló</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">16:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🎯 Aktivitás / Pihenés</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Sörspa, lövészet, vagy power nap</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">20:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🍽️ Ünnepi vacsora</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Otto tiszteletére!</div>
+                    </div>
+                </div>
+                <div class="itinerary-item" style="border-color: var(--accent-gold);">
+                    <div class="itinerary-time">22:00+</div>
+                    <div>
+                        <div style="font-weight: 600; color: var(--accent-gold);">🔥 A NAGY BULI</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Klubok, bárok, hajnalig!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3: May 9 -->
+            <div class="itinerary-day">
+                <div class="itinerary-day-header">
+                    <div class="itinerary-day-date">
+                        <div class="day">9</div>
+                        <div class="month">Máj</div>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0;">Szombat - Lassítás</h3>
+                        <p style="color: var(--text-muted); margin: 5px 0 0;">Regenerálódás + búcsú 😴</p>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">11:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🛏️ Lassú ébredés</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Nincs sietség...</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">13:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🍳 Brunch / Ebéd</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Gyomorerősítő</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">15:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🚶 Chill program</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Séta, sörkert, vagy amit akartok</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">19:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🍻 Búcsú sörök</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Utolsó este (nyugisabb)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 4: May 10 -->
+            <div class="itinerary-day">
+                <div class="itinerary-day-header">
+                    <div class="itinerary-day-date">
+                        <div class="day">10</div>
+                        <div class="month">Máj</div>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0;">Vasárnap - Hazaút</h3>
+                        <p style="color: var(--text-muted); margin: 5px 0 0;">Viszlát Prága! 👋</p>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">10:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🏠 Kijelentkezés</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Csomagolás, takarítás</div>
+                    </div>
+                </div>
+                <div class="itinerary-item">
+                    <div class="itinerary-time">12:00</div>
+                    <div>
+                        <div style="font-weight: 600;">🚆 Indulás haza</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Vonatok / autók</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="padding: 30px; margin-top: 30px; text-align: center; background: rgba(255, 215, 0, 0.1); border: 2px solid var(--accent-gold);">
+                <p style="color: var(--accent-gold); font-size: 1.1rem;">
+                    💡 Ez csak egy vázlat! A helyszínen döntünk a részletekről.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MUSIC PLAYLIST SECTION -->
+    <section id="playlist" style="padding: 80px 0;">
+        <div class="container">
+            <h2 style="text-align: center;">🎵 Trip Soundtrack</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">
+                A hivatalos legénybúcsú playlist - add hozzá a kedvenceidet!
+            </p>
+
+            <div class="card" style="padding: 30px;">
+                <div class="playlist-embed">
+                    <!-- Spotify Playlist Embed Placeholder -->
+                    <div style="background: linear-gradient(135deg, #1DB954, #191414); border-radius: 12px; padding: 40px; text-align: center;">
+                        <div style="font-size: 4rem; margin-bottom: 20px;">🎧</div>
+                        <h3 style="margin-bottom: 15px;">Otto's Bachelor Party Playlist</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 25px;">
+                            Közös playlist a trip zenéihez
+                        </p>
+                        <a href="https://open.spotify.com" target="_blank" class="btn btn-primary" style="background: #1DB954;">
+                            🎵 Megnyitás Spotify-ban
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Song Suggestion -->
+                <div style="margin-top: 30px;">
+                    <h4 style="margin-bottom: 15px;">➕ Dal Javaslat</h4>
+                    <div class="song-suggestion">
+                        <input type="text" id="songSuggestion" placeholder="Előadó - Dal címe" style="flex: 1;">
+                        <button class="btn btn-secondary" onclick="suggestSong()">Küldés</button>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 10px;">
+                        A javaslatokat hozzáadjuk a playlisthez!
+                    </p>
+                </div>
+
+                <!-- Quick Add Buttons -->
+                <div style="margin-top: 30px;">
+                    <h4 style="margin-bottom: 15px;">🔥 Gyors Hozzáadás</h4>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="suggestSongQuick('AC/DC - Highway to Hell')">AC/DC</button>
+                        <button class="btn btn-secondary" onclick="suggestSongQuick('Queen - Don\'t Stop Me Now')">Queen</button>
+                        <button class="btn btn-secondary" onclick="suggestSongQuick('Bon Jovi - Livin\' on a Prayer')">Bon Jovi</button>
+                        <button class="btn btn-secondary" onclick="suggestSongQuick('The Killers - Mr. Brightside')">The Killers</button>
+                        <button class="btn btn-secondary" onclick="suggestSongQuick('Journey - Don\'t Stop Believin\'')">Journey</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRIP MEMORIES TIMELINE -->
+    <section id="memories" style="padding: 80px 0; background: rgba(0, 0, 0, 0.2);">
+        <div class="container">
+            <h2 style="text-align: center;">📷 Trip Emlékek</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">
+                Az utazás legjobb pillanatai - frissül élőben!
+            </p>
+
+            <div class="timeline-container" id="memoriesTimeline">
+                <!-- Pre-trip placeholder -->
+                <div class="timeline-item">
+                    <div class="timeline-date">📅 Utazás előtt</div>
+                    <h4>Készülődés...</h4>
+                    <p style="color: var(--text-muted);">Hamarosan kezdődik a kaland! Töltsétek fel ide a fotókat az utazás alatt.</p>
+                </div>
+
+                <!-- Empty state -->
+                <div class="timeline-item" id="timelineEmpty">
+                    <div class="timeline-date">🎉 2026. Május 7-10.</div>
+                    <h4>Itt lesznek a közös emlékek</h4>
+                    <p style="color: var(--text-muted);">A galéria feltöltött fotói automatikusan megjelennek itt időrendi sorrendben!</p>
+                    <div style="margin-top: 20px;">
+                        <button class="btn btn-secondary" onclick="document.getElementById('gallery').scrollIntoView({behavior: 'smooth'})">
+                            📤 Fotó Feltöltése
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download All -->
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn btn-secondary" onclick="downloadAllPhotos()" style="opacity: 0.5;" disabled>
+                    📥 Összes Fotó Letöltése
+                </button>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 10px;">
+                    (Elérhető lesz a trip után)
+                </p>
             </div>
         </div>
     </section>
@@ -1638,7 +2936,7 @@
             nightlifeData.forEach(nl => {
                 L.marker(nl.pos, { icon: createIcon('#ffe66d', '🎉') })
                     .addTo(nightlifeLayer)
-                    .bindPopup(`<strong>🎉 ${nl.name}</strong><br>${nl.desc}`);
+                    .bindPopup(`<strong>🎉 ${nl.name}</strong><br>${nl.desc}<br><a href="https://www.google.com/maps/dir/?api=1&destination=${nl.pos[0]},${nl.pos[1]}" target="_blank" style="color: #00d4ff; text-decoration: none; font-size: 0.85rem;">📍 Útvonal</a>`);
             });
             
             // ==================== BARS & PUBS ====================
@@ -1663,7 +2961,7 @@
             barsData.forEach(bar => {
                 L.marker(bar.pos, { icon: createIcon('#a855f7', '🍺') })
                     .addTo(barsLayer)
-                    .bindPopup(`<strong>🍺 ${bar.name}</strong><br>${bar.desc}`);
+                    .bindPopup(`<strong>🍺 ${bar.name}</strong><br>${bar.desc}<br><a href="https://www.google.com/maps/dir/?api=1&destination=${bar.pos[0]},${bar.pos[1]}" target="_blank" style="color: #00d4ff; text-decoration: none; font-size: 0.85rem;">📍 Útvonal</a>`);
             });
             
             // ==================== ACTIVITIES ====================
@@ -1687,7 +2985,7 @@
             activitiesData.forEach(act => {
                 L.marker(act.pos, { icon: createIcon('#10b981', '🎯') })
                     .addTo(activitiesLayer)
-                    .bindPopup(`<strong>🎯 ${act.name}</strong><br>${act.desc}`);
+                    .bindPopup(`<strong>🎯 ${act.name}</strong><br>${act.desc}<br><a href="https://www.google.com/maps/dir/?api=1&destination=${act.pos[0]},${act.pos[1]}" target="_blank" style="color: #00d4ff; text-decoration: none; font-size: 0.85rem;">📍 Útvonal</a>`);
             });
             
             // ==================== RESTAURANTS ====================
@@ -1709,7 +3007,7 @@
             foodData.forEach(food => {
                 L.marker(food.pos, { icon: createIcon('#f97316', '🍽️') })
                     .addTo(foodLayer)
-                    .bindPopup(`<strong>🍽️ ${food.name}</strong><br>${food.desc}`);
+                    .bindPopup(`<strong>🍽️ ${food.name}</strong><br>${food.desc}<br><a href="https://www.google.com/maps/dir/?api=1&destination=${food.pos[0]},${food.pos[1]}" target="_blank" style="color: #00d4ff; text-decoration: none; font-size: 0.85rem;">📍 Útvonal</a>`);
             });
             
             // ==================== TRANSPORT ====================
@@ -1968,8 +3266,255 @@
             }
         }
         
+        // ==================== CURRENCY CONVERTER ====================
+        const exchangeRates = {
+            EUR: 1,
+            CZK: 25.0,
+            HUF: 395.0,
+            RON: 4.97
+        };
+        
+        function toggleCurrencyPanel() {
+            const panel = document.getElementById('currencyPanel');
+            panel.classList.toggle('active');
+        }
+        
+        function setCurrencyAmount(amount) {
+            document.getElementById('currencyAmount').value = amount;
+            convertCurrency();
+        }
+        
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('currencyAmount').value) || 0;
+            const fromCurrency = document.getElementById('currencyFrom').value;
+            
+            // Convert to EUR first
+            const eurAmount = amount / exchangeRates[fromCurrency];
+            
+            // Convert to all currencies
+            document.getElementById('resultEUR').textContent = eurAmount.toFixed(2);
+            document.getElementById('resultCZK').textContent = (eurAmount * exchangeRates.CZK).toFixed(2);
+            document.getElementById('resultHUF').textContent = (eurAmount * exchangeRates.HUF).toFixed(2);
+            document.getElementById('resultRON').textContent = (eurAmount * exchangeRates.RON).toFixed(2);
+        }
+        
+        // Close currency panel when clicking outside
+        document.addEventListener('click', function(e) {
+            const widget = document.querySelector('.currency-widget');
+            const panel = document.getElementById('currencyPanel');
+            if (widget && !widget.contains(e.target) && panel) {
+                panel.classList.remove('active');
+            }
+        });
+        
+        // ==================== THEME TOGGLE ====================
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            
+            // Update toggle button
+            const btn = document.querySelector('.theme-toggle');
+            if (btn) btn.textContent = isLight ? '☀️' : '🌙';
+            
+            if (window.toast) {
+                window.toast.info(isLight ? 'Világos mód' : 'Sötét mód', { icon: isLight ? '☀️' : '🌙' });
+            }
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            const btn = document.querySelector('.theme-toggle');
+            if (btn) btn.textContent = '☀️';
+        }
+        
+        // ==================== CZECH PHRASE BOOK ====================
+        function copyPhrase(phrase) {
+            navigator.clipboard.writeText(phrase).then(() => {
+                if (window.toast) {
+                    window.toast.success(`"${phrase}" másolva!`, { icon: '📋' });
+                }
+            }).catch(() => {
+                if (window.toast) {
+                    window.toast.error('Nem sikerült másolni', { icon: '❌' });
+                }
+            });
+        }
+        
+        // ==================== DRINKING GAMES ====================
+        function toggleGameRules(card) {
+            card.classList.toggle('expanded');
+        }
+        
+        const drinkingGames = ['Kings', 'Én Még Soha', 'Beer Pong', 'Flip Cup', 'Busz Sofőr', 'Paranoia', 'Roxanne', 'Igazság vagy Ital', 'Ki a Legvalószínűbb'];
+        
+        function pickRandomGame() {
+            const resultDiv = document.getElementById('randomGameResult');
+            resultDiv.style.display = 'block';
+            
+            // Animate through games
+            let count = 0;
+            const interval = setInterval(() => {
+                resultDiv.textContent = drinkingGames[Math.floor(Math.random() * drinkingGames.length)];
+                count++;
+                if (count > 15) {
+                    clearInterval(interval);
+                    const finalGame = drinkingGames[Math.floor(Math.random() * drinkingGames.length)];
+                    resultDiv.textContent = `🎉 ${finalGame}! 🎉`;
+                    if (window.toast) {
+                        window.toast.success(`A játék: ${finalGame}`, { icon: '🎲' });
+                    }
+                }
+            }, 100);
+        }
+        
+        // ==================== PHOTO CHALLENGES ====================
+        const CHALLENGES_KEY = 'otto-challenges';
+        let completedChallenges = JSON.parse(localStorage.getItem(CHALLENGES_KEY) || '[]');
+        
+        function markChallenge(card) {
+            const challengeId = card.dataset.challenge;
+            
+            if (completedChallenges.includes(challengeId)) {
+                // Already completed
+                if (window.toast) {
+                    window.toast.info('Már teljesítetted ezt a kihívást!', { icon: '✅' });
+                }
+                return;
+            }
+            
+            // Mark as completed
+            completedChallenges.push(challengeId);
+            localStorage.setItem(CHALLENGES_KEY, JSON.stringify(completedChallenges));
+            card.classList.add('completed');
+            
+            const points = card.querySelector('.challenge-points').textContent;
+            if (window.toast) {
+                window.toast.success(`Kihívás teljesítve! ${points}`, { icon: '🏆' });
+            }
+            
+            updateLeaderboard();
+        }
+        
+        function updateLeaderboard() {
+            // Simple local leaderboard
+            const total = completedChallenges.length * 10; // Simplified
+            const leaderboard = document.getElementById('challengeLeaderboard');
+            if (leaderboard && completedChallenges.length > 0) {
+                leaderboard.innerHTML = `
+                    <div class="leaderboard-item">
+                        <div class="leaderboard-rank">1</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600;">Te</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">${completedChallenges.length} kihívás</div>
+                        </div>
+                        <div style="font-weight: bold; color: var(--accent-gold);">~${total} pont</div>
+                    </div>
+                `;
+            }
+        }
+        
+        // Load completed challenges on page load
+        document.querySelectorAll('.challenge-card').forEach(card => {
+            if (completedChallenges.includes(card.dataset.challenge)) {
+                card.classList.add('completed');
+            }
+        });
+        
+        // ==================== LIVE POLLS ====================
+        function votePoll(option) {
+            document.querySelectorAll('.poll-option').forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+            
+            if (window.toast) {
+                window.toast.success('Szavazat rögzítve!', { icon: '🗳️' });
+            }
+        }
+        
+        function createQuickPoll(question) {
+            if (window.toast) {
+                window.toast.info(`"${question}" - Aktiváld a WhatsApp csoportban!`, { icon: '📊' });
+            }
+        }
+        
+        // ==================== BADGE GALLERY ====================
+        const allBadges = [
+            { id: 'groom', emoji: '👑', name: 'Vőlegény', desc: 'A főszereplő!' },
+            { id: 'organizer', emoji: '📋', name: 'Szervező', desc: 'A háttérben dolgozik' },
+            { id: 'first-beer', emoji: '🍺', name: 'Első Sör', desc: 'Első aki sört rendel' },
+            { id: 'night-owl', emoji: '🦉', name: 'Éjjeli Bagoly', desc: 'Utolsóként megy aludni' },
+            { id: 'early-bird', emoji: '🌅', name: 'Korai Kelő', desc: 'Elsőként ébred' },
+            { id: 'photographer', emoji: '📸', name: 'Fotós', desc: 'A legtöbb fotót készíti' },
+            { id: 'party-starter', emoji: '🎉', name: 'Party Indító', desc: 'Mindig ő hozza a hangulatot' },
+            { id: 'tour-guide', emoji: '🗺️', name: 'Túravezető', desc: 'Mindig tudja hova menjen' },
+            { id: 'best-dressed', emoji: '👔', name: 'Legjobban Öltözött', desc: 'Mindig stílusos' },
+            { id: 'challenge-king', emoji: '🏆', name: 'Kihívás Király', desc: 'Legtöbb kihívást teljesíti' },
+            { id: 'vip', emoji: '⭐', name: 'VIP', desc: 'Extra különleges' },
+            { id: 'survivor', emoji: '💪', name: 'Túlélő', desc: 'Mindent kibír' }
+        ];
+        
+        function showBadgeGallery() {
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+            modal.innerHTML = `
+                <div style="background: rgba(20, 20, 35, 0.98); border-radius: 20px; padding: 30px; max-width: 600px; max-height: 80vh; overflow-y: auto;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2>🏆 Összes Achievement</h2>
+                        <button onclick="this.closest('div').parentElement.remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: white;">×</button>
+                    </div>
+                    <div class="badge-modal">
+                        ${allBadges.map(badge => `
+                            <div class="badge-item">
+                                <div class="badge-icon">${badge.emoji}</div>
+                                <div style="font-weight: 600; font-size: 0.9rem;">${badge.name}</div>
+                                <div style="color: var(--text-muted); font-size: 0.75rem;">${badge.desc}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+            document.body.appendChild(modal);
+        }
+        
+        // ==================== MUSIC PLAYLIST ====================
+        function suggestSong() {
+            const input = document.getElementById('songSuggestion');
+            const song = input.value.trim();
+            if (song) {
+                if (window.toast) {
+                    window.toast.success(`"${song}" javasolva!`, { icon: '🎵' });
+                }
+                input.value = '';
+            } else {
+                if (window.toast) {
+                    window.toast.error('Írd be a dal címét!', { icon: '❌' });
+                }
+            }
+        }
+        
+        function suggestSongQuick(song) {
+            if (window.toast) {
+                window.toast.success(`"${song}" hozzáadva!`, { icon: '🎵' });
+            }
+        }
+        
+        // ==================== TRIP TIMELINE ====================
+        function downloadAllPhotos() {
+            if (window.toast) {
+                window.toast.info('Ez a funkció a trip után lesz elérhető!', { icon: '📥' });
+            }
+        }
+        
         // ==================== INITIALIZE ALL NEW FEATURES ====================
         window.addEventListener('load', function() {
+            // Initialize currency converter
+            convertCurrency();
+            
+            // Update challenge cards
+            updateLeaderboard();
+            
             // Initialize map
             setTimeout(initPragueMap, 500);
             
