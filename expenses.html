@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,49 +8,329 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Extra styling for buttons to ensure they work */
-        .btn-clickable {
-            cursor: pointer;
-            user-select: none;
+        /* Animated particle background */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
         }
-        .btn-clickable:active {
-            transform: scale(0.95);
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.4s ease-out;
+        }
+
+        .floating-particle {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shimmer-effect {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background-size: 1000px 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        /* Glass morphism enhanced */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(168, 85, 247, 0.3);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        /* Progress bar animation */
+        .progress-fill {
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Category gradient backgrounds */
+        .cat-food {
+            background: linear-gradient(135deg, #FF6B9D 0%, #FEC163 100%);
+        }
+
+        .cat-accommodation {
+            background: linear-gradient(135deg, #A8EDEA 0%, #FED6E3 100%);
+        }
+
+        .cat-transport {
+            background: linear-gradient(135deg, #30CFD0 0%, #330867 100%);
+        }
+
+        .cat-activities {
+            background: linear-gradient(135deg, #FA709A 0%, #FEE140 100%);
+        }
+
+        .cat-gifts {
+            background: linear-gradient(135deg, #FFA3D7 0%, #C1F4D7 100%);
+        }
+
+        .cat-other {
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+        }
+
+        /* Confetti animation */
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: confetti-fall 3s linear forwards;
+        }
+
+        /* Floating background particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(168, 85, 247, 0.3);
+            border-radius: 50%;
+        }
+
+        /* Search bar */
+        .search-bar {
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Stat card hover effect */
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Button pulse on hover */
+        .btn-pulse:hover {
+            animation: pulse-glow 1.5s infinite;
+        }
+
+        /* Mobile swipe hint */
+        @keyframes swipe-hint {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-10px);
+            }
+        }
+
+        .swipe-hint {
+            animation: swipe-hint 2s ease-in-out infinite;
+        }
+
+        /* Scroll snap for mobile */
+        .expense-scroll {
+            scroll-snap-type: y mandatory;
+        }
+
+        .expense-scroll>* {
+            scroll-snap-align: start;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white min-h-screen">
-    
+
+<body
+    class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white min-h-screen relative overflow-x-hidden">
+
+    <!-- Animated Background Particles -->
+    <div class="bg-particles">
+        <div class="particle floating-particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle floating-particle" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
+        <div class="particle floating-particle" style="top: 40%; left: 50%; animation-delay: 2s;"></div>
+        <div class="particle floating-particle" style="top: 80%; left: 30%; animation-delay: 1.5s;"></div>
+        <div class="particle floating-particle" style="top: 10%; left: 70%; animation-delay: 0.5s;"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-black/30 backdrop-blur-md z-50 border-b border-white/10">
         <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-lg md:text-xl font-bold hover:text-purple-400 transition">← Vissza</a>
             <h1 class="text-sm md:text-lg font-semibold">💰 Költség Kezelő</h1>
-            <button id="add-expense-btn-header" class="btn-clickable px-3 md:px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:opacity-90 transition flex items-center gap-2 text-sm">
+            <button id="add-expense-btn-header"
+                class="px-3 md:px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:opacity-90 transition flex items-center gap-2 text-sm btn-pulse">
                 <span class="text-lg md:text-xl">+</span>
                 <span class="hidden md:inline">Új Költség</span>
             </button>
         </div>
     </nav>
 
-    <div class="container mx-auto px-4 pt-24 pb-32 max-w-4xl">
-        
-        <!-- HERO SECTION WITH BIG BUTTON -->
-        <div class="mb-8 text-center bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-2xl p-6 md:p-8 border border-purple-500/20">
-            <h2 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Költségek Nyomon Követése</h2>
-            <p class="text-sm md:text-base text-gray-300 mb-4 md:mb-6">Töltsd fel a számlákat és oszd szét a költségeket könnyen!</p>
-            <button id="add-expense-btn-top" class="btn-clickable inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white font-bold text-base md:text-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+    <div class="container mx-auto px-4 pt-24 pb-32 max-w-6xl relative z-10">
+
+        <!-- Quick Add Section -->
+        <div class="mb-8 text-center glass-card rounded-2xl p-6 md:p-8 border border-purple-500/20 animate-fade-in-up"
+            style="animation-delay: 0.1s;">
+            <h2
+                class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+                Költségek Nyomon Követése
+            </h2>
+            <p class="text-sm md:text-base text-gray-300 mb-4 md:mb-6">Töltsd fel a számlákat és oszd szét a költségeket
+                könnyen!</p>
+            <button id="add-expense-btn-top"
+                class="inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white font-bold text-base md:text-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 btn-pulse">
                 <span class="text-xl md:text-2xl">➕</span>
                 <span>Új Költség Hozzáadása</span>
             </button>
         </div>
 
+        <!-- Revolut Quick Pay Section -->
+        <section id="revolut-section" class="mb-8 animate-fade-in-up" style="animation-delay: 0.45s;">
+            <div class="glass-card rounded-2xl p-6 border border-blue-500/20">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    💳 Gyors Fizetés - Revolut
+                </h3>
+                <p class="text-sm text-gray-400 mb-4">Kattints a nevekre hogy azonnal fizess Revoluton!</p>
+                <div id="revolut-people-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filter Bar -->
+        <div class="mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+            <div class="glass-card rounded-xl p-4 flex flex-col md:flex-row gap-3">
+                <div class="flex-1">
+                    <input type="text" id="search-expenses" placeholder="🔍 Keresés leírás alapján..."
+                        class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 search-bar focus:outline-none">
+                </div>
+                <select id="filter-category"
+                    class="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-purple-500">
+                    <option value="all">Összes Kategória</option>
+                    <option value="food">🍽️ Étel & Ital</option>
+                    <option value="accommodation">🏠 Szállás</option>
+                    <option value="transport">🚕 Utazás</option>
+                    <option value="activities">🎉 Programok</option>
+                    <option value="gifts">🎁 Ajándékok</option>
+                    <option value="other">💊 Egyéb</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Category Spending Breakdown -->
+        <section class="mb-8 animate-fade-in-up" style="animation-delay: 0.3s;" id="category-breakdown-section">
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    📊 Költések Kategóriánként
+                </h3>
+                <div id="category-breakdown" class="space-y-3">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+        </section>
+
         <!-- Balance Dashboard -->
-        <section id="balance-dashboard" class="mb-8">
-            <div class="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 p-4 md:p-6">
+        <section id="balance-dashboard" class="mb-8 animate-fade-in-up" style="animation-delay: 0.5s;">
+            <div class="glass-card rounded-2xl p-6">
                 <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
-                💰 Összes Egyenleg
+                    💰 Egyenlegek
                 </h2>
-                <div id="balance-list" class="space-y-4">
+                <div id="balance-list" class="space-y-3">
                     <div class="text-center text-gray-400 py-8">
                         <p>Még nincsenek költségek. Add hozzá az elsőt fent! 👆</p>
                     </div>
@@ -57,11 +338,11 @@
             </div>
         </section>
 
-        <!-- Settlement Suggestions -->
-        <section id="settlement-section" class="mb-8 hidden">
-            <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 backdrop-blur-lg rounded-2xl border border-green-500/20 p-4 md:p-6">
+        <!-- Smart Settlement -->
+        <section id="settlement-section" class="mb-8 hidden animate-fade-in-up" style="animation-delay: 0.6s;">
+            <div class="glass-card rounded-2xl border border-green-500/20 p-6">
                 <h3 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
-                    💡 Legegyszerűbb Elszámolás
+                    💡 Okos Elszámolás (Minimális Átutalások)
                 </h3>
                 <div id="settlement-list" class="space-y-2">
                     <!-- Settlement suggestions will be inserted here -->
@@ -70,16 +351,17 @@
         </section>
 
         <!-- Expense List -->
-        <section id="expense-list-section" class="mb-8">
+        <section id="expense-list-section" class="mb-8 animate-fade-in-up" style="animation-delay: 0.7s;">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl md:text-2xl font-bold">📋 Összes Költség</h2>
                 <div class="flex gap-2">
-                    <button id="export-btn" class="px-3 md:px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-xs md:text-sm">
-                        📊 Exportálás
+                    <button id="export-btn"
+                        class="px-3 md:px-4 py-2 glass-card rounded-lg hover:bg-white/20 transition text-xs md:text-sm">
+                        📊 CSV Export
                     </button>
                 </div>
             </div>
-            <div id="expense-list" class="space-y-4">
+            <div id="expense-list" class="space-y-4 expense-scroll">
                 <!-- Expense cards will be inserted here -->
             </div>
         </section>
@@ -87,25 +369,27 @@
     </div>
 
     <!-- Floating Add Button -->
-    <button id="add-expense-btn" class="btn-clickable fixed bottom-24 right-6 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center text-2xl md:text-3xl z-50 hover:scale-110">
+    <button id="add-expense-btn"
+        class="fixed bottom-24 right-6 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center text-2xl md:text-3xl z-50 hover:scale-110 btn-pulse">
         +
     </button>
 
     <!-- Add Expense Modal -->
-    <div id="expense-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-gray-900 rounded-2xl border border-white/10 p-4 md:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4 md:mb-6">
-                <h3 class="text-xl md:text-2xl font-bold">➕ Új Költség Hozzáadása</h3>
+    <div id="expense-modal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="glass-card rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">➕ Új Költség Hozzáadása</h3>
                 <button id="close-modal-btn" class="text-3xl hover:text-red-400 transition">&times;</button>
             </div>
 
             <form id="expense-form" class="space-y-4">
-                
+
                 <!-- Bill Photo Upload -->
                 <div>
                     <label class="block text-sm font-medium mb-2">📸 Számla Fotó (opcionális)</label>
-                    <input type="file" id="bill-photo" accept="image/*" capture="environment" 
-                           class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm">
+                    <input type="file" id="bill-photo" accept="image/*" capture="environment"
+                        class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm">
                     <div id="photo-preview" class="mt-2 hidden">
                         <img id="preview-img" class="w-full max-h-48 object-contain rounded-lg border border-white/10">
                     </div>
@@ -115,7 +399,7 @@
                 <div>
                     <label class="block text-sm font-medium mb-2">📝 Leírás</label>
                     <input type="text" id="description" required placeholder="pl. Ebéd az U Fleků-nál"
-                           class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500">
+                        class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500">
                 </div>
 
                 <!-- Amount -->
@@ -123,11 +407,12 @@
                     <div>
                         <label class="block text-sm font-medium mb-2">💶 Összeg</label>
                         <input type="number" id="amount" required step="0.01" placeholder="0.00"
-                               class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white">
+                            class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">💱 Pénznem</label>
-                        <select id="currency" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white">
+                        <select id="currency"
+                            class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white">
                             <option value="EUR">EUR (€)</option>
                             <option value="CZK">CZK (Kč)</option>
                         </select>
@@ -137,7 +422,8 @@
                 <!-- Category -->
                 <div>
                     <label class="block text-sm font-medium mb-2">🏷️ Kategória</label>
-                    <select id="category" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white">
+                    <select id="category"
+                        class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white">
                         <option value="food">🍽️ Étel & Ital</option>
                         <option value="accommodation">🏠 Szállás</option>
                         <option value="transport">🚕 Utazás</option>
@@ -150,30 +436,33 @@
                 <!-- Who Paid -->
                 <div>
                     <label class="block text-sm font-medium mb-2">👤 Ki Fizette?</label>
-                    <select id="paid-by" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white">
+                    <select id="paid-by" required
+                        class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white">
                         <option value="">Válassz...</option>
                     </select>
                 </div>
 
                 <!-- Split Between -->
                 <div>
-                    <label class="block text-sm font-medium mb-2">👥 Kik Között Osztjuk? (válaszd ki ki volt ott)</label>
-                    <div id="split-between-list" class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto p-2 bg-white/5 rounded-lg border border-white/10">
+                    <label class="block text-sm font-medium mb-2">👥 Kik Között Osztjuk?</label>
+                    <div id="split-between-list"
+                        class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto p-2 bg-white/5 rounded-lg border border-white/10">
                         <!-- Checkboxes will be populated here -->
                     </div>
-                    <button type="button" id="select-all-btn" class="mt-2 text-sm text-purple-400 hover:text-purple-300">
-                        Mindenkit Kiválaszt
+                    <button type="button" id="select-all-btn"
+                        class="mt-2 text-sm text-purple-400 hover:text-purple-300">
+                        ✅ Mindenkit Kiválaszt
                     </button>
                 </div>
 
-                <input type="hidden" id="split-type" value="equal">
-
                 <!-- Buttons -->
                 <div class="flex gap-4 pt-4">
-                    <button type="submit" class="flex-1 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:opacity-90 transition">
+                    <button type="submit"
+                        class="flex-1 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:opacity-90 transition">
                         💾 Költség Mentése
                     </button>
-                    <button type="button" id="cancel-btn" class="px-6 py-3 bg-white/10 rounded-lg hover:bg-white/20 transition">
+                    <button type="button" id="cancel-btn"
+                        class="px-6 py-3 bg-white/10 rounded-lg hover:bg-white/20 transition">
                         Mégse
                     </button>
                 </div>
@@ -181,53 +470,16 @@
         </div>
     </div>
 
-     <!-- Detail Modal - INSERT HERE! -->
-    <div id="detail-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] items-center justify-center p-4">
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-white/10 shadow-2xl">
+    <!-- Detail Modal -->
+    <div id="detail-modal"
+        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] items-center justify-center p-4">
+        <div class="glass-card rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-in">
             <div id="detail-content" class="p-6 md:p-8"></div>
         </div>
     </div>
 
     <!-- Firebase & Scripts -->
     <script type="module" src="expenses.js"></script>
-    
-    <!-- Backup inline script to ensure buttons work -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Page loaded, checking buttons...');
-            
-            // Check if buttons exist
-            const btnTop = document.getElementById('add-expense-btn-top');
-            const btnHeader = document.getElementById('add-expense-btn-header');
-            const btnFloat = document.getElementById('add-expense-btn');
-            
-            console.log('Top button:', btnTop);
-            console.log('Header button:', btnHeader);
-            console.log('Float button:', btnFloat);
-            
-            // If expenses.js hasn't loaded yet, add temporary listeners
-            setTimeout(() => {
-                const modal = document.getElementById('expense-modal');
-                
-                const openModal = () => {
-                    console.log('Opening modal...');
-                    if (modal) {
-                        modal.classList.remove('hidden');
-                        modal.classList.add('flex');
-                    }
-                };
-                
-                if (btnTop && !btnTop.onclick) {
-                    btnTop.addEventListener('click', openModal);
-                }
-                if (btnHeader && !btnHeader.onclick) {
-                    btnHeader.addEventListener('click', openModal);
-                }
-                if (btnFloat && !btnFloat.onclick) {
-                    btnFloat.addEventListener('click', openModal);
-                }
-            }, 100);
-        });
-    </script>
 </body>
+
 </html>
