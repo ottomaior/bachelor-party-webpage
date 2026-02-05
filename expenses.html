@@ -104,6 +104,29 @@
             transform: scale(1.02);
             box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
         }
+
+        /* Budget Tracker */
+        .budget-meter {
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .budget-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #fbbf24, #ef4444);
+            background-size: 300% 100%;
+            transition: width 0.5s ease;
+            border-radius: 12px;
+        }
+        .budget-marker {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 
