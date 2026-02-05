@@ -2,10 +2,26 @@
 
 // ===== DARE GENERATOR - MAGYAR =====
 const dares = [
-    "Játszol te faszoddal, köcsög",
-    "Játszol te faszoddal, köcsög",
-    "Játszol te faszoddal, köcsög",
-    "Játszol te faszoddal, köcsög"
+    "Vegyél egy kört az asztaltársaságnak! 🍻",
+    "Énekelj el egy dalt karaoke stílusban! 🎤",
+    "Csinálj 10 guggolást a bár közepén! 💪",
+    "Kérj el egy idegentől egy szelfit! 📸",
+    "Mondd el a kedvenc viccet hangosan! 😂",
+    "Táncolj 30 másodpercig zene nélkül! 💃",
+    "Hívd fel az anyukádat és mondd el mennyire szereted! ❤️",
+    "Igyál egy feles szemkontaktus nélkül! 🥃",
+    "Adj egy tósztot Ottóra a legjobb formában! 🥂",
+    "Cserélj ruhát valakivel 5 percre! 👔",
+    "Beszélj akcentussal a következő 10 percben! 🗣️",
+    "Mesélj el egy kínos sztorit magadról! 😅",
+    "Találj ki egy új becenevet Ottónak! 🏷️",
+    "Csináld végig a Macarena táncot! 🕺",
+    "Kérj egy autogramot a pincértől! ✍️",
+    "Rendeld meg a következő italt csak kézjelekkel! 🤟",
+    "Mondj 5 dolgot amit szeretsz Ottóban! 💝",
+    "Fotózkodj le egy szoborral kreatívan! 🗿",
+    "Tanítsd meg valakinek a kedvenc táncmozdulatod! 🎶",
+    "Adj le 20 fekvőtámaszt most azonnal! 🏋️"
 ];
 
 function generateDare() {
@@ -37,13 +53,21 @@ function handleRSVP(event) {
     // Check if Firebase is loaded
     if (typeof firebase === 'undefined') {
         console.error('❌ Firebase not defined!');
-        alert('Firebase nincs betöltve. Frissítsd az oldalt és próbáld újra!');
+        if (window.toast) {
+            window.toast.error('Firebase nincs betöltve. Frissítsd az oldalt és próbáld újra!');
+        } else {
+            alert('Firebase nincs betöltve. Frissítsd az oldalt és próbáld újra!');
+        }
         return;
     }
     
     if (typeof db === 'undefined') {
         console.error('❌ Firestore db not defined!');
-        alert('Firestore nincs betöltve. Frissítsd az oldalt és próbáld újra!');
+        if (window.toast) {
+            window.toast.error('Firestore nincs betöltve. Frissítsd az oldalt és próbáld újra!');
+        } else {
+            alert('Firestore nincs betöltve. Frissítsd az oldalt és próbáld újra!');
+        }
         return;
     }
     
@@ -129,7 +153,14 @@ function handleRSVP(event) {
         console.error('Error code:', error.code);
         console.error('Error message:', error.message);
         
-        alert('Hiba történt a küldés közben:\n' + error.message + '\n\nPróbáld újra vagy írj WhatsAppon!');
+        if (window.toast) {
+            window.toast.error('Próbáld újra vagy írj WhatsAppon!', {
+                title: 'Hiba történt a küldés közben',
+                duration: 6000
+            });
+        } else {
+            alert('Hiba történt a küldés közben:\n' + error.message + '\n\nPróbáld újra vagy írj WhatsAppon!');
+        }
         
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
@@ -151,7 +182,11 @@ function shareOnFacebook() {
 function copyLink() {
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(window.location.href).then(() => {
-            alert('🔗 Link másolva!');
+            if (window.toast) {
+                window.toast.success('Link másolva a vágólapra!', { icon: '🔗' });
+            } else {
+                alert('🔗 Link másolva!');
+            }
         }).catch(err => {
             console.error('Failed to copy:', err);
             fallbackCopyTextToClipboard(window.location.href);
@@ -172,10 +207,18 @@ function fallbackCopyTextToClipboard(text) {
     
     try {
         document.execCommand('copy');
-        alert('🔗 Link másolva!');
+        if (window.toast) {
+            window.toast.success('Link másolva a vágólapra!', { icon: '🔗' });
+        } else {
+            alert('🔗 Link másolva!');
+        }
     } catch (err) {
         console.error('Fallback: Could not copy text', err);
-        alert('Link másolása sikertelen. Másold ki manuálisan: ' + text);
+        if (window.toast) {
+            window.toast.error('Link másolása sikertelen. Másold ki manuálisan!');
+        } else {
+            alert('Link másolása sikertelen. Másold ki manuálisan: ' + text);
+        }
     }
     
     document.body.removeChild(textarea);

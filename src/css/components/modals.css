@@ -1,0 +1,318 @@
+/* ===== MODAL SYSTEM ===== */
+
+/* Modal Backdrop */
+.modal-backdrop,
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: var(--z-modal-backdrop);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.modal-backdrop.active,
+.modal.active,
+.modal.flex {
+    display: flex;
+    opacity: 1;
+}
+
+/* Modal Container */
+.modal-container,
+.modal-content {
+    background: var(--color-bg-card-solid);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-2xl);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.95) translateY(20px);
+    transition: transform var(--duration-normal) var(--ease-spring);
+    box-shadow: var(--shadow-xl);
+}
+
+.modal.active .modal-container,
+.modal.flex .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.modal-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0;
+}
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.modal-close:hover {
+    background: var(--color-error-light);
+    color: var(--color-error);
+}
+
+/* Modal Body */
+.modal-body {
+    padding: var(--space-xl);
+}
+
+/* Modal Footer */
+.modal-footer {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-xl);
+    border-top: 1px solid var(--color-border-subtle);
+    justify-content: flex-end;
+}
+
+/* Modal Sizes */
+.modal-sm .modal-container {
+    max-width: 400px;
+}
+
+.modal-lg .modal-container {
+    max-width: 800px;
+}
+
+.modal-xl .modal-container {
+    max-width: 1000px;
+}
+
+.modal-fullscreen .modal-container {
+    max-width: none;
+    width: calc(100% - var(--space-2xl));
+    height: calc(100% - var(--space-2xl));
+    max-height: none;
+}
+
+/* Drawer Modal (slides from side) */
+.modal-drawer {
+    justify-content: flex-end;
+}
+
+.modal-drawer .modal-container {
+    height: 100%;
+    max-height: none;
+    border-radius: var(--radius-2xl) 0 0 var(--radius-2xl);
+    transform: translateX(100%);
+}
+
+.modal-drawer.active .modal-container {
+    transform: translateX(0);
+}
+
+/* Bottom Sheet Modal */
+.modal-bottom-sheet {
+    align-items: flex-end;
+}
+
+.modal-bottom-sheet .modal-container {
+    width: 100%;
+    max-width: none;
+    border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+    transform: translateY(100%);
+    max-height: 80vh;
+}
+
+.modal-bottom-sheet.active .modal-container {
+    transform: translateY(0);
+}
+
+.modal-bottom-sheet .modal-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--color-border-strong);
+    border-radius: var(--radius-full);
+    margin: var(--space-sm) auto var(--space-md);
+}
+
+/* Image Lightbox */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: var(--z-modal);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2xl);
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: var(--font-size-2xl);
+    cursor: pointer;
+    transition: all var(--duration-fast);
+}
+
+.lightbox-close:hover {
+    background: var(--color-error);
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    transition: all var(--duration-fast);
+}
+
+.lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-prev {
+    left: var(--space-lg);
+}
+
+.lightbox-next {
+    right: var(--space-lg);
+}
+
+/* Confirmation Dialog */
+.confirm-dialog .modal-container {
+    max-width: 400px;
+    text-align: center;
+}
+
+.confirm-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-3xl);
+}
+
+.confirm-icon.warning {
+    background: var(--color-warning-light);
+    color: var(--color-warning);
+}
+
+.confirm-icon.danger {
+    background: var(--color-error-light);
+    color: var(--color-error);
+}
+
+.confirm-icon.success {
+    background: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.confirm-icon.info {
+    background: var(--color-info-light);
+    color: var(--color-info);
+}
+
+.confirm-message {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+}
+
+/* Detail Modal (for expenses) */
+#detail-modal {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+}
+
+#detail-modal > div {
+    background: linear-gradient(135deg, var(--color-bg-card-solid), rgba(30, 30, 50, 1));
+    border-radius: var(--radius-3xl);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: var(--shadow-xl);
+}
+
+#detail-content {
+    padding: var(--space-xl);
+}
+
+/* Photo Preview */
+.photo-preview {
+    margin-top: var(--space-md);
+    position: relative;
+}
+
+.photo-preview img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-subtle);
+}
+
+.photo-preview .remove-btn {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background: var(--color-error);
+    color: white;
+    cursor: pointer;
+}

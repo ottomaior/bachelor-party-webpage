@@ -7,7 +7,10 @@
     <title>Otto Legénybúcsúja 🍻 | Last Ride in Prague</title>
     <meta name="description" content="Otto búcsúztatása - Prága, 2026 május">
 
-    <!-- CSS Files -->
+    <!-- CSS Files - New Modular System -->
+    <link rel="stylesheet" href="src/css/main.css">
+    
+    <!-- Legacy CSS (to be removed after migration) -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/components.css">
@@ -15,9 +18,33 @@
 </head>
 
 <body>
+    <!-- Skip Link for Keyboard Navigation -->
+    <a href="#main-content" class="skip-link">Ugrás a tartalomhoz</a>
+    
+    <!-- Particle Background -->
+    <div class="animated-background" aria-hidden="true"></div>
+    <div id="particles-container" class="particles-container" aria-hidden="true">
+        <canvas id="particles-canvas"></canvas>
+    </div>
+    <!-- CSS Particle Fallback -->
+    <div class="floating-particles" aria-hidden="true">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container top-right" aria-live="polite" aria-atomic="true"></div>
 
     <!-- NAVIGATION BAR -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Fő navigáció">
         <div class="nav-container">
             <div class="nav-logo">🍻 Ottó Legénybúcsúja</div>
             <ul class="nav-links" id="navLinks">
@@ -40,7 +67,8 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="hero" id="home">
+    <main id="main-content">
+    <section class="hero" id="home" aria-label="Kezdőlap">
         <div class="hero-content">
             <h1>Ottó Legénybúcsúja 🍻</h1>
             <p class="hero-subtitle">Final Boss Fight – Prague Edition</p>
@@ -97,14 +125,14 @@
     <!-- TAB CONTENT: OVERVIEW -->
     <div class="tab-content active" id="tab-overview" data-tab="overview">
         <div class="container">
-            <h2>Mi vár ránk?</h2>
-            <div class="grid-2">
-                <div class="card">
+            <h2 class="scroll-reveal">Mi vár ránk?</h2>
+            <div class="grid-2 stagger-children">
+                <div class="card card-3d">
                     <h3>🎉 A Misszió</h3>
                     <p>Egy hétvége Prágában együtt. Iszunk, megyünk, meglátjuk mi történik – a részletek majd utólag
                         derülnek ki..</p>
                 </div>
-                <div class="card">
+                <div class="card card-3d">
                     <h3>📅 Mikor & Hol</h3>
                     <p><strong>Dátum:</strong> 2026. május 6–9.<br>
                         <strong>Időtartam:</strong> 2-3 éjszaka<br>
@@ -114,20 +142,20 @@
                 </div>
             </div>
 
-            <h2 style="margin-top: 60px;">🍺 Miért Prága?</h2>
-            <div class="grid-3">
-                <div class="card">
+            <h2 class="scroll-reveal" style="margin-top: 60px;">🍺 Miért Prága?</h2>
+            <div class="grid-3 stagger-children">
+                <div class="card card-3d">
                     <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 15px;">💰</h3>
                     <h4 style="text-align: center;">Mert szerintem pont erre való hely</h4>
                     <p style="text-align: center; color: var(--text-muted);">Jó ár-érték arány, sör olcsóbb mint a víz
                     </p>
                 </div>
-                <div class="card">
+                <div class="card card-3d">
                     <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 15px;">🎉</h3>
                     <h4 style="text-align: center;">Bulis</h4>
                     <p style="text-align: center; color: var(--text-muted);">Éjszakai élet, bulizóhelyek, romkocsmák</p>
                 </div>
-                <div class="card">
+                <div class="card card-3d">
                     <h3 style="text-align: center; font-size: 2.5rem; margin-bottom: 15px;">🗺️</h3>
                     <h4 style="text-align: center;">Jól bejárható</h4>
                     <p style="text-align: center; color: var(--text-muted);">Kompakt város, gyalog lehet menni
@@ -136,7 +164,7 @@
             </div>
 
             <!-- Stats -->
-            <div class="stats-grid">
+            <div class="stats-grid scroll-reveal">
                 <div class="stat-box">
                     <div class="stat-value" id="daysUntil">91</div>
                     <div class="stat-label">Nap a bulira</div>
@@ -532,7 +560,7 @@
                         De ezt csak a helyszínen tudjátok meg 😏
                     </p>
                     <button class="btn btn-secondary"
-                        onclick="alert('🤫 Ha most megtudnád nézni, már nem is lenne secret!')">
+                        onclick="if(window.toast){window.toast.info('Ha most megtudnád nézni, már nem is lenne secret!',{icon:'🤫',title:'Secret Section'})}else{alert('🤫 Ha most megtudnád nézni, már nem is lenne secret!')}">
                         🔓 Unlock Secrets
                     </button>
                 </div>
@@ -763,8 +791,8 @@
                     </div>
                 </div>
 
-                <!-- Travel Details (only shown if attending YES) -->
-                <div id="travelSection" style="display: block;">
+                <!-- Travel Details (only shown if attending YES or MAYBE) -->
+                <div id="travelSection" style="display: none;">
 
                     <!-- Starting Location -->
                     <div
@@ -945,10 +973,10 @@
             </div>
         </div>
     </section>
-
+    </main>
 
     <!-- FOOTER -->
-    <footer>
+    <footer role="contentinfo">
         <h2>Ott találkozunk! 🔥</h2>
         <p style="color: var(--text-muted); margin: 20px 0;">
             Jó lesz ez, készülj fel!
@@ -967,8 +995,8 @@
     </footer>
 
     <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <!-- Firebase Config -->
     <script>
@@ -990,6 +1018,9 @@
     </script>
 
     <!-- JavaScript Files -->
+    <script src="src/js/components/toast.js"></script>
+    <script src="src/js/components/particles.js"></script>
+    <script src="src/js/components/ui-enhancements.js"></script>
     <script src="js/main.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/tabs.js"></script>
@@ -1009,13 +1040,13 @@
                 attendingSelect.addEventListener('change', function () {
                     console.log('🔥 Attending changed to:', this.value);
 
-                    // Only hide if user selects "no" - otherwise keep it visible
-                    if (this.value === 'no') {
-                        travelSection.style.display = 'none';
-                        console.log('❌ Travel section HIDDEN (not attending)');
-                    } else {
+                    // Show only if user selects "yes" or "maybe"
+                    if (this.value === 'yes' || this.value === 'maybe') {
                         travelSection.style.display = 'block';
                         console.log('✅ Travel section SHOWN');
+                    } else {
+                        travelSection.style.display = 'none';
+                        console.log('❌ Travel section HIDDEN');
                     }
                 });
                 console.log('✅ Travel listener attached!');
@@ -1057,10 +1088,6 @@
             }
         });
     </script>
-
-</body>
-
-</html>
 
 </body>
 
