@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,92 +12,199 @@
     <!-- QR Code library -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
-        /* Extra styling for buttons to ensure they work */
-        .btn-clickable {
-            cursor: pointer;
-            user-select: none;
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
         }
-        .btn-clickable:active {
-            transform: scale(0.95);
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(720deg); }
+        }
+
+        .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+        .animate-scale-in { animation: scaleIn 0.4s ease-out; }
+        .floating-particle { animation: float 6s ease-in-out infinite; }
+        .btn-pulse:hover { animation: pulse-glow 1.5s infinite; }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: confetti-fall 3s linear forwards;
+        }
+
+        /* Glass morphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(168, 85, 247, 0.3);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        /* Progress bar */
+        .progress-fill { transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Category gradients */
+        .cat-food { background: linear-gradient(135deg, #FF6B9D 0%, #FEC163 100%); }
+        .cat-accommodation { background: linear-gradient(135deg, #A8EDEA 0%, #FED6E3 100%); }
+        .cat-transport { background: linear-gradient(135deg, #30CFD0 0%, #330867 100%); }
+        .cat-activities { background: linear-gradient(135deg, #FA709A 0%, #FEE140 100%); }
+        .cat-gifts { background: linear-gradient(135deg, #FFA3D7 0%, #C1F4D7 100%); }
+        .cat-other { background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); }
+
+        /* Floating particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(168, 85, 247, 0.3);
+            border-radius: 50%;
+        }
+
+        /* Search bar focus */
+        .search-bar:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white min-h-screen">
-    <!-- Skip Link for Keyboard Navigation -->
+
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white min-h-screen relative overflow-x-hidden">
+    <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Ugrás a tartalomhoz</a>
-    
-    <!-- Animated Background -->
-    <div class="animated-background" aria-hidden="true"></div>
-    
-    <!-- Particle Background -->
-    <div id="particles-container" class="particles-container" aria-hidden="true">
-        <canvas id="particles-canvas"></canvas>
+
+    <!-- Background Particles -->
+    <div class="bg-particles" aria-hidden="true">
+        <div class="particle floating-particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle floating-particle" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
+        <div class="particle floating-particle" style="top: 40%; left: 50%; animation-delay: 2s;"></div>
+        <div class="particle floating-particle" style="top: 80%; left: 30%; animation-delay: 1.5s;"></div>
+        <div class="particle floating-particle" style="top: 10%; left: 70%; animation-delay: 0.5s;"></div>
     </div>
-    
+
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container top-right" aria-live="polite" aria-atomic="true"></div>
-    
+
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-black/30 backdrop-blur-md z-50 border-b border-white/10" role="navigation" aria-label="Költség oldal navigáció">
+    <nav class="fixed top-0 w-full bg-black/30 backdrop-blur-md z-50 border-b border-white/10" role="navigation">
         <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-lg md:text-xl font-bold hover:text-purple-400 transition">← Vissza</a>
             <h1 class="text-sm md:text-lg font-semibold">💰 Költség Kezelő</h1>
-            <button id="add-expense-btn-header" class="btn-clickable px-3 md:px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:opacity-90 transition flex items-center gap-2 text-sm">
+            <button id="add-expense-btn-header"
+                class="px-3 md:px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:opacity-90 transition flex items-center gap-2 text-sm btn-pulse">
                 <span class="text-lg md:text-xl">+</span>
                 <span class="hidden md:inline">Új Költség</span>
             </button>
         </div>
     </nav>
 
-    <main id="main-content" class="container mx-auto px-4 pt-24 pb-32 max-w-4xl">
-        
-        <!-- HERO SECTION WITH BIG BUTTON -->
-        <div class="mb-8 text-center bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-2xl p-6 md:p-8 border border-purple-500/20">
-            <h2 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Költségek Nyomon Követése</h2>
+    <main id="main-content" class="container mx-auto px-4 pt-24 pb-32 max-w-6xl relative z-10">
+
+        <!-- Hero Section -->
+        <div class="mb-8 text-center glass-card rounded-2xl p-6 md:p-8 border border-purple-500/20 animate-fade-in-up" style="animation-delay: 0.1s;">
+            <h2 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+                Költségek Nyomon Követése
+            </h2>
             <p class="text-sm md:text-base text-gray-300 mb-4 md:mb-6">Töltsd fel a számlákat és oszd szét a költségeket könnyen!</p>
-            <button id="add-expense-btn-top" class="btn-clickable inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white font-bold text-base md:text-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <button id="add-expense-btn-top"
+                class="inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white font-bold text-base md:text-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 btn-pulse">
                 <span class="text-xl md:text-2xl">➕</span>
                 <span>Új Költség Hozzáadása</span>
             </button>
         </div>
 
-        <!-- Balance Dashboard -->
-        <section id="balance-dashboard" class="mb-8">
-            <div class="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 p-4 md:p-6">
-                <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
-                💰 Összes Egyenleg
-                </h2>
-                <div id="balance-list" class="space-y-4">
-                    <div class="text-center text-gray-400 py-8">
-                        <p>Még nincsenek költségek. Add hozzá az elsőt fent! 👆</p>
-                    </div>
+        <!-- Revolut Quick Pay Section -->
+        <section id="revolut-section" class="mb-8 animate-fade-in-up" style="animation-delay: 0.15s;">
+            <div class="glass-card rounded-2xl p-6 border border-blue-500/20">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    💳 Gyors Fizetés - Revolut
+                </h3>
+                <p class="text-sm text-gray-400 mb-4">Kattints a nevekre hogy azonnal fizess Revoluton!</p>
+                <div id="revolut-people-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    <!-- Populated by JS -->
                 </div>
             </div>
         </section>
 
-        <!-- Settlement Suggestions -->
-        <section id="settlement-section" class="mb-8 hidden">
-            <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/30 backdrop-blur-lg rounded-2xl border border-green-500/20 p-4 md:p-6">
-                <h3 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
-                    💡 Legegyszerűbb Elszámolás
+        <!-- Search & Filter Bar -->
+        <div class="mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+            <div class="glass-card rounded-xl p-4 flex flex-col md:flex-row gap-3">
+                <div class="flex-1">
+                    <input type="text" id="search-expenses" placeholder="🔍 Keresés leírás alapján..."
+                        class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 search-bar focus:outline-none focus:border-purple-500 transition">
+                </div>
+                <select id="filter-category-main"
+                    class="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-purple-500">
+                    <option value="all">Összes Kategória</option>
+                    <option value="food">🍽️ Étel & Ital</option>
+                    <option value="accommodation">🏠 Szállás</option>
+                    <option value="transport">🚕 Utazás</option>
+                    <option value="activities">🎉 Programok</option>
+                    <option value="gifts">🎁 Ajándékok</option>
+                    <option value="other">💊 Egyéb</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Category Breakdown -->
+        <section class="mb-8 animate-fade-in-up" style="animation-delay: 0.3s;">
+            <div class="glass-card rounded-2xl p-6">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    📊 Költések Kategóriánként
                 </h3>
-                <div id="settlement-list" class="space-y-2">
-                    <!-- Settlement suggestions will be inserted here -->
+                <div id="category-breakdown" class="space-y-3">
+                    <p class="text-gray-400 text-center py-4">Még nincsenek költségek</p>
                 </div>
             </div>
         </section>
 
         <!-- Charts Section -->
-        <section id="charts-section" class="mb-8">
-            <div class="bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 p-4 md:p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
-                        📊 Statisztikák
-                    </h2>
-                    <div class="flex gap-2">
-                        <button id="chart-toggle-category" class="chart-toggle active px-3 py-1 text-sm bg-purple-500/30 rounded-lg transition">Kategória</button>
-                        <button id="chart-toggle-person" class="chart-toggle px-3 py-1 text-sm bg-white/10 rounded-lg transition">Személyek</button>
-                        <button id="chart-toggle-timeline" class="chart-toggle px-3 py-1 text-sm bg-white/10 rounded-lg transition">Idősor</button>
+        <section id="charts-section" class="mb-8 animate-fade-in-up" style="animation-delay: 0.35s;">
+            <div class="glass-card rounded-2xl p-4 md:p-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">📈 Statisztikák</h2>
+                    <div class="flex gap-2 flex-wrap">
+                        <button id="chart-toggle-category" class="chart-toggle active px-3 py-1.5 text-sm bg-purple-500/30 rounded-lg transition">Kategória</button>
+                        <button id="chart-toggle-person" class="chart-toggle px-3 py-1.5 text-sm bg-white/10 rounded-lg transition hover:bg-white/20">Személyek</button>
+                        <button id="chart-toggle-timeline" class="chart-toggle px-3 py-1.5 text-sm bg-white/10 rounded-lg transition hover:bg-white/20">Idősor</button>
                     </div>
                 </div>
                 
@@ -126,104 +234,63 @@
             </div>
         </section>
 
+        <!-- Balance Dashboard -->
+        <section id="balance-dashboard" class="mb-8 animate-fade-in-up" style="animation-delay: 0.4s;">
+            <div class="glass-card rounded-2xl p-6">
+                <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">💰 Egyenlegek</h2>
+                <div id="balance-list" class="space-y-3">
+                    <div class="text-center text-gray-400 py-8">
+                        <p>Még nincsenek költségek. Add hozzá az elsőt fent! 👆</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Smart Settlement -->
+        <section id="settlement-section" class="mb-8 hidden animate-fade-in-up" style="animation-delay: 0.45s;">
+            <div class="glass-card rounded-2xl border border-green-500/20 p-6">
+                <h3 class="text-lg md:text-xl font-bold mb-4 flex items-center gap-2">
+                    💡 Okos Elszámolás (Minimális Átutalások)
+                </h3>
+                <div id="settlement-list" class="space-y-2"></div>
+            </div>
+        </section>
+
         <!-- Expense List -->
-        <section id="expense-list-section" class="mb-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+        <section id="expense-list-section" class="mb-8 animate-fade-in-up" style="animation-delay: 0.5s;">
+            <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl md:text-2xl font-bold">📋 Összes Költség</h2>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="toggle-filters-btn" class="px-3 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm flex items-center gap-2">
-                        🔍 Szűrők
-                        <span id="active-filter-count" class="hidden px-2 py-0.5 bg-purple-500 rounded-full text-xs">0</span>
-                    </button>
-                    <button id="export-btn" class="px-3 md:px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-xs md:text-sm">
-                        📊 Exportálás
-                    </button>
-                </div>
+                <button id="export-btn" class="px-3 md:px-4 py-2 glass-card rounded-lg hover:bg-white/20 transition text-xs md:text-sm">
+                    📊 CSV Export
+                </button>
             </div>
-            
-            <!-- Filter Panel -->
-            <div id="filter-panel" class="hidden mb-6 p-4 bg-white/5 rounded-xl border border-white/10">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <!-- Search -->
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">🔎 Keresés</label>
-                        <input type="text" id="filter-search" placeholder="Leírás keresése..."
-                               class="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 text-sm">
-                    </div>
-                    
-                    <!-- Category Filter -->
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">🏷️ Kategória</label>
-                        <select id="filter-category" class="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm">
-                            <option value="">Mind</option>
-                            <option value="food">🍽️ Étel & Ital</option>
-                            <option value="accommodation">🏠 Szállás</option>
-                            <option value="transport">🚕 Utazás</option>
-                            <option value="activities">🎉 Programok</option>
-                            <option value="gifts">🎁 Ajándékok</option>
-                            <option value="other">💊 Egyéb</option>
-                        </select>
-                    </div>
-                    
-                    <!-- Person Filter -->
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">👤 Ki Fizette</label>
-                        <select id="filter-person" class="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm">
-                            <option value="">Mind</option>
-                            <!-- Populated dynamically -->
-                        </select>
-                    </div>
-                    
-                    <!-- Date Range -->
-                    <div>
-                        <label class="block text-sm text-gray-400 mb-2">📅 Időszak</label>
-                        <select id="filter-date" class="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm">
-                            <option value="">Mind</option>
-                            <option value="today">Ma</option>
-                            <option value="week">Elmúlt 7 nap</option>
-                            <option value="month">Elmúlt 30 nap</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <!-- Filter Actions -->
-                <div class="flex justify-between items-center mt-4 pt-4 border-t border-white/10">
-                    <div id="filter-results" class="text-sm text-gray-400">
-                        <!-- Results count shown here -->
-                    </div>
-                    <button id="clear-filters-btn" class="px-4 py-2 text-sm text-purple-400 hover:text-purple-300 transition">
-                        ✕ Szűrők törlése
-                    </button>
-                </div>
-            </div>
-            
             <div id="expense-list" class="space-y-4">
-                <!-- Expense cards will be inserted here -->
+                <!-- Expense cards populated by JS -->
             </div>
         </section>
 
     </main>
 
     <!-- Floating Add Button -->
-    <button id="add-expense-btn" class="btn-clickable fixed bottom-24 right-6 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center text-2xl md:text-3xl z-50 hover:scale-110">
+    <button id="add-expense-btn"
+        class="fixed bottom-24 right-6 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center text-2xl md:text-3xl z-50 hover:scale-110 btn-pulse">
         +
     </button>
 
     <!-- Add Expense Modal -->
-    <div id="expense-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="bg-gray-900 rounded-2xl border border-white/10 p-4 md:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-4 md:mb-6">
-                <h3 id="modal-title" class="text-xl md:text-2xl font-bold">➕ Új Költség Hozzáadása</h3>
+    <div id="expense-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4" role="dialog" aria-modal="true">
+        <div class="glass-card rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modal-title" class="text-2xl font-bold">➕ Új Költség Hozzáadása</h3>
                 <button id="close-modal-btn" class="text-3xl hover:text-red-400 transition">&times;</button>
             </div>
 
             <form id="expense-form" class="space-y-4">
-                
-                <!-- Bill Photo Upload -->
+                <!-- Bill Photo -->
                 <div>
                     <label class="block text-sm font-medium mb-2">📸 Számla Fotó (opcionális)</label>
-                    <input type="file" id="bill-photo" accept="image/*" capture="environment" 
-                           class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm">
+                    <input type="file" id="bill-photo" accept="image/*" capture="environment"
+                        class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white text-sm">
                     <div id="photo-preview" class="mt-2 hidden">
                         <img id="preview-img" class="w-full max-h-48 object-contain rounded-lg border border-white/10">
                     </div>
@@ -233,15 +300,15 @@
                 <div>
                     <label class="block text-sm font-medium mb-2">📝 Leírás</label>
                     <input type="text" id="description" required placeholder="pl. Ebéd az U Fleků-nál"
-                           class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500">
+                        class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none">
                 </div>
 
-                <!-- Amount -->
+                <!-- Amount & Currency -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-2">💶 Összeg</label>
                         <input type="number" id="amount" required step="0.01" placeholder="0.00"
-                               class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white">
+                            class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">💱 Pénznem</label>
@@ -275,16 +342,13 @@
 
                 <!-- Split Between -->
                 <div>
-                    <label class="block text-sm font-medium mb-2">👥 Kik Között Osztjuk? (válaszd ki ki volt ott)</label>
+                    <label class="block text-sm font-medium mb-2">👥 Kik Között Osztjuk?</label>
                     <div id="split-between-list" class="grid grid-cols-2 gap-2 max-h-48 overflow-y-auto p-2 bg-white/5 rounded-lg border border-white/10">
-                        <!-- Checkboxes will be populated here -->
                     </div>
                     <button type="button" id="select-all-btn" class="mt-2 text-sm text-purple-400 hover:text-purple-300">
-                        Mindenkit Kiválaszt
+                        ✅ Mindenkit Kiválaszt
                     </button>
                 </div>
-
-                <input type="hidden" id="split-type" value="equal">
 
                 <!-- Buttons -->
                 <div class="flex gap-4 pt-4">
@@ -299,58 +363,17 @@
         </div>
     </div>
 
-     <!-- Detail Modal -->
-    <div id="detail-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="detail-modal-title">
-        <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-white/10 shadow-2xl">
+    <!-- Detail Modal -->
+    <div id="detail-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] items-center justify-center p-4" role="dialog" aria-modal="true">
+        <div class="glass-card rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-in">
             <div id="detail-content" class="p-6 md:p-8"></div>
         </div>
     </div>
 
-    <!-- Toast System & UI Enhancements -->
+    <!-- Scripts -->
     <script src="src/js/components/toast.js"></script>
-    <script src="src/js/components/particles.js"></script>
     <script src="src/js/components/ui-enhancements.js"></script>
-    
-    <!-- Firebase & Scripts -->
     <script type="module" src="expenses.js"></script>
-    
-    <!-- Backup inline script to ensure buttons work -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Page loaded, checking buttons...');
-            
-            // Check if buttons exist
-            const btnTop = document.getElementById('add-expense-btn-top');
-            const btnHeader = document.getElementById('add-expense-btn-header');
-            const btnFloat = document.getElementById('add-expense-btn');
-            
-            console.log('Top button:', btnTop);
-            console.log('Header button:', btnHeader);
-            console.log('Float button:', btnFloat);
-            
-            // If expenses.js hasn't loaded yet, add temporary listeners
-            setTimeout(() => {
-                const modal = document.getElementById('expense-modal');
-                
-                const openModal = () => {
-                    console.log('Opening modal...');
-                    if (modal) {
-                        modal.classList.remove('hidden');
-                        modal.classList.add('flex');
-                    }
-                };
-                
-                if (btnTop && !btnTop.onclick) {
-                    btnTop.addEventListener('click', openModal);
-                }
-                if (btnHeader && !btnHeader.onclick) {
-                    btnHeader.addEventListener('click', openModal);
-                }
-                if (btnFloat && !btnFloat.onclick) {
-                    btnFloat.addEventListener('click', openModal);
-                }
-            }, 100);
-        });
-    </script>
 </body>
+
 </html>
