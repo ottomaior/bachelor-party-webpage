@@ -15,6 +15,208 @@
     <link rel="stylesheet" href="css/navigation.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Leaflet.js for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <style>
+        /* Map Styles */
+        #prague-map {
+            height: 400px;
+            width: 100%;
+            border-radius: 15px;
+            z-index: 1;
+        }
+        .leaflet-popup-content-wrapper {
+            background: rgba(20, 20, 35, 0.95);
+            color: #fff;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .leaflet-popup-tip {
+            background: rgba(20, 20, 35, 0.95);
+        }
+        .leaflet-popup-content {
+            margin: 12px 16px;
+        }
+        .map-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        /* Weather Widget Styles */
+        .weather-card {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.1), rgba(100, 200, 255, 0.1));
+            border: 1px solid rgba(0, 150, 255, 0.2);
+        }
+        .weather-day {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+        .weather-day:hover {
+            transform: translateY(-3px);
+        }
+        .weather-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Emergency Card Styles */
+        .emergency-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.1));
+            border: 2px solid rgba(239, 68, 68, 0.3);
+        }
+        .emergency-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        .emergency-icon {
+            font-size: 1.8rem;
+            min-width: 45px;
+            text-align: center;
+        }
+        
+        /* Packing List Styles */
+        .packing-category {
+            margin-bottom: 20px;
+        }
+        .packing-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .packing-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+        .packing-item.checked {
+            background: rgba(16, 185, 129, 0.1);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        .packing-checkbox {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--accent-blue);
+        }
+        .packing-progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        .packing-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-pink));
+            transition: width 0.3s ease;
+        }
+        
+        /* Calendar Button */
+        .calendar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .calendar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-upload {
+            aspect-ratio: 1;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .gallery-upload:hover {
+            border-color: var(--accent-blue);
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        /* Budget Tracker */
+        .budget-meter {
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        .budget-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #fbbf24, #ef4444);
+            background-size: 300% 100%;
+            transition: width 0.5s ease;
+        }
+        .budget-marker {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,6 +258,7 @@
                 <li><a href="#logistics" class="nav-link">Logisztika</a></li>
                 <li><a href="#stats-dashboard" class="nav-link">Statisztika</a></li>
                 <a href="/expenses.html" onclick="event.stopPropagation(); window.location.href='/expenses.html';" style="cursor: pointer;">💰 Költségek</a>
+                <li><a href="#gallery" class="nav-link">📸 Galéria</a></li>
                 <li><a href="#rsvp" class="nav-link">Jövök!</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
@@ -576,6 +779,138 @@
                 Hogyan jutunk el Prágába?
             </p>
 
+            <!-- Add to Calendar Button -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <button class="calendar-btn" onclick="downloadCalendarEvent()">
+                    📅 Hozzáadás a Naptárhoz
+                </button>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 10px;">
+                    Töltsd le az eseményt .ics formátumban
+                </p>
+            </div>
+
+            <!-- Interactive Map Section -->
+            <h3 style="margin-top: 40px;">🗺️ Prága Térkép</h3>
+            <div class="card" style="padding: 20px; margin-top: 20px; margin-bottom: 40px;">
+                <div id="prague-map"></div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #ff6b6b;"></div>
+                        <span>Szállás (tervezett)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #4ecdc4;"></div>
+                        <span>Látnivalók</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #ffe66d;"></div>
+                        <span>Bulinegyed</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot" style="background: #a855f7;"></div>
+                        <span>Kocsmák & Éttermek</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Forecast -->
+            <h3 style="margin-top: 40px;">🌤️ Időjárás Előrejelzés (Május 6-9)</h3>
+            <div class="card weather-card" style="padding: 30px; margin-top: 20px; margin-bottom: 40px;">
+                <div id="weather-forecast" class="grid-4" style="gap: 15px;">
+                    <div class="weather-day">
+                        <div class="weather-icon">🌤️</div>
+                        <div style="font-weight: 600;">Máj. 6</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent-blue);">18°C</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Részben felhős</div>
+                    </div>
+                    <div class="weather-day">
+                        <div class="weather-icon">☀️</div>
+                        <div style="font-weight: 600;">Máj. 7</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent-blue);">21°C</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Napos</div>
+                    </div>
+                    <div class="weather-day">
+                        <div class="weather-icon">⛅</div>
+                        <div style="font-weight: 600;">Máj. 8</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent-blue);">19°C</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Változó</div>
+                    </div>
+                    <div class="weather-day">
+                        <div class="weather-icon">🌤️</div>
+                        <div style="font-weight: 600;">Máj. 9</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--accent-blue);">20°C</div>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">Kellemes</div>
+                    </div>
+                </div>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 20px;">
+                    ⚠️ Előzetes becslés - a pontos előrejelzés az esemény előtt frissül
+                </p>
+                <div style="text-align: center; margin-top: 15px;">
+                    <p style="color: var(--accent-gold);">👕 Ajánlott öltözék: Könnyű rétegek, esőkabát a biztonság kedvéért</p>
+                </div>
+            </div>
+
+            <!-- Emergency Information -->
+            <h3 style="margin-top: 40px;">🆘 Sürgősségi Információk</h3>
+            <div class="card emergency-card" style="padding: 30px; margin-top: 20px; margin-bottom: 40px;">
+                <div class="grid-2" style="gap: 20px;">
+                    <div>
+                        <div class="emergency-item">
+                            <div class="emergency-icon">🚨</div>
+                            <div>
+                                <div style="font-weight: 600; color: #ef4444;">Általános Segélyhívó</div>
+                                <div style="font-size: 1.3rem; font-weight: bold;">112</div>
+                                <div style="color: var(--text-muted); font-size: 0.85rem;">EU egységes szám</div>
+                            </div>
+                        </div>
+                        <div class="emergency-item">
+                            <div class="emergency-icon">👮</div>
+                            <div>
+                                <div style="font-weight: 600;">Cseh Rendőrség</div>
+                                <div style="font-size: 1.3rem; font-weight: bold;">158</div>
+                            </div>
+                        </div>
+                        <div class="emergency-item">
+                            <div class="emergency-icon">🚑</div>
+                            <div>
+                                <div style="font-weight: 600;">Mentők</div>
+                                <div style="font-size: 1.3rem; font-weight: bold;">155</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="emergency-item">
+                            <div class="emergency-icon">🏥</div>
+                            <div>
+                                <div style="font-weight: 600;">Legközelebbi Kórház</div>
+                                <div style="font-size: 0.95rem;">Nemocnice Na Františku</div>
+                                <div style="color: var(--text-muted); font-size: 0.85rem;">Na Františku 847/8, Praha 1</div>
+                            </div>
+                        </div>
+                        <div class="emergency-item">
+                            <div class="emergency-icon">🇷🇴</div>
+                            <div>
+                                <div style="font-weight: 600;">Román Nagykövetség</div>
+                                <div style="font-size: 0.95rem;">+420 224 303 502</div>
+                                <div style="color: var(--text-muted); font-size: 0.85rem;">Nerudova 5, Praha 1</div>
+                            </div>
+                        </div>
+                        <div class="emergency-item">
+                            <div class="emergency-icon">📞</div>
+                            <div>
+                                <div style="font-weight: 600;">Szervező (Szucsu)</div>
+                                <div style="font-size: 0.95rem;">WhatsApp csoportban</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        💡 Tipp: Mentsd el ezeket a számokat a telefonodba utazás előtt!
+                    </p>
+                </div>
+            </div>
+
             <h3 style="margin-top: 40px;">✈️ Utazási Opciók</h3>
             <div class="grid-3" style="margin-top: 30px;">
                 <div class="card">
@@ -649,6 +984,142 @@
                     Pontos útvonalak, időpontok és szállás részletek<br>
                     a WhatsApp csoportban lesznek megosztva
                 </p>
+            </div>
+
+            <!-- Packing Checklist -->
+            <h3 style="margin-top: 60px;">🎒 Csomagolási Lista</h3>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">
+                Ellenőrizd le, hogy mindent bepakoltál!
+            </p>
+            <div class="card" style="padding: 30px; margin-top: 20px;">
+                <div class="packing-progress">
+                    <div class="packing-progress-fill" id="packingProgress" style="width: 0%;"></div>
+                </div>
+                <p id="packingStats" style="text-align: center; margin-top: 10px; color: var(--text-muted);">
+                    0 / 16 kész
+                </p>
+                
+                <div class="grid-2" style="gap: 30px; margin-top: 30px;">
+                    <!-- Documents -->
+                    <div class="packing-category">
+                        <h4 style="color: var(--accent-gold); margin-bottom: 15px;">📄 Dokumentumok</h4>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Személyi igazolvány / Útlevél</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Egészségbiztosítási kártya (EU)</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Bankkártya / Készpénz (EUR/CZK)</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Vonat/Repülő jegy</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Clothing -->
+                    <div class="packing-category">
+                        <h4 style="color: var(--accent-blue); margin-bottom: 15px;">👕 Ruházat</h4>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Kényelmes cipő (séta)</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Bulis ruha (esti program)</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Esőkabát / Dzseki</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Váltás fehérnemű (3 nap)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Toiletries -->
+                    <div class="packing-category">
+                        <h4 style="color: var(--accent-pink); margin-bottom: 15px;">🧴 Tisztálkodás</h4>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Fogkefe & Fogkrém</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Dezodor</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Gyógyszerek (ha kellenek)</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Napszemüveg</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Tech & Party -->
+                    <div class="packing-category">
+                        <h4 style="color: #10b981; margin-bottom: 15px;">🎉 Tech & Party</h4>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Telefon töltő</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Powerbank</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Fényképezőgép (opcionális)</span>
+                        </div>
+                        <div class="packing-item" onclick="togglePackingItem(this)">
+                            <input type="checkbox" class="packing-checkbox" onclick="event.stopPropagation()">
+                            <span>Jó kedv! 🍻</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-secondary" onclick="resetPackingList()">🔄 Lista Visszaállítása</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHOTO GALLERY SECTION -->
+    <section id="gallery" style="padding: 80px 0;">
+        <div class="container">
+            <h2 style="text-align: center;">📸 Fotó Galéria</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">
+                Közös emlékek - tölts fel fotókat az utazás előtt, alatt és után!
+            </p>
+
+            <div class="card" style="padding: 30px;">
+                <div id="gallery-grid" class="gallery-grid">
+                    <!-- Upload Button -->
+                    <div class="gallery-upload" onclick="document.getElementById('gallery-upload-input').click()">
+                        <span style="font-size: 3rem; margin-bottom: 10px;">📤</span>
+                        <span style="color: var(--text-muted);">Fotó Feltöltése</span>
+                    </div>
+                </div>
+                <input type="file" id="gallery-upload-input" accept="image/*" multiple style="display: none;" onchange="handleGalleryUpload(event)">
+                
+                <div id="gallery-empty" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                    <p style="font-size: 1.1rem;">Még nincsenek fotók feltöltve</p>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">Legyél te az első aki megörökíti az előkészületeket! 📷</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">
+                        💡 A feltöltött fotók a csapat minden tagja számára láthatóak lesznek
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -1027,6 +1498,318 @@
     <script src="js/countdown.js"></script>
     <script src="js/interactive.js"></script>
     <script src="js/firebase-stats.js"></script>
+    
+    <!-- Leaflet.js for Maps -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    
+    <!-- New Features: Map, Calendar, Packing, Gallery -->
+    <script>
+        // ==================== PRAGUE MAP ====================
+        function initPragueMap() {
+            const mapContainer = document.getElementById('prague-map');
+            if (!mapContainer) return;
+            
+            // Prague center coordinates
+            const pragueCenter = [50.0755, 14.4378];
+            
+            // Initialize map
+            const map = L.map('prague-map').setView(pragueCenter, 14);
+            
+            // Add tile layer (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+            
+            // Custom icon function
+            const createIcon = (color, emoji) => {
+                return L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="background: ${color}; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 3px 10px rgba(0,0,0,0.3); border: 3px solid white;">${emoji}</div>`,
+                    iconSize: [36, 36],
+                    iconAnchor: [18, 18]
+                });
+            };
+            
+            // Accommodation marker (Old Town area - placeholder)
+            const accommodation = L.marker([50.0875, 14.4213], { icon: createIcon('#ff6b6b', '🏠') })
+                .addTo(map)
+                .bindPopup('<strong>🏠 Szállás</strong><br>Óváros környéke<br><em>Pontos cím később</em>');
+            
+            // Attractions
+            const attractions = [
+                { pos: [50.0865, 14.4200], name: 'Óvárosi tér', desc: 'Prága szíve' },
+                { pos: [50.0911, 14.4002], name: 'Károly híd', desc: 'Ikonikus látvány' },
+                { pos: [50.0909, 14.3985], name: 'Prágai Vár', desc: 'Panoráma' },
+                { pos: [50.0833, 14.4166], name: 'Orloj (Csillagászati óra)', desc: 'Óvárosi tér' }
+            ];
+            
+            attractions.forEach(attr => {
+                L.marker(attr.pos, { icon: createIcon('#4ecdc4', '📍') })
+                    .addTo(map)
+                    .bindPopup(`<strong>📍 ${attr.name}</strong><br>${attr.desc}`);
+            });
+            
+            // Nightlife area
+            const nightlife = [
+                { pos: [50.0820, 14.4280], name: 'Dlouhá utca', desc: 'Bulinegyed' },
+                { pos: [50.0790, 14.4320], name: 'Karlovo náměstí', desc: 'Klubok' }
+            ];
+            
+            nightlife.forEach(nl => {
+                L.marker(nl.pos, { icon: createIcon('#ffe66d', '🎉') })
+                    .addTo(map)
+                    .bindPopup(`<strong>🎉 ${nl.name}</strong><br>${nl.desc}`);
+            });
+            
+            // Recommended bars/restaurants
+            const bars = [
+                { pos: [50.0847, 14.4177], name: 'U Fleků', desc: 'Történelmi sörfőzde (1499 óta!)' },
+                { pos: [50.0880, 14.4197], name: 'Lokál', desc: 'Cseh konyha & tank sör' },
+                { pos: [50.0812, 14.4295], name: 'Beer Museum', desc: '30+ csapolt sör' }
+            ];
+            
+            bars.forEach(bar => {
+                L.marker(bar.pos, { icon: createIcon('#a855f7', '🍺') })
+                    .addTo(map)
+                    .bindPopup(`<strong>🍺 ${bar.name}</strong><br>${bar.desc}`);
+            });
+            
+            // Fit bounds to show all markers
+            const group = L.featureGroup([accommodation, ...attractions.map(a => L.marker(a.pos))]);
+            map.fitBounds(group.getBounds().pad(0.1));
+        }
+        
+        // ==================== CALENDAR DOWNLOAD ====================
+        function downloadCalendarEvent() {
+            const event = {
+                title: "Ottó Legénybúcsúja - Prague",
+                description: "Last Ride in Prague! 🍻\\n\\nTalálkozunk Prágában!\\n\\nRészletek: https://otto-bachelor-party.up.railway.app",
+                location: "Prague, Czech Republic",
+                startDate: new Date('2026-05-06T12:00:00'),
+                endDate: new Date('2026-05-09T18:00:00')
+            };
+            
+            const formatDate = (date) => {
+                return date.toISOString().replace(/-|:|\.\d{3}/g, '').slice(0, -1);
+            };
+            
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Otto Bachelor Party//EN',
+                'BEGIN:VEVENT',
+                `DTSTART:${formatDate(event.startDate)}`,
+                `DTEND:${formatDate(event.endDate)}`,
+                `SUMMARY:${event.title}`,
+                `DESCRIPTION:${event.description}`,
+                `LOCATION:${event.location}`,
+                'STATUS:CONFIRMED',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+            
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'otto-legenybucsuja-prague-2026.ics';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            if (window.toast) {
+                window.toast.success('Naptár esemény letöltve!', { icon: '📅' });
+            }
+        }
+        
+        // ==================== PACKING LIST ====================
+        const PACKING_STORAGE_KEY = 'otto-packing-list';
+        
+        function loadPackingState() {
+            const saved = localStorage.getItem(PACKING_STORAGE_KEY);
+            if (saved) {
+                const checkedItems = JSON.parse(saved);
+                document.querySelectorAll('.packing-item').forEach((item, index) => {
+                    const checkbox = item.querySelector('.packing-checkbox');
+                    if (checkedItems.includes(index)) {
+                        checkbox.checked = true;
+                        item.classList.add('checked');
+                    }
+                });
+            }
+            updatePackingProgress();
+        }
+        
+        function savePackingState() {
+            const checkedItems = [];
+            document.querySelectorAll('.packing-item').forEach((item, index) => {
+                if (item.querySelector('.packing-checkbox').checked) {
+                    checkedItems.push(index);
+                }
+            });
+            localStorage.setItem(PACKING_STORAGE_KEY, JSON.stringify(checkedItems));
+        }
+        
+        function togglePackingItem(element) {
+            const checkbox = element.querySelector('.packing-checkbox');
+            checkbox.checked = !checkbox.checked;
+            element.classList.toggle('checked', checkbox.checked);
+            savePackingState();
+            updatePackingProgress();
+        }
+        
+        function updatePackingProgress() {
+            const total = document.querySelectorAll('.packing-item').length;
+            const checked = document.querySelectorAll('.packing-item.checked').length;
+            const percentage = (checked / total) * 100;
+            
+            const progressBar = document.getElementById('packingProgress');
+            const stats = document.getElementById('packingStats');
+            
+            if (progressBar) progressBar.style.width = percentage + '%';
+            if (stats) stats.textContent = `${checked} / ${total} kész`;
+            
+            // Celebrate when complete
+            if (checked === total && checked > 0 && window.triggerConfetti) {
+                window.triggerConfetti();
+                if (window.toast) {
+                    window.toast.success('Minden bepakolva! Készen állsz! 🎉', { icon: '🎒' });
+                }
+            }
+        }
+        
+        function resetPackingList() {
+            document.querySelectorAll('.packing-item').forEach(item => {
+                item.classList.remove('checked');
+                item.querySelector('.packing-checkbox').checked = false;
+            });
+            localStorage.removeItem(PACKING_STORAGE_KEY);
+            updatePackingProgress();
+            if (window.toast) {
+                window.toast.info('Lista visszaállítva', { icon: '🔄' });
+            }
+        }
+        
+        // ==================== PHOTO GALLERY ====================
+        let galleryPhotos = [];
+        const GALLERY_STORAGE_KEY = 'otto-gallery-photos';
+        
+        function loadGalleryPhotos() {
+            const saved = localStorage.getItem(GALLERY_STORAGE_KEY);
+            if (saved) {
+                galleryPhotos = JSON.parse(saved);
+                renderGallery();
+            }
+        }
+        
+        function saveGalleryPhotos() {
+            // Only save thumbnails to localStorage (limited space)
+            localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(galleryPhotos.slice(0, 20)));
+        }
+        
+        function handleGalleryUpload(event) {
+            const files = event.target.files;
+            if (!files.length) return;
+            
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith('image/')) return;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    galleryPhotos.unshift({
+                        id: Date.now() + Math.random(),
+                        src: e.target.result,
+                        name: file.name,
+                        uploadedAt: new Date().toISOString()
+                    });
+                    saveGalleryPhotos();
+                    renderGallery();
+                    
+                    if (window.toast) {
+                        window.toast.success('Fotó feltöltve!', { icon: '📸' });
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            event.target.value = '';
+        }
+        
+        function renderGallery() {
+            const grid = document.getElementById('gallery-grid');
+            const emptyState = document.getElementById('gallery-empty');
+            
+            if (!grid) return;
+            
+            // Keep the upload button
+            const uploadBtn = grid.querySelector('.gallery-upload');
+            grid.innerHTML = '';
+            if (uploadBtn) grid.appendChild(uploadBtn);
+            
+            // Add photos
+            galleryPhotos.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `<img src="${photo.src}" alt="${photo.name}" loading="lazy">`;
+                item.onclick = () => openGalleryModal(index);
+                grid.appendChild(item);
+            });
+            
+            // Show/hide empty state
+            if (emptyState) {
+                emptyState.style.display = galleryPhotos.length > 0 ? 'none' : 'block';
+            }
+        }
+        
+        function openGalleryModal(index) {
+            const photo = galleryPhotos[index];
+            if (!photo) return;
+            
+            // Create modal
+            const modal = document.createElement('div');
+            modal.id = 'gallery-modal';
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+            modal.innerHTML = `
+                <div style="position:relative;max-width:90vw;max-height:90vh;">
+                    <img src="${photo.src}" style="max-width:100%;max-height:90vh;border-radius:12px;">
+                    <button onclick="this.parentElement.parentElement.remove()" style="position:absolute;top:-15px;right:-15px;width:40px;height:40px;border-radius:50%;background:#ef4444;border:none;color:white;font-size:1.5rem;cursor:pointer;">×</button>
+                    <button onclick="deleteGalleryPhoto(${index})" style="position:absolute;bottom:10px;right:10px;padding:10px 20px;background:#ef4444;border:none;color:white;border-radius:8px;cursor:pointer;">🗑️ Törlés</button>
+                </div>
+            `;
+            modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+            document.body.appendChild(modal);
+        }
+        
+        function deleteGalleryPhoto(index) {
+            galleryPhotos.splice(index, 1);
+            saveGalleryPhotos();
+            renderGallery();
+            document.getElementById('gallery-modal')?.remove();
+            if (window.toast) {
+                window.toast.info('Fotó törölve', { icon: '🗑️' });
+            }
+        }
+        
+        // ==================== INITIALIZE ALL NEW FEATURES ====================
+        window.addEventListener('load', function() {
+            // Initialize map
+            setTimeout(initPragueMap, 500);
+            
+            // Load packing list state
+            loadPackingState();
+            
+            // Add checkbox listeners
+            document.querySelectorAll('.packing-checkbox').forEach(cb => {
+                cb.addEventListener('change', function() {
+                    this.closest('.packing-item').classList.toggle('checked', this.checked);
+                    savePackingState();
+                    updatePackingProgress();
+                });
+            });
+            
+            // Load gallery photos
+            loadGalleryPhotos();
+        });
+    </script>
 
     <!-- Force Travel Section Toggle -->
     <script>
