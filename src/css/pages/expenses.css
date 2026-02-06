@@ -419,10 +419,17 @@
     .filter-select,
     .filter-input {
         width: 100%;
+        min-width: 0;
+        font-size: 16px; /* prevents iOS zoom on focus */
     }
     
     .charts-section {
         grid-template-columns: 1fr;
+    }
+    
+    .chart-container,
+    #chart-container {
+        height: 250px !important;
     }
     
     .summary-stats {
@@ -442,5 +449,78 @@
     
     .split-checkbox-list {
         grid-template-columns: 1fr;
+    }
+    
+    .expense-card {
+        padding: var(--space-md);
+    }
+    
+    .expense-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+    
+    .expense-amount {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .expense-footer {
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+    
+    .balance-card {
+        padding: var(--space-md);
+    }
+    
+    .balance-amount {
+        font-size: var(--font-size-xl);
+    }
+    
+    .participant-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+    
+    .settlement-card {
+        padding: var(--space-md);
+    }
+}
+
+/* Expense modals & toasts: safe area and touch targets */
+@media (max-width: 768px) {
+    #expense-modal,
+    #detail-modal,
+    #qr-modal {
+        padding: 12px;
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+        align-items: flex-end;
+    }
+    
+    #expense-modal > div,
+    #detail-modal > div,
+    #qr-modal > div {
+        max-height: 90vh;
+        max-height: calc(90vh - env(safe-area-inset-bottom));
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .toast-container {
+        top: max(12px, env(safe-area-inset-top));
+        right: max(12px, env(safe-area-inset-right));
+    }
+    
+    /* Touch-friendly buttons in forms */
+    #expense-form button[type="submit"],
+    #expense-form button[type="button"],
+    #qr-modal button,
+    #detail-modal button {
+        min-height: 44px;
+        padding: 12px 16px;
     }
 }

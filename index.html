@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Otto Legénybúcsúja 🍻 | Last Ride in Prague</title>
     <meta name="description" content="Otto búcsúztatása - Prága, 2026 május">
 
@@ -3045,7 +3045,8 @@
                 '🚆 Közlekedés': transportLayer
             };
             
-            L.control.layers(null, overlays, { collapsed: false, position: 'topright' }).addTo(map);
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            L.control.layers(null, overlays, { collapsed: isMobile, position: 'topright' }).addTo(map);
             
             // Fit bounds to show main areas
             const allMarkers = [

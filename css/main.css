@@ -74,6 +74,9 @@ section {
     text-align: center;
     position: relative;
     padding: 40px 20px;
+    /* Prevent overlap with fixed navbar */
+    padding-top: 90px;
+    box-sizing: border-box;
 }
 
 .hero-content {
