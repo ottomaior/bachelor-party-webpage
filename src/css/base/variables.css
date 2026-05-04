@@ -1,59 +1,75 @@
-/* ===== DESIGN TOKENS & CSS CUSTOM PROPERTIES ===== */
+/* ===== DESIGN TOKENS — PUB-WARM PALETTE ===== */
 
 :root {
     /* ===== COLOR PALETTE ===== */
-    /* Primary Colors */
-    --color-bg-dark: #0a0a0f;
-    --color-bg-card: rgba(20, 20, 35, 0.8);
-    --color-bg-card-solid: #141423;
-    --color-bg-elevated: rgba(30, 30, 50, 0.9);
-    
-    /* Accent Colors */
-    --color-accent-blue: #00d4ff;
-    --color-accent-pink: #ff006e;
-    --color-accent-gold: #ffd60a;
-    --color-accent-purple: #667eea;
-    --color-accent-green: #10b981;
-    --color-accent-cyan: #06b6d4;
-    
-    /* Semantic Colors */
-    --color-success: #10b981;
-    --color-success-light: rgba(16, 185, 129, 0.2);
-    --color-warning: #f59e0b;
-    --color-warning-light: rgba(245, 158, 11, 0.2);
-    --color-error: #ef4444;
-    --color-error-light: rgba(239, 68, 68, 0.2);
-    --color-info: #3b82f6;
-    --color-info-light: rgba(59, 130, 246, 0.2);
-    
+    /* Warm pub backgrounds */
+    --color-bg-dark: #1a1410;            /* warm coffee-charcoal */
+    --color-bg-darker: #120d0a;          /* deeper for navbar/footer */
+    --color-bg-paper: #f4ecd8;           /* cream paper */
+    --color-bg-paper-soft: #ebe1c8;      /* slightly darker paper */
+    --color-bg-paper-warm: #f9f1de;      /* lightest paper */
+    --color-bg-card: rgba(244, 236, 216, 0.04);   /* on dark */
+    --color-bg-card-solid: #221a14;
+    --color-bg-elevated: #2a1f17;
+
+    /* Pub accent colors */
+    --color-amber: #d4a35a;              /* pilsner gold */
+    --color-amber-deep: #b8852f;
+    --color-amber-light: #e8c084;
+    --color-forest: #2c4a30;             /* Czech beer green */
+    --color-forest-deep: #1f3522;
+    --color-forest-light: #4a6f4f;
+    --color-brick: #a8483a;              /* Prague tile red */
+    --color-brick-deep: #84362b;
+    --color-brick-light: #c46a5d;
+    --color-cream: #f4ecd8;
+    --color-ink: #1a1410;                /* text on cream */
+
+    /* Semantic Colors (toned to palette) */
+    --color-success: #4a6f4f;
+    --color-success-light: rgba(74, 111, 79, 0.15);
+    --color-warning: #d4a35a;
+    --color-warning-light: rgba(212, 163, 90, 0.15);
+    --color-error: #a8483a;
+    --color-error-light: rgba(168, 72, 58, 0.15);
+    --color-info: #6b8e8e;
+    --color-info-light: rgba(107, 142, 142, 0.15);
+
     /* Text Colors */
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #e0e0e8;
-    --color-text-muted: #a0a0b0;
-    --color-text-disabled: #606070;
-    
+    --color-text-primary: #f4ecd8;       /* cream on dark */
+    --color-text-secondary: #d8cdb4;
+    --color-text-muted: #a89a82;
+    --color-text-disabled: #6b5e4a;
+    --color-text-on-paper: #1a1410;
+    --color-text-on-paper-muted: #5a4a38;
+
     /* Border Colors */
-    --color-border-subtle: rgba(255, 255, 255, 0.1);
-    --color-border-default: rgba(255, 255, 255, 0.15);
-    --color-border-strong: rgba(255, 255, 255, 0.25);
-    
+    --color-border-subtle: rgba(244, 236, 216, 0.08);
+    --color-border-default: rgba(244, 236, 216, 0.15);
+    --color-border-strong: rgba(244, 236, 216, 0.28);
+    --color-border-amber: rgba(212, 163, 90, 0.45);
+    --color-border-paper: rgba(26, 20, 16, 0.12);
+
     /* ===== GRADIENTS ===== */
-    --gradient-primary: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-pink));
-    --gradient-secondary: linear-gradient(135deg, var(--color-accent-purple), var(--color-accent-pink));
-    --gradient-gold: linear-gradient(135deg, var(--color-accent-gold), #ff8c00);
-    --gradient-success: linear-gradient(135deg, var(--color-success), #059669);
-    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    
-    /* ===== SHADOWS ===== */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
-    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.3);
-    --shadow-glow-blue: 0 0 20px rgba(0, 212, 255, 0.5);
-    --shadow-glow-pink: 0 0 20px rgba(255, 0, 110, 0.5);
-    --shadow-glow-gold: 0 0 20px rgba(255, 214, 10, 0.5);
-    --shadow-glow-success: 0 0 20px rgba(16, 185, 129, 0.5);
-    
+    --gradient-primary: linear-gradient(135deg, var(--color-amber), var(--color-amber-deep));
+    --gradient-secondary: linear-gradient(135deg, var(--color-brick), var(--color-brick-deep));
+    --gradient-gold: linear-gradient(135deg, var(--color-amber-light), var(--color-amber-deep));
+    --gradient-success: linear-gradient(135deg, var(--color-forest-light), var(--color-forest-deep));
+    --gradient-warm-bg: linear-gradient(180deg, #1a1410 0%, #221610 60%, #1a1410 100%);
+    --gradient-paper: linear-gradient(180deg, #f9f1de 0%, #f4ecd8 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(244, 236, 216, 0.06), rgba(244, 236, 216, 0.02));
+
+    /* ===== SHADOWS (warm-tinted) ===== */
+    --shadow-sm: 0 1px 2px rgba(18, 13, 10, 0.25);
+    --shadow-md: 0 4px 12px rgba(18, 13, 10, 0.30);
+    --shadow-lg: 0 10px 28px rgba(18, 13, 10, 0.35);
+    --shadow-xl: 0 24px 48px rgba(18, 13, 10, 0.40);
+    --shadow-paper: 0 2px 4px rgba(18, 13, 10, 0.18), 0 12px 28px rgba(18, 13, 10, 0.28);
+    --shadow-coaster: 0 4px 0 rgba(18, 13, 10, 0.25), 0 12px 24px rgba(18, 13, 10, 0.30);
+    --shadow-stamp: 0 1px 0 rgba(168, 72, 58, 0.3);
+    --shadow-glow-amber: 0 0 24px rgba(212, 163, 90, 0.35);
+    --shadow-inset-paper: inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+
     /* ===== SPACING SCALE ===== */
     --space-xs: 4px;
     --space-sm: 8px;
@@ -63,7 +79,7 @@
     --space-2xl: 48px;
     --space-3xl: 64px;
     --space-4xl: 96px;
-    
+
     /* ===== BORDER RADIUS ===== */
     --radius-sm: 4px;
     --radius-md: 8px;
@@ -72,11 +88,13 @@
     --radius-2xl: 20px;
     --radius-3xl: 24px;
     --radius-full: 9999px;
-    
+
     /* ===== TYPOGRAPHY ===== */
+    --font-family-display: 'Fraunces', 'Georgia', 'Times New Roman', serif;
     --font-family-base: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-family-stamp: 'Bricolage Grotesque', 'Inter', sans-serif;
     --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
-    
+
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
@@ -86,32 +104,33 @@
     --font-size-3xl: 2rem;
     --font-size-4xl: 2.5rem;
     --font-size-5xl: 3rem;
-    --font-size-hero: clamp(2.5rem, 8vw, 5rem);
-    
+    --font-size-hero: clamp(2.75rem, 8vw, 5.5rem);
+
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
-    
-    --line-height-tight: 1.2;
+    --font-weight-black: 900;
+
+    --line-height-tight: 1.15;
     --line-height-normal: 1.5;
-    --line-height-relaxed: 1.6;
-    --line-height-loose: 1.8;
-    
+    --line-height-relaxed: 1.65;
+    --line-height-loose: 1.85;
+
     /* ===== ANIMATION TIMING ===== */
     --duration-instant: 50ms;
     --duration-fast: 150ms;
     --duration-normal: 300ms;
     --duration-slow: 500ms;
     --duration-slower: 700ms;
-    
+
     --ease-linear: linear;
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
+
     /* ===== Z-INDEX SCALE ===== */
     --z-base: 0;
     --z-elevated: 10;
@@ -123,36 +142,43 @@
     --z-toast: 1200;
     --z-tooltip: 1300;
     --z-max: 9999;
-    
+
     /* ===== LAYOUT ===== */
     --container-max-width: 1200px;
-    --navbar-height: 70px;
+    --container-narrow: 880px;
+    --navbar-height: 72px;
     --sidebar-width: 280px;
-    
-    /* ===== GLASSMORPHISM ===== */
-    --glass-blur: 20px;
-    --glass-bg: rgba(20, 20, 35, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    
-    /* Legacy variable aliases for backward compatibility */
+
+    /* ===== Legacy aliases (kept so unmigrated styles still work) ===== */
     --bg-dark: var(--color-bg-dark);
     --bg-card: var(--color-bg-card);
-    --accent-blue: var(--color-accent-blue);
-    --accent-pink: var(--color-accent-pink);
-    --accent-gold: var(--color-accent-gold);
-    --accent-purple: var(--color-accent-purple);
+    --bg-primary: var(--color-bg-dark);
+    --accent-blue: var(--color-amber);          /* remapped */
+    --accent-pink: var(--color-brick);          /* remapped */
+    --accent-gold: var(--color-amber);
+    --accent-purple: var(--color-forest);       /* remapped */
+    --color-accent-blue: var(--color-amber);
+    --color-accent-pink: var(--color-brick);
+    --color-accent-gold: var(--color-amber);
+    --color-accent-purple: var(--color-forest);
+    --color-accent-green: var(--color-forest);
+    --color-accent-cyan: var(--color-amber);
     --text-light: var(--color-text-primary);
     --text-muted: var(--color-text-muted);
     --text-primary: var(--color-text-primary);
-    --gradient-1: var(--gradient-secondary);
-    --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --glow-blue: var(--shadow-glow-blue);
-    --glow-pink: var(--shadow-glow-pink);
-}
+    --gradient-1: var(--gradient-primary);
+    --gradient-2: var(--gradient-secondary);
+    --glow-blue: var(--shadow-glow-amber);
+    --glow-pink: var(--shadow-glow-amber);
+    --shadow-glow-blue: var(--shadow-glow-amber);
+    --shadow-glow-pink: var(--shadow-glow-amber);
+    --shadow-glow-gold: var(--shadow-glow-amber);
+    --shadow-glow-success: 0 0 24px rgba(74, 111, 79, 0.35);
 
-/* ===== DARK MODE (default) ===== */
-[data-theme="dark"] {
-    /* Already using dark theme by default */
+    /* Glassmorphism — kept but neutralised */
+    --glass-blur: 0px;
+    --glass-bg: var(--color-bg-card-solid);
+    --glass-border: var(--color-border-default);
 }
 
 /* ===== REDUCED MOTION ===== */

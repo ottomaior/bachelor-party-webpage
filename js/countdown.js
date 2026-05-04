@@ -1,7 +1,7 @@
 // Countdown timer functionality
 
-// Prága trip - Május 6, 2026, 12:00
-const partyDate = new Date(2026, 4, 6, 12, 0, 0).getTime(); // Month is 0-indexed (4 = May)
+// Prága trip - Május 7, 2026, 12:00
+const partyDate = new Date(2026, 4, 7, 12, 0, 0).getTime(); // Month is 0-indexed (4 = May)
 
 // Store interval reference for cleanup
 let countdownInterval = null;

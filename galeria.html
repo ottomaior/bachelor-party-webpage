@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Galéria · Otto Legénybúcsúja</title>
+    <meta name="description" content="Közös fotógaléria, fotó-kihívások pontokkal és emlékek idővonala a prágai trip-ről.">
+    <meta name="theme-color" content="#1a1410">
+
+    <link rel="stylesheet" href="src/css/main.css?v=20260504c">
+</head>
+
+<body data-page="galeria">
+    <header data-shell="header"></header>
+
+    <main id="main-content">
+        <section class="section" style="padding-top: clamp(48px, 6vw, 80px); padding-bottom: clamp(24px, 4vw, 40px);">
+            <div class="shell-container shell-container--narrow">
+                <div class="section-head">
+                    <span class="eyebrow">04 · Galéria</span>
+                    <h2>Fotók &amp; kihívások</h2>
+                    <p>Közös galéria, fotó-kihívások pontokkal és egy idővonal az emlékekhez.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="section" style="padding-top: 0;">
+            <div class="shell-container">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">📷 Fotó galéria</span>
+                </div>
+                <div class="paper">
+                    <div id="gallery-grid" class="gallery-grid">
+                        <div class="gallery-upload" onclick="document.getElementById('gallery-upload-input').click()">
+                            <span class="icon">📤</span>
+                            <span>Fotó feltöltése</span>
+                        </div>
+                    </div>
+                    <input type="file" id="gallery-upload-input" accept="image/*" multiple style="display: none;" onchange="handleGalleryUpload(event)">
+
+                    <div id="gallery-empty" class="gallery-empty">
+                        <p style="font-size: 1.05rem; color: var(--color-text-on-paper);">Még nincsenek fotók feltöltve.</p>
+                        <p style="font-size: 0.9rem; margin-top: 8px;">Legyél te az első, aki megörökíti az előkészületeket! 📸</p>
+                    </div>
+
+                    <p style="text-align: center; color: var(--color-text-on-paper-muted); font-size: 0.85rem; margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px dashed rgba(184, 133, 47, 0.3);">
+                        💡 A feltöltött fotók a böngésződben tárolódnak (max. ~20 db). A trip után közös felhőbe kerülnek.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEADERBOARD -->
+        <section class="section" style="padding-top: 0;">
+            <div class="shell-container shell-container--narrow">
+                <div class="leaderboard">
+                    <h3>🏆 Ranglista</h3>
+                    <div id="challengeLeaderboard">
+                        <div class="leaderboard-item">
+                            <div class="leaderboard-rank">1</div>
+                            <div class="leaderboard-name">
+                                <div class="title">Még nincs győztes</div>
+                                <div class="meta">Legyél te az első!</div>
+                            </div>
+                            <div class="leaderboard-points">0 pont</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHALLENGES -->
+        <section class="section section--dark">
+            <div class="shell-container">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">🎯 Fotó kihívások</span>
+                </div>
+                <p style="text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-xl);">
+                    Teljesítsd a kihívásokat és gyűjts pontokat! A győztes kap egy körítést. 🍺
+                </p>
+
+                <div class="challenge-grid">
+                    <div class="challenge-card" data-challenge="charles-bridge">
+                        <span class="challenge-points">+10 pont</span>
+                        <h4>🌉 Károly híd</h4>
+                        <p>Csoportkép a Károly hídon napkeltekor vagy napnyugtakor.</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="beer-spa">
+                        <span class="challenge-points">+15 pont</span>
+                        <h4>🛁 Sörspa</h4>
+                        <p>Fotó a sörfürdőből (ha elmegyünk).</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="castle">
+                        <span class="challenge-points">+10 pont</span>
+                        <h4>🏰 Prágai Vár</h4>
+                        <p>Panorámakép a várnál.</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="cheers">
+                        <span class="challenge-points">+5 pont</span>
+                        <h4>🍻 Na Zdraví!</h4>
+                        <p>Koccintós fotó a csapattal.</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="landmark">
+                        <span class="challenge-points">+5 pont</span>
+                        <h4>📍 Turistáskodás</h4>
+                        <p>Fotó bármelyik nevezetességnél.</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="local-food">
+                        <span class="challenge-points">+5 pont</span>
+                        <h4>🥖 Trdelník</h4>
+                        <p>Fotó helyi kajával (trdelník, svíčková, stb.).</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="metro">
+                        <span class="challenge-points">+5 pont</span>
+                        <h4>🚇 Metró Turista</h4>
+                        <p>Szelfi a metrón.</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="night-out">
+                        <span class="challenge-points">+10 pont</span>
+                        <h4>🎉 Éjszakai Kaland</h4>
+                        <p>Csoportkép egy klubban.</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="lennon-wall">
+                        <span class="challenge-points">+10 pont</span>
+                        <h4>🎨 Lennon Fal</h4>
+                        <p>Kreatív fotó a Lennon Falnál.</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="sunrise">
+                        <span class="challenge-points">+20 pont</span>
+                        <h4>🌅 Napkelte</h4>
+                        <p>Fotó napkeltekor — ha még fenn vagytok!</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="otto-special">
+                        <span class="challenge-points">+25 pont</span>
+                        <h4>👑 Otto Király</h4>
+                        <p>Ottoval közös kép valami vicces helyzetben.</p>
+                    </div>
+                    <div class="challenge-card" data-challenge="mystery">
+                        <span class="challenge-points">+??? pont</span>
+                        <h4>🎁 Titkos Kihívás</h4>
+                        <p>Ezt csak a helyszínen tudjátok meg…</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEMORIES TIMELINE -->
+        <section class="section">
+            <div class="shell-container shell-container--narrow">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">🗓️ Trip emlékek</span>
+                </div>
+                <p style="text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-xl);">
+                    Az utazás legjobb pillanatai — frissül élőben.
+                </p>
+
+                <div class="timeline-container" id="memoriesTimeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">📅 Utazás előtt</div>
+                        <h4>Készülődés…</h4>
+                        <p>Hamarosan kezdődik a kaland! Töltsétek fel a fotókat az utazás alatt.</p>
+                    </div>
+
+                    <div class="timeline-item" id="timelineEmpty">
+                        <div class="timeline-date">🎉 2026. Május 6–10.</div>
+                        <h4>Itt lesznek a közös emlékek</h4>
+                        <p>A galéria feltöltött fotói automatikusan megjelennek itt időrendi sorrendben.</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: var(--space-xl);">
+                    <button class="btn btn-outline btn-sm" disabled style="opacity: 0.5;">
+                        📥 Összes fotó letöltése
+                    </button>
+                    <p style="color: var(--color-text-muted); font-size: 0.85rem; margin-top: 10px;">
+                        (Elérhető lesz a trip után.)
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer data-shell="footer"></footer>
+
+    <script src="src/js/components/toast.js?v=20260504c"></script>
+    <script src="js/icons.js?v=20260504c"></script>
+    <script src="js/site-shell.js?v=20260504c"></script>
+    <script src="js/main.js?v=20260504c"></script>
+    <script src="js/gallery.js?v=20260504c"></script>
+    <script src="js/challenges.js?v=20260504c"></script>
+</body>
+</html>

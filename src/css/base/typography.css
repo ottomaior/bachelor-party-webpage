@@ -1,22 +1,26 @@
-/* ===== TYPOGRAPHY SYSTEM ===== */
+/* ===== TYPOGRAPHY SYSTEM — pub-warm ===== */
 
-/* Google Fonts import (optional - fallback to system fonts) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Google Fonts: warm serif for display, friendly sans for UI, chunky grotesque for stamps */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap');
 
 /* ===== HEADINGS ===== */
 h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-display);
     font-weight: var(--font-weight-bold);
     color: var(--color-text-primary);
     margin-bottom: var(--space-md);
+    letter-spacing: -0.015em;
 }
 
 h1 {
     font-size: var(--font-size-5xl);
     line-height: var(--line-height-tight);
+    font-weight: var(--font-weight-black);
+    letter-spacing: -0.02em;
 }
 
 h2 {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-4xl);
     line-height: var(--line-height-tight);
 }
 
@@ -42,18 +46,58 @@ h6 {
 
 /* ===== PARAGRAPHS ===== */
 p {
+    font-family: var(--font-family-base);
     margin-bottom: var(--space-md);
     color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
 }
 
 /* ===== LINKS ===== */
 a {
-    color: var(--color-accent-blue);
+    color: var(--color-amber);
+    text-decoration: none;
     transition: color var(--duration-fast) var(--ease-out);
 }
 
 a:hover {
-    color: var(--color-accent-pink);
+    color: var(--color-amber-light);
+}
+
+/* ===== STAMP / LABEL TEXT ===== */
+.stamp {
+    display: inline-block;
+    font-family: var(--font-family-stamp);
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brick);
+    padding: 4px 12px;
+    border: 2px solid currentColor;
+    border-radius: 4px;
+    transform: rotate(-2deg);
+    background: rgba(168, 72, 58, 0.08);
+}
+
+.stamp-amber {
+    color: var(--color-amber);
+    background: rgba(212, 163, 90, 0.08);
+}
+
+.stamp-forest {
+    color: var(--color-forest-light);
+    background: rgba(74, 111, 79, 0.08);
+}
+
+.eyebrow {
+    display: inline-block;
+    font-family: var(--font-family-stamp);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-amber);
+    margin-bottom: var(--space-md);
 }
 
 /* ===== TEXT UTILITIES ===== */
@@ -66,20 +110,32 @@ a:hover {
 .text-3xl { font-size: var(--font-size-3xl); }
 .text-4xl { font-size: var(--font-size-4xl); }
 
+.font-display { font-family: var(--font-family-display); }
+.font-stamp { font-family: var(--font-family-stamp); }
+.font-base { font-family: var(--font-family-base); }
+
 .font-normal { font-weight: var(--font-weight-normal); }
 .font-medium { font-weight: var(--font-weight-medium); }
 .font-semibold { font-weight: var(--font-weight-semibold); }
 .font-bold { font-weight: var(--font-weight-bold); }
+.font-black { font-weight: var(--font-weight-black); }
 
 .text-primary { color: var(--color-text-primary); }
 .text-secondary { color: var(--color-text-secondary); }
 .text-muted { color: var(--color-text-muted); }
-.text-accent-blue { color: var(--color-accent-blue); }
-.text-accent-pink { color: var(--color-accent-pink); }
-.text-accent-gold { color: var(--color-accent-gold); }
-.text-success { color: var(--color-success); }
-.text-warning { color: var(--color-warning); }
-.text-error { color: var(--color-error); }
+.text-amber { color: var(--color-amber); }
+.text-amber-light { color: var(--color-amber-light); }
+.text-forest { color: var(--color-forest-light); }
+.text-brick { color: var(--color-brick); }
+.text-cream { color: var(--color-cream); }
+.text-ink { color: var(--color-ink); }
+/* Legacy aliases */
+.text-accent-blue { color: var(--color-amber); }
+.text-accent-pink { color: var(--color-brick); }
+.text-accent-gold { color: var(--color-amber); }
+.text-success { color: var(--color-forest-light); }
+.text-warning { color: var(--color-amber); }
+.text-error { color: var(--color-brick); }
 
 .text-center { text-align: center; }
 .text-left { text-align: left; }
@@ -95,33 +151,13 @@ a:hover {
 .tracking-wider { letter-spacing: 0.05em; }
 .tracking-widest { letter-spacing: 0.1em; }
 
-/* ===== GRADIENT TEXT ===== */
-.text-gradient {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.text-gradient-gold {
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
+/* ===== ACCENT TEXT (formerly gradient text) ===== */
+.text-gradient,
+.text-gradient-gold,
 .text-gradient-animated {
-    background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-pink), var(--color-accent-gold));
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    color: var(--color-amber);
+    -webkit-text-fill-color: currentColor;
+    background: none;
 }
 
 /* ===== TRUNCATION ===== */
@@ -145,7 +181,7 @@ a:hover {
     overflow: hidden;
 }
 
-/* ===== PROSE (for long-form content) ===== */
+/* ===== PROSE ===== */
 .prose {
     max-width: 65ch;
     color: var(--color-text-secondary);
@@ -175,14 +211,14 @@ a:hover {
 
 .prose code {
     font-family: var(--font-family-mono);
-    background: var(--color-bg-card);
+    background: rgba(244, 236, 216, 0.06);
     padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-sm);
     font-size: 0.9em;
 }
 
 .prose blockquote {
-    border-left: 4px solid var(--color-accent-blue);
+    border-left: 4px solid var(--color-amber);
     padding-left: var(--space-lg);
     margin: var(--space-lg) 0;
     font-style: italic;

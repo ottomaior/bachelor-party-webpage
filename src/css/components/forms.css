@@ -1,14 +1,25 @@
 /* ===== FORM SYSTEM ===== */
 
-/* Form Container */
+/* Form Container — paper feel */
 .form-container,
 .rsvp-form {
-    background: var(--color-bg-card);
-    backdrop-filter: blur(var(--glass-blur));
-    border-radius: var(--radius-2xl);
-    padding: var(--space-2xl);
-    max-width: 600px;
+    background: var(--color-bg-paper);
+    color: var(--color-text-on-paper);
+    border-radius: var(--radius-xl);
+    padding: clamp(20px, 4vw, 40px);
+    max-width: 640px;
     margin: 0 auto;
+    box-shadow: var(--shadow-paper);
+}
+
+.form-container h1, .form-container h2, .form-container h3,
+.rsvp-form h1, .rsvp-form h2, .rsvp-form h3 {
+    color: var(--color-text-on-paper);
+}
+
+.form-container p,
+.rsvp-form p {
+    color: var(--color-text-on-paper-muted);
 }
 
 /* Form Group */
@@ -19,12 +30,13 @@
 .form-group label {
     display: block;
     margin-bottom: var(--space-sm);
-    color: var(--color-text-primary);
+    color: var(--color-text-on-paper);
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-sm);
+    font-family: var(--font-family-base);
 }
 
-/* Base Input Styles */
+/* Base Input Styles — bright fields on paper */
 .form-group input,
 .form-group select,
 .form-group textarea,
@@ -32,23 +44,26 @@
 .form-select,
 .form-textarea {
     width: 100%;
-    padding: var(--space-md);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-lg);
-    color: var(--color-text-primary);
-    font-size: var(--font-size-base);
-    transition: all var(--duration-normal) var(--ease-out);
+    padding: 12px 14px;
+    background: #fff8e8;
+    border: 1.5px solid rgba(26, 20, 16, 0.18);
+    border-radius: var(--radius-md);
+    color: var(--color-text-on-paper);
+    font-size: 1rem;
+    font-family: var(--font-family-base);
+    transition: border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out),
+                background var(--duration-fast) var(--ease-out);
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder,
 .form-input::placeholder,
 .form-textarea::placeholder {
-    color: var(--color-text-disabled);
+    color: rgba(26, 20, 16, 0.35);
 }
 
-/* Focus States */
+/* Focus */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus,
@@ -56,19 +71,16 @@
 .form-select:focus,
 .form-textarea:focus {
     outline: none;
-    border-color: var(--color-accent-blue);
-    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
-    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-amber-deep);
+    box-shadow: 0 0 0 3px rgba(212, 163, 90, 0.25);
+    background: #fffbed;
 }
 
-/* Glow Focus Effect */
 .form-input-glow:focus,
 .form-select-glow:focus,
 .form-textarea-glow:focus {
-    border-color: var(--color-accent-blue);
-    box-shadow: 
-        0 0 0 3px rgba(0, 212, 255, 0.1),
-        0 0 20px rgba(0, 212, 255, 0.2);
+    border-color: var(--color-amber-deep);
+    box-shadow: 0 0 0 3px rgba(212, 163, 90, 0.25);
 }
 
 /* Select Dropdown */
@@ -76,7 +88,8 @@ select,
 .form-select {
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a0a0b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-color: #fff8e8;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231a1410' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right var(--space-md) center;
     background-size: 16px;
@@ -85,16 +98,16 @@ select,
 
 select option,
 .form-select option {
-    background: var(--color-bg-card-solid);
-    color: var(--color-text-primary);
+    background: var(--color-bg-paper);
+    color: var(--color-text-on-paper);
     padding: var(--space-sm);
 }
 
 select option:hover,
 select option:focus,
 select option:checked {
-    background: var(--color-accent-blue);
-    color: white;
+    background: var(--color-amber);
+    color: var(--color-ink);
 }
 
 /* Textarea */
@@ -118,7 +131,7 @@ textarea,
 
 .form-checkbox:hover,
 .form-radio:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(26, 20, 16, 0.05);
 }
 
 .form-checkbox input,
@@ -126,7 +139,7 @@ textarea,
     width: 18px;
     height: 18px;
     cursor: pointer;
-    accent-color: var(--color-accent-blue);
+    accent-color: var(--color-amber-deep);
 }
 
 /* Input with Icon */
@@ -167,9 +180,9 @@ textarea,
     display: flex;
     align-items: center;
     padding: 0 var(--space-md);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid var(--color-border-subtle);
-    color: var(--color-text-muted);
+    background: rgba(26, 20, 16, 0.06);
+    border: 1.5px solid rgba(26, 20, 16, 0.18);
+    color: var(--color-text-on-paper-muted);
 }
 
 /* Floating Label */
@@ -199,7 +212,7 @@ textarea,
 .form-floating textarea:not(:placeholder-shown) ~ label {
     top: var(--space-sm);
     font-size: var(--font-size-xs);
-    color: var(--color-accent-blue);
+    color: var(--color-amber-deep);
 }
 
 /* Validation States */
@@ -260,18 +273,18 @@ textarea,
     justify-content: center;
     gap: var(--space-sm);
     padding: var(--space-lg);
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px dashed var(--color-border-default);
+    background: rgba(26, 20, 16, 0.04);
+    border: 2px dashed rgba(184, 133, 47, 0.5);
     border-radius: var(--radius-lg);
-    color: var(--color-text-muted);
+    color: var(--color-text-on-paper-muted);
     cursor: pointer;
     transition: all var(--duration-normal) var(--ease-out);
 }
 
 .file-input-label:hover {
-    border-color: var(--color-accent-blue);
-    background: rgba(0, 212, 255, 0.05);
-    color: var(--color-accent-blue);
+    border-color: var(--color-amber-deep);
+    background: rgba(212, 163, 90, 0.1);
+    color: var(--color-amber-deep);
 }
 
 /* Search Input */
@@ -315,7 +328,7 @@ input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(26, 20, 16, 0.1);
     border-radius: var(--radius-full);
     outline: none;
 }
@@ -324,7 +337,7 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 20px;
     height: 20px;
-    background: var(--color-accent-blue);
+    background: var(--color-amber);
     border-radius: var(--radius-full);
     cursor: pointer;
     transition: transform var(--duration-fast);
@@ -352,7 +365,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(26, 20, 16, 0.15);
     border-radius: var(--radius-full);
     transition: var(--duration-normal);
 }
@@ -370,23 +383,23 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .toggle-switch input:checked + .toggle-slider {
-    background: var(--color-accent-blue);
+    background: var(--color-amber-deep);
 }
 
 .toggle-switch input:checked + .toggle-slider::before {
     transform: translateX(24px);
 }
 
-/* Dark mode select fix */
+/* Firefox select fix */
 @-moz-document url-prefix() {
     select option {
-        background-color: var(--color-bg-card-solid);
-        color: var(--color-text-primary);
+        background-color: var(--color-bg-paper);
+        color: var(--color-text-on-paper);
     }
     
     select option:hover,
     select option:checked {
-        background-color: var(--color-accent-blue);
-        color: white;
+        background-color: var(--color-amber);
+        color: var(--color-ink);
     }
 }

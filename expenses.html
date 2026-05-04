@@ -6,31 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Költség Kezelő - Ottó Legénybúcsúja</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/main.css?v=20260504c">
     <!-- Chart.js for visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- QR Code library -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
         /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(-20px) translateX(10px); }
-        }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.8); }
+            from { opacity: 0; transform: scale(0.94); }
             to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
-            50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
         }
 
         @keyframes confetti-fall {
@@ -40,8 +30,7 @@
 
         .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
         .animate-scale-in { animation: scaleIn 0.4s ease-out; }
-        .floating-particle { animation: float 6s ease-in-out infinite; }
-        .btn-pulse:hover { animation: pulse-glow 1.5s infinite; }
+        .btn-pulse:hover { box-shadow: 0 4px 0 var(--color-brick-deep), 0 12px 28px rgba(168, 72, 58, 0.4); }
 
         .confetti {
             position: fixed;
@@ -52,70 +41,136 @@
             animation: confetti-fall 3s linear forwards;
         }
 
-        /* Glass morphism */
+        /* Pub-warm body */
+        body.expenses-body {
+            background:
+                radial-gradient(1200px 600px at 80% -10%, rgba(212, 163, 90, 0.10), transparent 60%),
+                radial-gradient(900px 600px at 0% 100%, rgba(168, 72, 58, 0.08), transparent 60%),
+                #1a1410 !important;
+            color: #f4ecd8 !important;
+        }
+
+        /* Override glass-card → paper card */
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            background: var(--color-bg-paper) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border: none !important;
+            box-shadow: var(--shadow-paper) !important;
+            color: var(--color-text-on-paper);
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(168, 85, 247, 0.3);
+            background: var(--color-bg-paper) !important;
+            border: none !important;
             transform: translateY(-2px);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg) !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Progress bar */
-        .progress-fill { transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
-
-        /* Category gradients */
-        .cat-food { background: linear-gradient(135deg, #FF6B9D 0%, #FEC163 100%); }
-        .cat-accommodation { background: linear-gradient(135deg, #A8EDEA 0%, #FED6E3 100%); }
-        .cat-transport { background: linear-gradient(135deg, #30CFD0 0%, #330867 100%); }
-        .cat-activities { background: linear-gradient(135deg, #FA709A 0%, #FEE140 100%); }
-        .cat-gifts { background: linear-gradient(135deg, #FFA3D7 0%, #C1F4D7 100%); }
-        .cat-other { background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%); }
-
-        /* Floating particles */
-        .bg-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
+        .glass-card h1, .glass-card h2, .glass-card h3, .glass-card h4 {
+            color: var(--color-text-on-paper);
+            font-family: var(--font-family-display);
         }
 
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(168, 85, 247, 0.3);
-            border-radius: 50%;
+        /* Tailwind text overrides — make body text readable on paper */
+        .glass-card .text-gray-300,
+        .glass-card .text-gray-400,
+        .glass-card .text-gray-500 {
+            color: var(--color-text-on-paper-muted) !important;
+        }
+        .glass-card .text-purple-400 { color: var(--color-amber-deep) !important; }
+        .glass-card .text-pink-400 { color: var(--color-brick) !important; }
+        .glass-card .text-blue-400 { color: var(--color-forest) !important; }
+        .glass-card .text-green-400 { color: var(--color-forest-light) !important; }
+        .glass-card .text-yellow-400 { color: var(--color-amber-deep) !important; }
+        .glass-card .text-red-400 { color: var(--color-brick) !important; }
+
+        /* Headlines using bg-clip-text gradients */
+        .glass-card .bg-gradient-to-r.bg-clip-text {
+            background: none !important;
+            -webkit-text-fill-color: var(--color-amber-deep) !important;
+            color: var(--color-amber-deep) !important;
         }
 
-        /* Search bar focus */
+        /* Tailwind backgrounds inside cards */
+        .glass-card .bg-white\/5 { background: rgba(26, 20, 16, 0.05) !important; }
+        .glass-card .bg-white\/10 { background: rgba(26, 20, 16, 0.08) !important; }
+        .glass-card .bg-white\/20 { background: rgba(26, 20, 16, 0.12) !important; }
+
+        /* Inputs/selects on cards */
+        .glass-card input,
+        .glass-card select,
+        .glass-card textarea {
+            background: #fff8e8 !important;
+            border: 1.5px solid rgba(26, 20, 16, 0.18) !important;
+            color: var(--color-text-on-paper) !important;
+        }
+        .glass-card input:focus,
+        .glass-card select:focus,
+        .glass-card textarea:focus {
+            border-color: var(--color-amber-deep) !important;
+            box-shadow: 0 0 0 3px rgba(212, 163, 90, 0.25) !important;
+            outline: none !important;
+        }
+        .glass-card input::placeholder,
+        .glass-card textarea::placeholder { color: rgba(26, 20, 16, 0.35) !important; }
+
+        /* Purple→amber CTA buttons */
+        .bg-gradient-to-r.from-purple-500.to-pink-500 {
+            background: var(--color-brick) !important;
+            border: 2px solid var(--color-brick-deep);
+            box-shadow: 0 3px 0 var(--color-brick-deep), 0 8px 18px rgba(168, 72, 58, 0.35);
+            color: var(--color-cream) !important;
+        }
+        .bg-gradient-to-r.from-purple-500.to-pink-500:hover {
+            background: var(--color-brick-light) !important;
+        }
+
+        /* Borders */
+        .border-purple-500\/20,
+        .border-blue-500\/20,
+        .border-yellow-500\/20,
+        .border-green-500\/20 {
+            border: none !important;
+            border-top: 4px solid var(--color-amber) !important;
+        }
+        .border-blue-500\/20 { border-top-color: var(--color-forest) !important; }
+        .border-yellow-500\/20 { border-top-color: var(--color-amber) !important; }
+        .border-green-500\/20 { border-top-color: var(--color-forest-light) !important; }
+
+        /* FAB */
+        button#add-expense-btn {
+            background: var(--color-brick) !important;
+            border: 2px solid var(--color-brick-deep);
+            box-shadow: 0 6px 18px rgba(168, 72, 58, 0.45);
+        }
+        button#add-expense-btn:hover { background: var(--color-brick-light) !important; }
+
+        /* Search bar */
         .search-bar:focus {
-            transform: scale(1.02);
-            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+            box-shadow: 0 0 0 3px rgba(212, 163, 90, 0.25) !important;
         }
 
-        /* Budget Tracker */
+        /* Category pills */
+        .cat-food { background: linear-gradient(135deg, #d4a35a 0%, #c46a5d 100%) !important; }
+        .cat-accommodation { background: linear-gradient(135deg, #2c4a30 0%, #4a6f4f 100%) !important; }
+        .cat-transport { background: linear-gradient(135deg, #84362b 0%, #a8483a 100%) !important; }
+        .cat-activities { background: linear-gradient(135deg, #d4a35a 0%, #b8852f 100%) !important; }
+        .cat-gifts { background: linear-gradient(135deg, #c46a5d 0%, #a8483a 100%) !important; }
+        .cat-other { background: linear-gradient(135deg, #6b5e4a 0%, #5a4a38 100%) !important; }
+
+        /* Budget tracker */
         .budget-meter {
             height: 24px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(26, 20, 16, 0.1);
             border-radius: 12px;
             overflow: hidden;
             position: relative;
         }
         .budget-fill {
             height: 100%;
-            background: linear-gradient(90deg, #10b981, #fbbf24, #ef4444);
+            background: linear-gradient(90deg, var(--color-forest-light), var(--color-amber), var(--color-brick));
             background-size: 300% 100%;
             transition: width 0.5s ease;
             border-radius: 12px;
@@ -125,41 +180,27 @@
             top: 0;
             height: 100%;
             width: 2px;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(26, 20, 16, 0.3);
         }
+
+        /* Progress bar */
+        .progress-fill { transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Detail modal scoped */
+        #detail-modal { color: var(--color-text-on-paper); }
+
+        /* Make sure h1/h2 in glass-card don't lose tailwind layout */
+        .glass-card h2 { letter-spacing: -0.015em; }
     </style>
 </head>
 
-<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white min-h-screen relative overflow-x-hidden">
-    <!-- Skip Link -->
-    <a href="#main-content" class="skip-link">Ugrás a tartalomhoz</a>
-
-    <!-- Background Particles -->
-    <div class="bg-particles" aria-hidden="true">
-        <div class="particle floating-particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
-        <div class="particle floating-particle" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
-        <div class="particle floating-particle" style="top: 40%; left: 50%; animation-delay: 2s;"></div>
-        <div class="particle floating-particle" style="top: 80%; left: 30%; animation-delay: 1.5s;"></div>
-        <div class="particle floating-particle" style="top: 10%; left: 70%; animation-delay: 0.5s;"></div>
-    </div>
+<body class="expenses-body min-h-screen relative overflow-x-hidden" data-page="expenses">
+    <header data-shell="header"></header>
 
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container top-right" aria-live="polite" aria-atomic="true"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-black/30 backdrop-blur-md z-50 border-b border-white/10" role="navigation">
-        <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-lg md:text-xl font-bold hover:text-purple-400 transition">← Vissza</a>
-            <h1 class="text-sm md:text-lg font-semibold">💰 Költség Kezelő</h1>
-            <button id="add-expense-btn-header"
-                class="px-3 md:px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg font-semibold hover:opacity-90 transition flex items-center gap-2 text-sm btn-pulse">
-                <span class="text-lg md:text-xl">+</span>
-                <span class="hidden md:inline">Új Költség</span>
-            </button>
-        </div>
-    </nav>
-
-    <main id="main-content" class="container mx-auto px-4 pt-24 pb-32 max-w-6xl relative z-10">
+    <main id="main-content" class="container mx-auto px-4 pt-8 pb-32 max-w-6xl relative z-10">
 
         <!-- Hero Section -->
         <div class="mb-8 text-center glass-card rounded-2xl p-6 md:p-8 border border-purple-500/20 animate-fade-in-up" style="animation-delay: 0.1s;">
@@ -470,10 +511,14 @@
         </div>
     </div>
 
+    <footer data-shell="footer"></footer>
+
     <!-- Scripts -->
-    <script src="src/js/components/toast.js"></script>
-    <script src="src/js/components/ui-enhancements.js"></script>
-    <script type="module" src="expenses.js"></script>
+    <script src="src/js/components/toast.js?v=20260504c"></script>
+    <script src="src/js/components/ui-enhancements.js?v=20260504c"></script>
+    <script src="js/icons.js?v=20260504c"></script>
+    <script src="js/site-shell.js?v=20260504c"></script>
+    <script type="module" src="expenses.js?v=20260504c"></script>
 </body>
 
 </html>

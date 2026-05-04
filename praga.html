@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Prága Túlélőkalauz · Otto Legénybúcsúja</title>
+    <meta name="description" content="Térkép, metró, időjárás, sürgősségi számok, cseh kisokos és csomagolási lista a prágai trip-hez.">
+    <meta name="theme-color" content="#1a1410">
+
+    <link rel="stylesheet" href="src/css/main.css?v=20260504c">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+</head>
+
+<body data-page="praga">
+    <header data-shell="header"></header>
+
+    <main id="main-content">
+        <section class="section" style="padding-top: clamp(48px, 6vw, 80px); padding-bottom: clamp(24px, 4vw, 40px);">
+            <div class="shell-container shell-container--narrow">
+                <div class="section-head">
+                    <span class="eyebrow">02 · Túlélőkalauz</span>
+                    <h2>Prága · alap infók</h2>
+                    <p>Térkép, metró, időjárás, sürgősségi számok, cseh kisokos. Mindent egy helyen.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAP -->
+        <section id="map" class="section" style="padding-top: 0;">
+            <div class="shell-container">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">🗺️ Prága térkép</span>
+                </div>
+                <div class="paper praga-map-card">
+                    <div id="prague-map"></div>
+                    <div class="map-legend">
+                        <div class="legend-item"><span class="legend-dot" style="background: #a8483a;"></span>🏠 Szállás</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #d4a35a;"></span>📍 Látnivalók</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #e8c084;"></span>🎉 Bulinegyed</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #84362b;"></span>🍺 Kocsmák</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #2c4a30;"></span>🎯 Aktivitások</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #c46a5d;"></span>🍽️ Éttermek</div>
+                        <div class="legend-item"><span class="legend-dot" style="background: #4a6f4f;"></span>🚆 Közlekedés</div>
+                    </div>
+                    <p style="text-align: center; color: var(--color-text-on-paper-muted); font-size: 0.85rem; margin-top: 12px;">
+                        💡 Használd a jobb felső sarokban lévő rétegvezérlőt a kategóriák szűréséhez.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- WEATHER -->
+        <section class="section" style="padding-top: 0;">
+            <div class="shell-container">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">🌤️ Időjárás · Máj 7–10</span>
+                </div>
+                <div class="paper">
+                    <div class="weather-grid">
+                        <div class="weather-day">
+                            <div class="weather-icon">🌤️</div>
+                            <div class="label">Máj. 7</div>
+                            <div class="temp">18°C</div>
+                            <div class="label">Részben felhős</div>
+                        </div>
+                        <div class="weather-day">
+                            <div class="weather-icon">☀️</div>
+                            <div class="label">Máj. 8</div>
+                            <div class="temp">21°C</div>
+                            <div class="label">Napos</div>
+                        </div>
+                        <div class="weather-day">
+                            <div class="weather-icon">⛅</div>
+                            <div class="label">Máj. 9</div>
+                            <div class="temp">19°C</div>
+                            <div class="label">Változó</div>
+                        </div>
+                        <div class="weather-day">
+                            <div class="weather-icon">🌤️</div>
+                            <div class="label">Máj. 10</div>
+                            <div class="temp">20°C</div>
+                            <div class="label">Kellemes</div>
+                        </div>
+                    </div>
+                    <p class="weather-tip">👕 Ajánlott öltözék: könnyű rétegek, esőkabát a biztonság kedvéért.</p>
+                    <p style="text-align: center; color: var(--color-text-on-paper-muted); font-size: 0.85rem; margin-top: 8px;">
+                        ⚠️ Előzetes becslés — a pontos előrejelzés az esemény előtt frissül.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EMERGENCY -->
+        <section id="emergency" class="section section--dark">
+            <div class="shell-container">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">🆘 Sürgősségi infók</span>
+                </div>
+                <div class="paper paper--brick">
+                    <div class="emergency-grid">
+                        <div>
+                            <div class="emergency-item urgent">
+                                <span class="emergency-icon">🚨</span>
+                                <div>
+                                    <div class="label">Általános segélyhívó</div>
+                                    <div class="number">112</div>
+                                    <div class="meta">EU egységes szám</div>
+                                </div>
+                            </div>
+                            <div class="emergency-item">
+                                <span class="emergency-icon">👮</span>
+                                <div>
+                                    <div class="label">Cseh rendőrség</div>
+                                    <div class="number">158</div>
+                                </div>
+                            </div>
+                            <div class="emergency-item">
+                                <span class="emergency-icon">🚑</span>
+                                <div>
+                                    <div class="label">Mentők</div>
+                                    <div class="number">155</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="emergency-item">
+                                <span class="emergency-icon">🏥</span>
+                                <div>
+                                    <div class="label">Legközelebbi kórház</div>
+                                    <div>Nemocnice Na Františku</div>
+                                    <div class="meta">Na Františku 847/8, Praha 1</div>
+                                </div>
+                            </div>
+                            <div class="emergency-item">
+                                <span class="emergency-icon">🇷🇴</span>
+                                <div>
+                                    <div class="label">Román nagykövetség</div>
+                                    <div>+420 224 303 502</div>
+                                    <div class="meta">Nerudova 5, Praha 1</div>
+                                </div>
+                            </div>
+                            <div class="emergency-item">
+                                <span class="emergency-icon">📞</span>
+                                <div>
+                                    <div class="label">Szervező (Otto)</div>
+                                    <div class="meta">WhatsApp csoportban</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: var(--color-text-on-paper-muted); font-size: 0.9rem; margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px dashed rgba(168, 72, 58, 0.3);">
+                        💡 Mentsd el ezeket a számokat a telefonodba utazás előtt.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- METRO -->
+        <section class="section">
+            <div class="shell-container">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">🚇 Tömegközlekedés</span>
+                </div>
+                <div class="paper">
+                    <div class="metro-grid">
+                        <div>
+                            <h4 class="font-display" style="color: var(--color-text-on-paper); margin-bottom: var(--space-md);">Metró vonalak</h4>
+                            <div class="metro-line">
+                                <div class="metro-badge line-a">A</div>
+                                <div>
+                                    <div class="name">Zöld vonal</div>
+                                    <div class="route">Dejvická ↔ Depo Hostivař</div>
+                                    <div class="key">Staroměstská (Óváros)</div>
+                                </div>
+                            </div>
+                            <div class="metro-line">
+                                <div class="metro-badge line-b">B</div>
+                                <div>
+                                    <div class="name">Sárga vonal</div>
+                                    <div class="route">Zličín ↔ Černý Most</div>
+                                    <div class="key">Můstek, Florenc (busz)</div>
+                                </div>
+                            </div>
+                            <div class="metro-line">
+                                <div class="metro-badge line-c">C</div>
+                                <div>
+                                    <div class="name">Piros vonal</div>
+                                    <div class="route">Letňany ↔ Háje</div>
+                                    <div class="key">Hlavní nádraží (vonat)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-display" style="color: var(--color-text-on-paper); margin-bottom: var(--space-md);">💳 Jegyárak (2026)</h4>
+                            <div class="fare-table">
+                                <div class="fare-row"><span>30 perces jegy</span><strong>30 CZK (~1.2€)</strong></div>
+                                <div class="fare-row"><span>90 perces jegy</span><strong>40 CZK (~1.6€)</strong></div>
+                                <div class="fare-row"><span>24 órás bérlet</span><strong>120 CZK (~4.8€)</strong></div>
+                            </div>
+                            <div class="tip-box">
+                                <div class="title">💡 Tipp</div>
+                                <div style="color: var(--color-text-on-paper-muted); font-size: 0.9rem;">
+                                    Használd a <strong>PID Lítačka</strong> appot jegyvásárláshoz.
+                                </div>
+                            </div>
+                            <div style="margin-top: var(--space-md); text-align: center;">
+                                <a href="https://app.pidlitacka.cz" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                                    📱 PID Lítačka App
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: var(--color-text-on-paper-muted); font-size: 0.9rem; margin-top: var(--space-md); padding-top: var(--space-md); border-top: 2px dashed rgba(184, 133, 47, 0.3);">
+                        🌙 <strong>Éjszakai járatok:</strong> 51-59 villamosok &amp; éjszakai buszok 00:00 – 05:00 között.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHRASEBOOK -->
+        <section id="phrases" class="section section--dark">
+            <div class="shell-container">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">🗣️ Cseh kisokos</span>
+                </div>
+                <p style="text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-md);">
+                    Kattints a kifejezésre, és bemásoljuk a vágólapra.
+                </p>
+                <div class="paper">
+                    <div class="phrase-grid">
+                        <div>
+                            <span class="phrase-category-title">👋 Köszönések</span>
+                            <div class="phrase-card" data-phrase="Dobrý den">
+                                <div class="czech">Dobrý den</div>
+                                <div class="phonetic">[dobré den]</div>
+                                <div class="hungarian">Jó napot</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Ahoj">
+                                <div class="czech">Ahoj</div>
+                                <div class="phonetic">[ahoj]</div>
+                                <div class="hungarian">Szia / Hello</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Na shledanou">
+                                <div class="czech">Na shledanou</div>
+                                <div class="phonetic">[na szledanou]</div>
+                                <div class="hungarian">Viszontlátásra</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Děkuji">
+                                <div class="czech">Děkuji</div>
+                                <div class="phonetic">[gyekuji]</div>
+                                <div class="hungarian">Köszönöm</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Prosím">
+                                <div class="czech">Prosím</div>
+                                <div class="phonetic">[proszím]</div>
+                                <div class="hungarian">Kérem / Tessék</div>
+                            </div>
+
+                            <span class="phrase-category-title">🍺 Kocsmában</span>
+                            <div class="phrase-card" data-phrase="Jedno pivo, prosím">
+                                <div class="czech">Jedno pivo, prosím</div>
+                                <div class="phonetic">[jedno pivo proszím]</div>
+                                <div class="hungarian">Egy sört kérek</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Ještě jedno">
+                                <div class="czech">Ještě jedno</div>
+                                <div class="phonetic">[jestye jedno]</div>
+                                <div class="hungarian">Még egyet</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Na zdraví!">
+                                <div class="czech">Na zdraví!</div>
+                                <div class="phonetic">[na zdraví]</div>
+                                <div class="hungarian">Egészségedre!</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Účet, prosím">
+                                <div class="czech">Účet, prosím</div>
+                                <div class="phonetic">[úcset proszím]</div>
+                                <div class="hungarian">Számlát kérek</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="phrase-category-title">🍽️ Étteremben</span>
+                            <div class="phrase-card" data-phrase="Jídelní lístek, prosím">
+                                <div class="czech">Jídelní lístek, prosím</div>
+                                <div class="phonetic">[jídelní lisztek proszím]</div>
+                                <div class="hungarian">Étlapot kérek</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Bylo to výborné">
+                                <div class="czech">Bylo to výborné</div>
+                                <div class="phonetic">[bilo to víborné]</div>
+                                <div class="hungarian">Nagyon finom volt</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Kde je záchod?">
+                                <div class="czech">Kde je záchod?</div>
+                                <div class="phonetic">[kde je záhod]</div>
+                                <div class="hungarian">Hol a mosdó?</div>
+                            </div>
+
+                            <span class="phrase-category-title">🆘 Vészhelyzet</span>
+                            <div class="phrase-card" data-phrase="Pomoc!">
+                                <div class="czech">Pomoc!</div>
+                                <div class="phonetic">[pomoc]</div>
+                                <div class="hungarian">Segítség!</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Zavolejte policii">
+                                <div class="czech">Zavolejte policii</div>
+                                <div class="phonetic">[zavolejte policii]</div>
+                                <div class="hungarian">Hívja a rendőrséget</div>
+                            </div>
+                            <div class="phrase-card" data-phrase="Potřebuji lékaře">
+                                <div class="czech">Potřebuji lékaře</div>
+                                <div class="phonetic">[potrebuji lékarzse]</div>
+                                <div class="hungarian">Orvosra van szükségem</div>
+                            </div>
+
+                            <span class="phrase-category-title">🔢 Számok</span>
+                            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px;">
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 20, 16, 0.05); border-radius: 8px;">
+                                    <div style="font-family: var(--font-family-display); font-weight: 700; color: var(--color-brick);">1</div>
+                                    <div style="font-size: 0.8rem; color: var(--color-text-on-paper);">jeden</div>
+                                </div>
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 20, 16, 0.05); border-radius: 8px;">
+                                    <div style="font-family: var(--font-family-display); font-weight: 700; color: var(--color-brick);">2</div>
+                                    <div style="font-size: 0.8rem; color: var(--color-text-on-paper);">dva</div>
+                                </div>
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 20, 16, 0.05); border-radius: 8px;">
+                                    <div style="font-family: var(--font-family-display); font-weight: 700; color: var(--color-brick);">3</div>
+                                    <div style="font-size: 0.8rem; color: var(--color-text-on-paper);">tři</div>
+                                </div>
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 20, 16, 0.05); border-radius: 8px;">
+                                    <div style="font-family: var(--font-family-display); font-weight: 700; color: var(--color-brick);">5</div>
+                                    <div style="font-size: 0.8rem; color: var(--color-text-on-paper);">pět</div>
+                                </div>
+                                <div style="text-align: center; padding: 10px; background: rgba(26, 20, 16, 0.05); border-radius: 8px;">
+                                    <div style="font-family: var(--font-family-display); font-weight: 700; color: var(--color-brick);">10</div>
+                                    <div style="font-size: 0.8rem; color: var(--color-text-on-paper);">deset</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CURRENCY -->
+        <section id="currency" class="section">
+            <div class="shell-container shell-container--narrow">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">💱 Valutaváltó</span>
+                </div>
+                <div class="paper currency-card">
+                    <h4 style="text-align: center; color: var(--color-text-on-paper); font-family: var(--font-family-display); margin-bottom: var(--space-md);">
+                        Mennyit ér nálatok 100 € Prágában?
+                    </h4>
+                    <div class="currency-presets">
+                        <button class="currency-preset" data-currency-amount="10">10</button>
+                        <button class="currency-preset" data-currency-amount="50">50</button>
+                        <button class="currency-preset" data-currency-amount="100">100</button>
+                        <button class="currency-preset" data-currency-amount="500">500</button>
+                        <button class="currency-preset" data-currency-amount="1000">1000</button>
+                    </div>
+                    <div class="currency-input-group">
+                        <input type="number" class="currency-input" id="currencyAmount" value="100">
+                        <select class="currency-select" id="currencyFrom">
+                            <option value="EUR">EUR</option>
+                            <option value="CZK">CZK</option>
+                            <option value="HUF">HUF</option>
+                            <option value="RON">RON</option>
+                        </select>
+                    </div>
+                    <div class="currency-results" id="currencyResults">
+                        <div class="currency-result"><div class="flag">🇪🇺</div><div class="amount" id="resultEUR">100.00</div><div class="code">EUR</div></div>
+                        <div class="currency-result"><div class="flag">🇨🇿</div><div class="amount" id="resultCZK">2,500.00</div><div class="code">CZK</div></div>
+                        <div class="currency-result"><div class="flag">🇭🇺</div><div class="amount" id="resultHUF">39,500.00</div><div class="code">HUF</div></div>
+                        <div class="currency-result"><div class="flag">🇷🇴</div><div class="amount" id="resultRON">497.00</div><div class="code">RON</div></div>
+                    </div>
+                    <p style="text-align: center; font-size: 0.78rem; color: var(--color-text-on-paper-muted); margin-top: var(--space-md);">
+                        Árfolyamok tájékoztató jellegűek.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PACKING -->
+        <section class="section section--dark">
+            <div class="shell-container shell-container--narrow">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">🎒 Csomagolási lista</span>
+                </div>
+                <p style="text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-md);">
+                    Pipáld ki amit beraktál — a státusz a böngésződben mentődik.
+                </p>
+                <div class="paper">
+                    <div class="packing-progress">
+                        <div class="packing-progress-fill" id="packingProgress" style="width: 0%;"></div>
+                    </div>
+                    <p id="packingStats" style="text-align: center; margin-top: 10px; color: var(--color-text-on-paper-muted);">
+                        0 / 16 kész
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-xl); margin-top: var(--space-xl);">
+                        <div class="packing-category">
+                            <h4>📄 Dokumentumok</h4>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Személyi igazolvány / útlevél</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Egészségbiztosítási kártya (EU)</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Bankkártya / készpénz (EUR/CZK)</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Vonat- / repülőjegy</span>
+                            </div>
+                        </div>
+
+                        <div class="packing-category">
+                            <h4>👕 Ruházat</h4>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Kényelmes cipő (séta)</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Bulis ruha (esti program)</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Esőkabát / dzseki</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Váltás fehérnemű (3 nap)</span>
+                            </div>
+                        </div>
+
+                        <div class="packing-category">
+                            <h4>🧴 Tisztálkodás</h4>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Fogkefe &amp; fogkrém</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Dezodor</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Gyógyszerek (ha kellenek)</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Napszemüveg</span>
+                            </div>
+                        </div>
+
+                        <div class="packing-category">
+                            <h4>🎉 Tech &amp; party</h4>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Telefon töltő</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Powerbank</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Fényképezőgép (opcionális)</span>
+                            </div>
+                            <div class="packing-item">
+                                <input type="checkbox" class="packing-checkbox">
+                                <span>Jó kedv 🍻</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: var(--space-xl);">
+                        <button class="btn btn-outline btn-sm" onclick="resetPackingList()">🔄 Lista visszaállítása</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer data-shell="footer"></footer>
+
+    <script src="src/js/components/toast.js?v=20260504c"></script>
+    <script src="js/icons.js?v=20260504c"></script>
+    <script src="js/site-shell.js?v=20260504c"></script>
+    <script src="js/main.js?v=20260504c"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="js/map.js?v=20260504c"></script>
+    <script src="js/phrases.js?v=20260504c"></script>
+    <script src="js/packing.js?v=20260504c"></script>
+    <script src="js/currency.js?v=20260504c"></script>
+</body>
+</html>

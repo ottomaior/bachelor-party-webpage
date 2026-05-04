@@ -1,28 +1,32 @@
-/* ===== BACHELOR PARTY WEBSITE - MAIN CSS ===== */
-/* Import orchestrator - loads all modular CSS files */
+/* ===== BACHELOR PARTY WEBSITE — main.css ===== */
+/* Pub-warm redesign · loads modular CSS files */
 
 /* ===== BASE ===== */
-@import url('./base/variables.css');
-@import url('./base/reset.css');
-@import url('./base/typography.css');
-@import url('./base/accessibility.css');
+@import url('./base/variables.css?v=20260504c');
+@import url('./base/reset.css?v=20260504c');
+@import url('./base/typography.css?v=20260504c');
+@import url('./base/accessibility.css?v=20260504c');
 
 /* ===== LAYOUTS ===== */
-@import url('./layouts/grid.css');
-@import url('./layouts/navigation.css');
+@import url('./layouts/site-shell.css?v=20260504c');
+@import url('./layouts/grid.css?v=20260504c');
 
 /* ===== COMPONENTS ===== */
-@import url('./components/buttons.css');
-@import url('./components/cards.css');
-@import url('./components/forms.css');
-@import url('./components/modals.css');
-@import url('./components/toast.css');
+@import url('./components/buttons.css?v=20260504c');
+@import url('./components/paper-card.css?v=20260504c');
+@import url('./components/coaster.css?v=20260504c');
+@import url('./components/cards.css?v=20260504c');
+@import url('./components/forms.css?v=20260504c');
+@import url('./components/modals.css?v=20260504c');
+@import url('./components/toast.css?v=20260504c');
 
 /* ===== EFFECTS ===== */
-@import url('./effects/animations.css');
-@import url('./effects/particles.css');
-@import url('./effects/glassmorphism.css');
+@import url('./effects/animations.css?v=20260504c');
 
 /* ===== PAGES ===== */
-@import url('./pages/home.css');
-@import url('./pages/expenses.css');
+@import url('./pages/home.css?v=20260504c');
+@import url('./pages/program.css?v=20260504c');
+@import url('./pages/praga.css?v=20260504c');
+@import url('./pages/banda.css?v=20260504c');
+@import url('./pages/galeria.css?v=20260504c');
+@import url('./pages/expenses.css?v=20260504c');

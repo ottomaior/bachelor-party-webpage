@@ -1,0 +1,255 @@
+/* ===== PAPER CARD — primary surface in the new design ===== */
+
+/* A "paper" card lives on the dark background. It looks like a piece of warm
+   cream paper pinned to a corkboard. Used for almost every block of content. */
+
+.paper {
+    position: relative;
+    background: var(--color-bg-paper);
+    color: var(--color-text-on-paper);
+    border-radius: var(--radius-lg);
+    padding: clamp(20px, 3vw, 32px);
+    box-shadow: var(--shadow-paper);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.paper::before {
+    /* subtle paper grain — pure CSS noise via layered gradients */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(rgba(26, 20, 16, 0.045) 1px, transparent 1px),
+        radial-gradient(rgba(26, 20, 16, 0.035) 1px, transparent 1px);
+    background-size: 4px 4px, 7px 7px;
+    background-position: 0 0, 2px 2px;
+    pointer-events: none;
+    opacity: 0.55;
+    z-index: 0;
+    mix-blend-mode: multiply;
+}
+
+.paper > * {
+    position: relative;
+    z-index: 1;
+}
+
+.paper h1, .paper h2, .paper h3, .paper h4, .paper h5, .paper h6 {
+    color: var(--color-text-on-paper);
+}
+
+.paper p {
+    color: var(--color-text-on-paper-muted);
+}
+
+.paper a {
+    color: var(--color-brick);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.paper a:hover {
+    color: var(--color-brick-deep);
+}
+
+/* Paper variants */
+.paper--soft {
+    background: var(--color-bg-paper-soft);
+}
+
+.paper--warm {
+    background: var(--color-bg-paper-warm);
+}
+
+.paper--accent {
+    background: linear-gradient(180deg, #f9f1de 0%, #f0e2bf 100%);
+    border-top: 4px solid var(--color-amber);
+}
+
+.paper--brick {
+    background: linear-gradient(180deg, #f9f1de 0%, #efd6cd 100%);
+    border-top: 4px solid var(--color-brick);
+}
+
+.paper--forest {
+    background: linear-gradient(180deg, #f9f1de 0%, #d8e0d3 100%);
+    border-top: 4px solid var(--color-forest);
+}
+
+.paper--gold-rule {
+    border: 1px solid rgba(184, 133, 47, 0.3);
+    box-shadow: var(--shadow-paper), inset 0 0 0 4px rgba(244, 236, 216, 0.6), inset 0 0 0 5px rgba(212, 163, 90, 0.4);
+}
+
+/* Stamp-style header inside paper */
+.paper-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.paper-header-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-amber);
+    color: var(--color-ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 0 var(--color-amber-deep);
+}
+
+.paper-header-text h3 {
+    margin: 0;
+    font-family: var(--font-family-display);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-on-paper);
+}
+
+.paper-header-text p {
+    margin: 4px 0 0;
+    color: var(--color-text-on-paper-muted);
+    font-size: 0.9rem;
+}
+
+/* Card grid helper */
+.card-grid {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+.card-grid--2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.card-grid--3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.card-grid--4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+/* ===== DARK CARD — for content that needs to stay on dark background ===== */
+.dark-card {
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    padding: clamp(20px, 3vw, 28px);
+    box-shadow: var(--shadow-md);
+}
+
+.dark-card--accent {
+    border-top: 3px solid var(--color-amber);
+}
+
+/* ===== Section wrapper ===== */
+.section {
+    padding: clamp(32px, 7vw, 96px) 0;
+    position: relative;
+}
+
+.section--dark {
+    background: linear-gradient(180deg, transparent 0%, rgba(18, 13, 10, 0.5) 100%);
+}
+
+@media (max-width: 540px) {
+    .section {
+        padding: clamp(24px, 5vw, 48px) 0;
+    }
+}
+
+.section-head {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.section-head h2 {
+    font-family: var(--font-family-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: var(--font-weight-black);
+    color: var(--color-cream);
+    margin: 0;
+}
+
+.section-head .eyebrow {
+    margin-bottom: var(--space-sm);
+}
+
+.section-head p {
+    margin-top: var(--space-md);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== STAMP HEADERS (for inside dark sections) ===== */
+.stamp-header {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: 8px 16px;
+    border: 2px solid var(--color-amber);
+    border-radius: 6px;
+    transform: rotate(-1.5deg);
+    background: rgba(212, 163, 90, 0.1);
+    color: var(--color-amber);
+    font-family: var(--font-family-stamp);
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+/* ===== List items on paper ===== */
+.paper-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.paper-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: rgba(26, 20, 16, 0.04);
+    border-radius: var(--radius-md);
+    color: var(--color-text-on-paper);
+}
+
+/* Backwards compat: keep existing .card class working but recolor it */
+.card,
+.card-3d {
+    background: var(--color-bg-paper);
+    color: var(--color-text-on-paper);
+    border-radius: var(--radius-lg);
+    padding: clamp(20px, 3vw, 32px);
+    box-shadow: var(--shadow-paper);
+    transform: none;
+    transition: transform var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.card:hover,
+.card-3d:hover {
+    transform: translateY(-2px) rotate(0.2deg);
+    box-shadow: var(--shadow-lg);
+}
+
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6,
+.card-3d h1, .card-3d h2, .card-3d h3, .card-3d h4, .card-3d h5, .card-3d h6 {
+    color: var(--color-text-on-paper);
+}
+
+.card p, .card-3d p {
+    color: var(--color-text-on-paper-muted);
+}
+
+.card a, .card-3d a {
+    color: var(--color-brick);
+}

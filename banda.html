@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>A Banda · Otto Legénybúcsúja</title>
+    <meta name="description" content="Élő statisztikák, szavazások, és RSVP form a prágai legénybúcsúhoz.">
+    <meta name="theme-color" content="#1a1410">
+
+    <link rel="stylesheet" href="src/css/main.css?v=20260504c">
+</head>
+
+<body data-page="banda">
+    <header data-shell="header"></header>
+
+    <main id="main-content">
+        <section class="section" style="padding-top: clamp(48px, 6vw, 80px); padding-bottom: clamp(24px, 4vw, 40px);">
+            <div class="shell-container shell-container--narrow">
+                <div class="section-head">
+                    <span class="eyebrow">03 · A banda</span>
+                    <h2>Ki jön &amp; mit szavazunk?</h2>
+                    <p>Élő RSVP-statisztika, szavazások a programról, és itt küldöd be a saját jelentkezésedet is.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIVE STATS -->
+        <section class="section" style="padding-top: 0;">
+            <div class="shell-container">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">📊 Élő statisztikák</span>
+                </div>
+
+                <div class="banda-stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalAttending">0</div>
+                        <div class="stat-label">Hell yes 🎉</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalMaybe">0</div>
+                        <div class="stat-label">Talán 🤔</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalTrain">0</div>
+                        <div class="stat-label">Vonattal 🚆</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="totalCar">0</div>
+                        <div class="stat-label">Autóval 🚗</div>
+                    </div>
+                </div>
+
+                <h3 style="text-align: center; margin: var(--space-2xl) 0 var(--space-lg);" class="font-display">👥 Ki jön?</h3>
+                <div id="attendeesList" class="attendees-grid">
+                    <div style="grid-column: 1/-1; text-align: center; padding: var(--space-xl); color: var(--color-text-muted);">
+                        Még senki nem jelentkezett. Legyél te az első! 🎉
+                    </div>
+                </div>
+
+                <h3 style="text-align: center; margin: var(--space-2xl) 0 var(--space-lg);" class="font-display">🚗 Utazási preferenciák</h3>
+                <div id="transportBreakdown" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-md);"></div>
+
+                <div id="carPoolingSection" style="margin-top: var(--space-2xl);"></div>
+            </div>
+        </section>
+
+        <!-- POLLS -->
+        <section class="section section--dark">
+            <div class="shell-container">
+                <div style="text-align: center; margin-bottom: var(--space-md);">
+                    <span class="stamp-header">🗳️ Élő szavazások</span>
+                </div>
+                <p style="text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-xl);">
+                    Szavazz, hogy közösen döntsünk a részletekről.
+                </p>
+
+                <div class="poll-card">
+                    <div class="poll-header">
+                        <h3>🍽️ Hol vacsorázzunk pénteken?</h3>
+                        <span class="poll-status">● Aktív</span>
+                    </div>
+                    <div class="poll-option" data-option="lokal">
+                        <div class="poll-option-text">
+                            <div class="name">🍺 Lokál</div>
+                            <div class="meta">Cseh konyha, tank sör</div>
+                        </div>
+                        <div class="poll-bar-wrap">
+                            <div class="poll-bar"><div class="poll-bar-fill" style="width: 40%;"></div></div>
+                            <span class="poll-votes">4 szavazat</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" data-option="kantyna">
+                        <div class="poll-option-text">
+                            <div class="name">🥩 Kantýna</div>
+                            <div class="meta">Modern cseh, steak</div>
+                        </div>
+                        <div class="poll-bar-wrap">
+                            <div class="poll-bar"><div class="poll-bar-fill" style="width: 30%;"></div></div>
+                            <span class="poll-votes">3 szavazat</span>
+                        </div>
+                    </div>
+                    <div class="poll-option" data-option="ufleku">
+                        <div class="poll-option-text">
+                            <div class="name">🏛️ U Fleků</div>
+                            <div class="meta">Történelmi sörfőzde (1499!)</div>
+                        </div>
+                        <div class="poll-bar-wrap">
+                            <div class="poll-bar"><div class="poll-bar-fill" style="width: 30%;"></div></div>
+                            <span class="poll-votes">3 szavazat</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="paper" style="margin-top: var(--space-xl);">
+                    <h4 style="color: var(--color-text-on-paper); font-family: var(--font-family-display);">➕ Új gyors szavazás</h4>
+                    <p style="color: var(--color-text-on-paper-muted); margin-bottom: var(--space-md); font-size: 0.9rem;">
+                        Aktiválható a helyszínen a WhatsApp csoportból.
+                    </p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn btn-outline btn-sm" onclick="createQuickPoll('Hova menjünk?')">📍 Hova menjünk?</button>
+                        <button class="btn btn-outline btn-sm" onclick="createQuickPoll('Mit igyunk?')">🍺 Mit igyunk?</button>
+                        <button class="btn btn-outline btn-sm" onclick="createQuickPoll('Mikor induljunk?')">⏰ Mikor induljunk?</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP FORM -->
+        <section class="section" id="rsvp">
+            <div class="shell-container shell-container--narrow">
+                <div class="section-head">
+                    <span class="eyebrow">Csekkelj be</span>
+                    <h2>🎯 Megerősítés &amp; utazás</h2>
+                    <p>Tudnunk kell, hogy számíthatunk-e rád, és hogyan utazol.</p>
+                </div>
+
+                <form class="rsvp-form" id="rsvpForm" onsubmit="handleRSVP(event)">
+                    <!-- Basic info -->
+                    <div class="rsvp-block">
+                        <h3>📋 Alap információk</h3>
+                        <div class="form-group">
+                            <label for="name">Teljes név *</label>
+                            <input type="text" id="name" name="name" required placeholder="A neved">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefonszám *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+36 ... ... ....">
+                        </div>
+                        <div class="form-group">
+                            <label for="attending">Jössz? *</label>
+                            <select id="attending" name="attending" required>
+                                <option value="">Válassz egyet</option>
+                                <option value="yes">Hell yes! 🎉</option>
+                                <option value="maybe">Talán 🤔</option>
+                                <option value="no">Sajnos nem 😢</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Travel section -->
+                    <div id="travelSection" style="display: none;">
+                        <div class="rsvp-block" style="background: rgba(212, 163, 90, 0.10); border-left: 4px solid var(--color-amber);">
+                            <h3>🗺️ Honnan indulsz?</h3>
+                            <div class="form-group">
+                                <label for="startLocation">Kiindulási pont *</label>
+                                <select id="startLocation" name="startLocation">
+                                    <option value="">Válassz...</option>
+                                    <option value="gyergyo">Gyergyószentmiklós</option>
+                                    <option value="brasso">Brassó</option>
+                                    <option value="bukarest">Bukarest</option>
+                                    <option value="debrecen">Debrecen</option>
+                                    <option value="budapest">Budapest</option>
+                                    <option value="other">Egyéb (írd be alább)</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="otherLocationGroup" style="display: none;">
+                                <label for="startLocationOther">Egyéb kiindulási pont</label>
+                                <input type="text" id="startLocationOther" name="startLocationOther" placeholder="Pl. Szeged, Pécs…">
+                            </div>
+                        </div>
+
+                        <div class="rsvp-block" style="background: rgba(212, 163, 90, 0.10); border-left: 4px solid var(--color-amber-deep);">
+                            <h3>🚗 Mivel utazol?</h3>
+                            <div class="form-group">
+                                <label for="transportMethod">Fő közlekedési eszköz *</label>
+                                <select id="transportMethod" name="transportMethod">
+                                    <option value="">Válassz...</option>
+                                    <option value="car-driver">🚗 Saját autóval (SOFŐR)</option>
+                                    <option value="car-passenger">🚗 Autóval (UTAS — csatlakoznék valakihez)</option>
+                                    <option value="train">🚆 Vonat</option>
+                                    <option value="plane">✈️ Repülő</option>
+                                    <option value="mixed">🔀 Kombináció</option>
+                                    <option value="undecided">❓ Még nem tudom</option>
+                                </select>
+                            </div>
+
+                            <div id="carDriverDetails" style="display: none; margin-top: 16px; padding: 16px; background: rgba(26, 20, 16, 0.05); border-radius: var(--radius-md);">
+                                <h4 style="font-family: var(--font-family-display); color: var(--color-text-on-paper);">🚗 Autós információk</h4>
+                                <div class="form-group">
+                                    <label for="carSeats">Hány szabad hely? *</label>
+                                    <select id="carSeats" name="carSeats">
+                                        <option value="">Válassz...</option>
+                                        <option value="1">1 hely</option>
+                                        <option value="2">2 hely</option>
+                                        <option value="3">3 hely</option>
+                                        <option value="4">4 hely</option>
+                                        <option value="5">5+ hely</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="carRoute">Útvonal részletei</label>
+                                    <textarea id="carRoute" name="carRoute" rows="3" placeholder="Pl.: Gyergyó → Debrecen → Budapest → Prága. Csatlakozási pontok: Debrecen (8:00), Budapest (14:00)"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox" id="carCostShare" name="carCostShare" value="yes">
+                                        Megosztom a benzinköltséget az utasokkal
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="carPassengerDetails" style="display: none; margin-top: 16px; padding: 16px; background: rgba(26, 20, 16, 0.05); border-radius: var(--radius-md);">
+                                <h4 style="font-family: var(--font-family-display); color: var(--color-text-on-paper);">🚗 Utas információk</h4>
+                                <div class="form-group">
+                                    <label for="preferredPickup">Honnan tudnál csatlakozni?</label>
+                                    <input type="text" id="preferredPickup" name="preferredPickup" placeholder="Pl. Debrecen, Budapest, Kolozsvár">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-checkbox">
+                                        <input type="checkbox" id="flexiblePickup" name="flexiblePickup" value="yes">
+                                        Rugalmas vagyok a csatlakozási ponttal
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="mixedTransportDetails" style="display: none; margin-top: 16px; padding: 16px; background: rgba(26, 20, 16, 0.05); border-radius: var(--radius-md);">
+                                <h4 style="font-family: var(--font-family-display); color: var(--color-text-on-paper);">🔀 Kombinált utazás</h4>
+                                <div class="form-group">
+                                    <label for="mixedRoute">Írd le az útvonaladat *</label>
+                                    <textarea id="mixedRoute" name="mixedRoute" rows="4" placeholder="Példa:&#10;Brassó → Debrecen (AUTÓ, saját, 2 szabad hely)&#10;Debrecen → Budapest (VONAT)&#10;Budapest → Prága (VONAT)"></textarea>
+                                    <small style="color: var(--color-text-on-paper-muted); display: block; margin-top: 6px;">
+                                        💡 Add meg minden szakaszt külön sorban.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rsvp-block" style="background: rgba(168, 72, 58, 0.08); border-left: 4px solid var(--color-brick);">
+                            <h3>🕐 Időzítés</h3>
+                            <div class="form-group">
+                                <label for="arrivalDay">Mikor érkezel Prágába?</label>
+                                <select id="arrivalDay" name="arrivalDay">
+                                    <option value="">Válassz...</option>
+                                    <option value="may6">Május 6.</option>
+                                    <option value="may7-morning">Május 7. délelőtt</option>
+                                    <option value="may7-afternoon">Május 7. délután</option>
+                                    <option value="may7-evening">Május 7. este</option>
+                                    <option value="may8">Május 8. (később érkezem)</option>
+                                    <option value="undecided">Még nem tudom</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="departureDay">Mikor utazol haza?</label>
+                                <select id="departureDay" name="departureDay">
+                                    <option value="">Válassz...</option>
+                                    <option value="may9">Május 9. (korán)</option>
+                                    <option value="may10-morning">Május 10. délelőtt</option>
+                                    <option value="may10-afternoon">Május 10. délután</option>
+                                    <option value="may10-evening">Május 10. este</option>
+                                    <option value="undecided">Még nem tudom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other -->
+                    <div class="rsvp-block">
+                        <h3>ℹ️ Egyéb információk</h3>
+                        <div class="form-group">
+                            <label for="dietary">Étel allergia / preferencia</label>
+                            <input type="text" id="dietary" name="dietary" placeholder="Vegetáriánus, allergiák, stb.">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Üzenet Ottonak / extra infó</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Bármi amit üzenni szeretnél vagy fontos infó az utazásról…"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: var(--space-md);">
+                        🎉 Jelentkezem!
+                    </button>
+                </form>
+
+                <div id="rsvpConfirmation" class="rsvp-success" style="display: none;">
+                    <h3>🎉 Jössz! Király!</h3>
+                    <p style="color: var(--color-text-on-paper-muted); margin-top: 12px;">
+                        Köszi a megerősítést! A statisztikákat ott látod feljebb az oldalon.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer data-shell="footer"></footer>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-init.js?v=20260504c"></script>
+
+    <script src="src/js/components/toast.js?v=20260504c"></script>
+    <script src="js/icons.js?v=20260504c"></script>
+    <script src="js/site-shell.js?v=20260504c"></script>
+    <script src="js/main.js?v=20260504c"></script>
+    <script src="js/interactive.js?v=20260504c"></script>
+    <script src="js/firebase-stats.js?v=20260504c"></script>
+    <script src="js/polls.js?v=20260504c"></script>
+</body>
+</html>

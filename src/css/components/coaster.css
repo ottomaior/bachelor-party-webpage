@@ -1,0 +1,134 @@
+/* ===== COASTER — round beer-mat element used for the countdown & badges ===== */
+
+.coaster-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(10px, 2vw, 18px);
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.coaster {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: var(--color-bg-paper);
+    color: var(--color-text-on-paper);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-shadow: var(--shadow-coaster);
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.coaster::before {
+    /* outer ring */
+    content: '';
+    position: absolute;
+    inset: 7px;
+    border: 2px dashed rgba(184, 133, 47, 0.55);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.coaster::after {
+    /* paper grain */
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-image:
+        radial-gradient(rgba(26, 20, 16, 0.06) 1px, transparent 1px);
+    background-size: 5px 5px;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.coaster-value {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-family-display);
+    font-weight: var(--font-weight-black);
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: 1;
+    color: var(--color-ink);
+    letter-spacing: -0.02em;
+}
+
+.coaster-label {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-family-stamp);
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brick);
+    margin-top: 6px;
+}
+
+/* When the coaster is "out of beer" (countdown reached 0) */
+.coaster--depleted {
+    opacity: 0.6;
+}
+
+/* ===== STAMP — like a rubber stamp passport mark ===== */
+.wax-seal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--color-brick-light), var(--color-brick) 60%, var(--color-brick-deep) 100%);
+    color: var(--color-cream);
+    font-family: var(--font-family-stamp);
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    box-shadow: 0 6px 14px rgba(168, 72, 58, 0.45), inset 0 -3px 8px rgba(0, 0, 0, 0.25), inset 0 3px 8px rgba(255, 255, 255, 0.15);
+    transform: rotate(-8deg);
+}
+
+/* ===== TICKET STUB — for itinerary days, etc. ===== */
+.ticket {
+    position: relative;
+    background: var(--color-bg-paper);
+    color: var(--color-text-on-paper);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-paper);
+    overflow: hidden;
+}
+
+.ticket::before,
+.ticket::after {
+    /* notch holes on left/right edges */
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: var(--color-bg-dark);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ticket::before { left: -9px; }
+.ticket::after  { right: -9px; }
+
+.ticket--no-notch::before,
+.ticket--no-notch::after { display: none; }
+
+.ticket-tear {
+    border-bottom: 2px dashed rgba(184, 133, 47, 0.4);
+    margin: var(--space-md) 0;
+}

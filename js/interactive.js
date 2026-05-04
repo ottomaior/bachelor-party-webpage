@@ -252,21 +252,47 @@ function updateTravelOptions() {
 
 // ===== TOGGLE TRANSPORT DETAILS =====
 function toggleTransportDetails() {
-    const method = document.getElementById('transportMethod').value;
-    
-    console.log('toggleTransportDetails called, method:', method);
-    
-    // Hide all
-    document.getElementById('carDriverDetails').style.display = 'none';
-    document.getElementById('carPassengerDetails').style.display = 'none';
-    document.getElementById('mixedTransportDetails').style.display = 'none';
-    
-    // Show relevant
-    if (method === 'car-driver') {
-        document.getElementById('carDriverDetails').style.display = 'block';
-    } else if (method === 'car-passenger') {
-        document.getElementById('carPassengerDetails').style.display = 'block';
-    } else if (method === 'mixed') {
-        document.getElementById('mixedTransportDetails').style.display = 'block';
+    const select = document.getElementById('transportMethod');
+    if (!select) return;
+    const method = select.value;
+
+    const carDriver = document.getElementById('carDriverDetails');
+    const carPassenger = document.getElementById('carPassengerDetails');
+    const mixed = document.getElementById('mixedTransportDetails');
+
+    if (carDriver) carDriver.style.display = 'none';
+    if (carPassenger) carPassenger.style.display = 'none';
+    if (mixed) mixed.style.display = 'none';
+
+    if (method === 'car-driver' && carDriver) {
+        carDriver.style.display = 'block';
+    } else if (method === 'car-passenger' && carPassenger) {
+        carPassenger.style.display = 'block';
+    } else if (method === 'mixed' && mixed) {
+        mixed.style.display = 'block';
     }
 }
+
+// Wire up form-section toggles automatically
+document.addEventListener('DOMContentLoaded', function () {
+    const attendingSelect = document.getElementById('attending');
+    const travelSection = document.getElementById('travelSection');
+    if (attendingSelect && travelSection) {
+        attendingSelect.addEventListener('change', function () {
+            travelSection.style.display = (this.value === 'yes' || this.value === 'maybe') ? 'block' : 'none';
+        });
+    }
+
+    const startLocationSelect = document.getElementById('startLocation');
+    const otherLocationGroup = document.getElementById('otherLocationGroup');
+    if (startLocationSelect && otherLocationGroup) {
+        startLocationSelect.addEventListener('change', function () {
+            otherLocationGroup.style.display = this.value === 'other' ? 'block' : 'none';
+        });
+    }
+
+    const transportMethodSelect = document.getElementById('transportMethod');
+    if (transportMethodSelect) {
+        transportMethodSelect.addEventListener('change', toggleTransportDetails);
+    }
+});

@@ -32,7 +32,10 @@ body {
     min-height: 100vh;
     line-height: var(--line-height-relaxed);
     font-family: var(--font-family-base);
-    background: var(--color-bg-dark);
+    background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(212, 163, 90, 0.10), transparent 60%),
+        radial-gradient(900px 600px at 0% 100%, rgba(168, 72, 58, 0.08), transparent 60%),
+        var(--color-bg-dark);
     color: var(--color-text-primary);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -125,7 +128,7 @@ table {
 
 /* Focus visible styles */
 :focus-visible {
-    outline: 2px solid var(--color-accent-blue);
+    outline: 2px solid var(--color-amber);
     outline-offset: 2px;
 }
 
@@ -136,8 +139,8 @@ table {
 
 /* Selection styling */
 ::selection {
-    background: var(--color-accent-blue);
-    color: var(--color-text-primary);
+    background: var(--color-amber);
+    color: var(--color-ink);
 }
 
 /* Scrollbar styling */

@@ -1,22 +1,29 @@
-/* ===== BUTTON SYSTEM ===== */
+/* ===== BUTTON SYSTEM — pub-warm ===== */
 
-/* Base Button */
+/* Base */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    padding: var(--space-md) var(--space-xl);
-    border: none;
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-semibold);
+    padding: 14px 26px;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    font-family: var(--font-family-stamp);
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: all var(--duration-normal) var(--ease-out);
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out),
+                background var(--duration-fast) var(--ease-out),
+                color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
     text-decoration: none;
     position: relative;
-    overflow: hidden;
     white-space: nowrap;
+    line-height: 1;
 }
 
 .btn:disabled {
@@ -25,168 +32,165 @@
     pointer-events: none;
 }
 
-/* Button Sizes */
+/* Sizes */
 .btn-sm {
-    padding: var(--space-sm) var(--space-md);
-    font-size: var(--font-size-sm);
+    padding: 8px 16px;
+    font-size: 0.78rem;
 }
 
 .btn-lg {
-    padding: var(--space-lg) var(--space-2xl);
-    font-size: var(--font-size-lg);
+    padding: 18px 36px;
+    font-size: 1rem;
 }
 
-/* Primary Button */
+/* ===== Primary — wax-seal red, the main CTA ===== */
 .btn-primary {
-    background: var(--gradient-primary);
-    color: var(--color-text-primary);
-    box-shadow: var(--shadow-md);
+    background: var(--color-brick);
+    border-color: var(--color-brick-deep);
+    color: var(--color-cream);
+    box-shadow: 0 3px 0 var(--color-brick-deep), 0 10px 22px rgba(168, 72, 58, 0.35);
 }
 
 .btn-primary:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+    transform: translateY(-1px);
+    background: var(--color-brick-light);
+    color: var(--color-cream);
+    box-shadow: 0 4px 0 var(--color-brick-deep), 0 14px 28px rgba(168, 72, 58, 0.45);
 }
 
 .btn-primary:active {
-    transform: scale(0.98);
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--color-brick-deep), 0 4px 10px rgba(168, 72, 58, 0.35);
 }
 
-/* Secondary Button */
+/* ===== Secondary — pilsner amber pill ===== */
 .btn-secondary {
-    background: transparent;
-    border: 2px solid var(--color-accent-gold);
-    color: var(--color-accent-gold);
+    background: var(--color-amber);
+    border-color: var(--color-amber-deep);
+    color: var(--color-ink);
+    box-shadow: 0 3px 0 var(--color-amber-deep), 0 8px 20px rgba(212, 163, 90, 0.3);
 }
 
 .btn-secondary:hover {
-    background: var(--color-accent-gold);
-    color: var(--color-bg-dark);
-    transform: scale(1.05);
+    transform: translateY(-1px);
+    background: var(--color-amber-light);
+    color: var(--color-ink);
+    box-shadow: 0 4px 0 var(--color-amber-deep), 0 12px 24px rgba(212, 163, 90, 0.4);
 }
 
-/* Ghost Button */
+.btn-secondary:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--color-amber-deep);
+}
+
+/* ===== Ghost — outline on dark ===== */
 .btn-ghost {
     background: transparent;
-    border: 1px solid var(--color-border-default);
+    border-color: var(--color-border-strong);
     color: var(--color-text-primary);
 }
 
 .btn-ghost:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--color-border-strong);
+    background: rgba(244, 236, 216, 0.08);
+    border-color: var(--color-amber);
+    color: var(--color-amber-light);
 }
 
-/* Glass Button */
+/* ===== Outline — for use on paper ===== */
+.btn-outline {
+    background: transparent;
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+    box-shadow: none;
+}
+
+.btn-outline:hover {
+    background: var(--color-ink);
+    color: var(--color-cream);
+}
+
+/* ===== Glass kept (neutralised) ===== */
 .btn-glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
+    background: rgba(244, 236, 216, 0.06);
+    border-color: var(--color-border-default);
     color: var(--color-text-primary);
 }
 
 .btn-glass:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: var(--color-accent-blue);
-    box-shadow: var(--shadow-glow-blue);
+    background: rgba(244, 236, 216, 0.12);
+    border-color: var(--color-amber);
 }
 
-/* Success Button */
+/* ===== Success / danger ===== */
 .btn-success {
-    background: var(--gradient-success);
-    color: var(--color-text-primary);
+    background: var(--color-forest);
+    border-color: var(--color-forest-deep);
+    color: var(--color-cream);
+    box-shadow: 0 3px 0 var(--color-forest-deep), 0 8px 20px rgba(44, 74, 48, 0.3);
 }
 
 .btn-success:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-glow-success);
+    transform: translateY(-1px);
+    background: var(--color-forest-light);
 }
 
-/* Danger Button */
 .btn-danger {
-    background: var(--color-error);
-    color: var(--color-text-primary);
+    background: var(--color-brick);
+    border-color: var(--color-brick-deep);
+    color: var(--color-cream);
 }
 
 .btn-danger:hover {
-    background: #dc2626;
-    transform: scale(1.05);
+    background: var(--color-brick-light);
 }
 
-/* Icon Button */
+/* ===== Icon button ===== */
 .btn-icon {
     width: 48px;
     height: 48px;
     padding: 0;
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-xl);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    letter-spacing: 0;
 }
 
 .btn-icon.btn-sm {
     width: 36px;
     height: 36px;
-    font-size: var(--font-size-base);
+    font-size: 1rem;
 }
 
 .btn-icon.btn-lg {
     width: 60px;
     height: 60px;
-    font-size: var(--font-size-2xl);
+    font-size: 1.5rem;
 }
 
-/* Floating Action Button */
+/* ===== FAB ===== */
 .btn-fab {
     position: fixed;
     bottom: var(--space-xl);
     right: var(--space-xl);
     width: 60px;
     height: 60px;
-    border-radius: var(--radius-full);
-    background: var(--gradient-primary);
-    color: var(--color-text-primary);
-    font-size: var(--font-size-2xl);
-    box-shadow: var(--shadow-xl);
+    border-radius: 50%;
+    background: var(--color-amber);
+    color: var(--color-ink);
+    font-size: 1.5rem;
+    box-shadow: 0 6px 18px rgba(212, 163, 90, 0.5);
     z-index: var(--z-fixed);
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid var(--color-amber-deep);
 }
 
 .btn-fab:hover {
-    transform: scale(1.1);
-    box-shadow: var(--shadow-glow-blue);
+    transform: scale(1.06);
 }
 
-/* Button with Shimmer Effect */
-.btn-shimmer {
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-shimmer::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        to right,
-        transparent 0%,
-        rgba(255, 255, 255, 0.2) 50%,
-        transparent 100%
-    );
-    transform: rotate(30deg);
-    animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-    0% { transform: translateX(-100%) rotate(30deg); }
-    100% { transform: translateX(100%) rotate(30deg); }
-}
-
-/* Button Group */
+/* ===== Button group ===== */
 .btn-group {
     display: inline-flex;
     gap: 0;
@@ -197,14 +201,14 @@
 }
 
 .btn-group .btn:first-child {
-    border-radius: var(--radius-full) 0 0 var(--radius-full);
+    border-radius: 999px 0 0 999px;
 }
 
 .btn-group .btn:last-child {
-    border-radius: 0 var(--radius-full) var(--radius-full) 0;
+    border-radius: 0 999px 999px 0;
 }
 
-/* Share Buttons */
+/* ===== Share / round buttons (used in footer) ===== */
 .share-buttons {
     display: flex;
     gap: var(--space-md);
@@ -213,52 +217,53 @@
 }
 
 .share-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: var(--radius-full);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-bg-card);
-    backdrop-filter: blur(10px);
+    background: rgba(244, 236, 216, 0.06);
     border: 1px solid var(--color-border-subtle);
+    color: var(--color-text-secondary);
     cursor: pointer;
-    transition: all var(--duration-normal) var(--ease-out);
-    font-size: 1.3rem;
+    transition: all var(--duration-fast) var(--ease-out);
+    font-size: 1.2rem;
 }
 
 .share-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+    background: var(--color-amber);
+    color: var(--color-ink);
+    border-color: var(--color-amber);
 }
 
-/* Player Controls */
-.player-controls {
-    display: flex;
-    gap: var(--space-lg);
-    justify-content: center;
-    margin-top: var(--space-xl);
-}
-
-.player-btn {
-    width: 60px;
-    height: 60px;
-    border-radius: var(--radius-full);
-    background: var(--color-accent-blue);
+/* ===== Wax-seal CTA — for huge "Jövök!" buttons ===== */
+.btn-seal {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--color-brick-light), var(--color-brick) 60%, var(--color-brick-deep) 100%);
+    color: var(--color-cream);
+    font-family: var(--font-family-stamp);
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
     border: none;
-    color: white;
-    font-size: 1.5rem;
+    box-shadow: 0 10px 28px rgba(168, 72, 58, 0.45),
+                inset 0 -4px 12px rgba(0, 0, 0, 0.25),
+                inset 0 4px 12px rgba(255, 255, 255, 0.18);
+    transform: rotate(-6deg);
+    transition: transform var(--duration-normal) var(--ease-spring);
     cursor: pointer;
-    transition: all var(--duration-normal) var(--ease-out);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.player-btn:hover {
-    transform: scale(1.1);
-    box-shadow: var(--shadow-glow-blue);
-}
-
-.player-btn.play {
-    width: 80px;
-    height: 80px;
-    font-size: 2rem;
+.btn-seal:hover {
+    transform: rotate(0deg) scale(1.06);
 }

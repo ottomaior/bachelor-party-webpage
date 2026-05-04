@@ -45,17 +45,17 @@
     transform: translateX(-50%);
 }
 
-/* Toast Item */
+/* Toast Item — paper feel */
 .toast {
     display: flex;
     align-items: flex-start;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
-    background: var(--color-bg-card-solid);
-    backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-xl);
+    background: var(--color-bg-paper);
+    color: var(--color-text-on-paper);
+    border-left: 4px solid var(--color-amber);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-paper);
     pointer-events: auto;
     animation: toastSlideIn var(--duration-normal) var(--ease-spring);
     position: relative;
@@ -175,13 +175,13 @@
 .toast-title {
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-sm);
-    color: var(--color-text-primary);
+    color: var(--color-text-on-paper);
     margin-bottom: var(--space-xs);
 }
 
 .toast-message {
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    color: var(--color-text-on-paper-muted);
     line-height: var(--line-height-normal);
 }
 
@@ -195,15 +195,16 @@
     justify-content: center;
     border-radius: var(--radius-full);
     background: transparent;
-    color: var(--color-text-muted);
+    border: none;
+    color: var(--color-text-on-paper-muted);
     cursor: pointer;
     transition: all var(--duration-fast);
     font-size: var(--font-size-lg);
 }
 
 .toast-close:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--color-text-primary);
+    background: rgba(26, 20, 16, 0.08);
+    color: var(--color-text-on-paper);
 }
 
 /* Progress Bar */
@@ -280,18 +281,18 @@
     color: var(--color-info);
 }
 
-/* Gradient Toast (premium feel) */
+/* Gradient Toast (kept as alias) */
 .toast-gradient {
-    background: linear-gradient(135deg, var(--color-bg-card-solid) 0%, rgba(30, 30, 50, 1) 100%);
+    background: var(--color-bg-paper);
 }
 
 .toast-gradient-success {
-    background: linear-gradient(135deg, var(--color-bg-card-solid) 0%, rgba(16, 185, 129, 0.1) 100%);
+    background: linear-gradient(135deg, var(--color-bg-paper) 0%, rgba(74, 111, 79, 0.1) 100%);
     border-left: 4px solid var(--color-success);
 }
 
 .toast-gradient-error {
-    background: linear-gradient(135deg, var(--color-bg-card-solid) 0%, rgba(239, 68, 68, 0.1) 100%);
+    background: linear-gradient(135deg, var(--color-bg-paper) 0%, rgba(168, 72, 58, 0.1) 100%);
     border-left: 4px solid var(--color-error);
 }
 

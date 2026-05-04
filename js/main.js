@@ -8,9 +8,9 @@ function scrollToSection(id) {
     }
 }
 
-// Confetti effect
+// Confetti effect — warm pub palette
 function triggerConfetti() {
-    const colors = ['#00d4ff', '#ff006e', '#ffd60a', '#667eea', '#f5576c'];
+    const colors = ['#d4a35a', '#a8483a', '#f4ecd8', '#2c4a30', '#e8c084', '#84362b'];
     const confettiCount = 50;
 
     for (let i = 0; i < confettiCount; i++) {
